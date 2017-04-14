@@ -1,0 +1,19 @@
+Jurgen Schmidhuber, Sepp Hochreiter, Alex Graves
+
+feed forward = one directional
+fading gradient -> gating (LSTM, GRU)
+Decide on length of input sequence
+meant for forecasting; outputting a sequence
+emulates a FSA, but exponentially more powerful:
+	n hidden neurons -> 2^n activity vector
+	if bottleneck = representation, better than FSA
+	double hidden neurons = squared activity vectors
+Vanilla RNNs faded, but LSTM models brought back interest
+Seq2seq (aka Encoder/Decoder) models use 2 RNNs simultaneously
+	In between is a word embedding algorithm (GloVe, Word2vec)
+
+
+Libraries:
+	- Tensorflow
+	- Keras (using Tensorflow or Theano)
+	- Torch
