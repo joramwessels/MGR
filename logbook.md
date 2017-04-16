@@ -8,4 +8,8 @@ My next coarse of action:
  * ✔ Set up a Git repos including a logbook and article dump folder
 
 ### Fr 14-04-2017
-**10:00-:** Setting up Git architecture. Understanding intuition behind RNNs.
+**10:00-12:30:** Setting up Git architecture. Understanding intuition behind RNNs.  
+**15:30-16:30:** First literary search
+
+### Su 16-04-2017
+**10:30-12:30:** Read (Vogler, 2016) and (Lidy, 2016), and collected more papers.
