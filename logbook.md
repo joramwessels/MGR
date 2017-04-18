@@ -2,7 +2,7 @@
 ### Th 13-04-2017
 **11:00-11:45:** Introductory brainstorm. The current plan is to directly apply an RNN to the signal, using ID3 tags as target variables. The dataset will include Electronic subgenres only, but this may change depending on early results.  
 My next coarse of action:
- * Research different types of RNNs
+ * ✔ Research different types of RNNs
  * Search for existing MGR algorithms using RNNs/NNs (ISMIR, MGR challenges)
  * Learn how RNNs work
  * ✔ Set up a Git repos including a logbook and article dump folder
@@ -13,3 +13,10 @@ My next coarse of action:
 
 ### Su 16-04-2017
 **10:30-12:30:** Read (Vogler, 2016) and (Lidy, 2016), and collected more papers.
+
+### Mo 17-04-2017
+**11:00-12:00:** Read (Costa, 2017), collected more papers.
+**14:00-:14:30** Read (Siva, 2014)
+
+### Tu 18-04-2017
+**10:30-12:15**: Read (Kirss, 2007) and (Chen, 2014).

@@ -17,3 +17,25 @@ Libraries:
 	- Tensorflow
 	- Keras (using Tensorflow or Theano)
 	- Torch
+
+Contests
+	MIREX
+	ISMIS
+
+Electronic MGR
+	Siva 2014
+	Diakopolus, 2009
+	Rocha, 2013
+	Kirss, 2007
+	Chen, 2014
+
+
+Electronic music is too diverse to be considered a single target class
+I propose a hybrid MGR classifier that is specialized in electronic subgenres,
+and that is also able to independently distinguish electronic music from other genres.
+
+MGR almost exclusively considers 5-10 genres to distinguish between.
+I suspect humans recognize genres by identifying the specific subgenre before abstracting using their knowledge of music.
+Music genres are often organized in a hierarchical fashion.
+I propose increasing the amount of subgenres and using a hierarchical genre representation to improve MGR results.
+
