@@ -57,3 +57,23 @@ for each of the genres: deep house, dubstep, progressive house. Three-fold cross
 Once agian, the size of the dataset is insufficient, which damages the reliability of the experiments. Even within the 10
 tracks that ought to represent an entire subgenre are artist duplicates.  
 Chen, A.C. (2014). 'Automatic Classification of Electronic Music and Speech/Music Audio Content', ECE MSc Thesis, University of Illinois, Urbana, Illinois.
+
+### (Choi, 2016 #1)
+Deconvolutes a CNN trained to classify music using the process of auralisation.  
+Choi, K., Fazekas, G. and Sandler, M. (2016). *Explaining deep convolutional neural networks on music classification*. arXiv preprint arXiv:1607.02444.
+
+### (Choi, 2016 #2)
+Combined a CNN and an RNN into a CRNN to catch both local features as temporal features. A CRNN is essentially a CNN with the
+last layers being RNNs instead of convolutions. The CRNN outperformed k2c2 CNNs with a slight margin in accuracy, but
+sacraficed speed and memory to do so.
+
+### (Wu, 2015)
+In response to the bag-of-frames approaches, Wu argued that time-frequency analysis is important as well. Wu won the MIREX
+mixed genre classification contests 2011-2016. It extracts multilevel visual features from the spectrogram and their temporal
+variations. It also includes beat tracking, and a confidence-based classification. The results of the 2016 MIREX contest
+were an accuracy of 76.27%, and in 2014 even 83.55%. The evaluation and training used the 4 most used datasets for MGR,
+one of which comprised more than 25 million songs.  
+The way song-level patterns (like hooks, drops and verses) are combined with beat-level patterns (which are so descriptive in
+electronic music) give insight into what defines a genre. This could be a very interesting aspect to keep in mind while
+engineering a neural network alternative.  
+Wu, M.J. and Jang, J.S.R. (2015). *Combining acoustic and multilevel visual features for music genre classification*. ACM Transactions on Multimedia Computing, Communications, and Applications (TOMM), 12(1), p.10.

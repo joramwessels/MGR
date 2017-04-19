@@ -15,8 +15,11 @@ My next coarse of action:
 **10:30-12:30:** Read (Vogler, 2016) and (Lidy, 2016), and collected more papers.
 
 ### Mo 17-04-2017
-**11:00-12:00:** Read (Costa, 2017), collected more papers.
+**11:00-12:00:** Read (Costa, 2017), collected more papers.  
 **14:00-:14:30** Read (Siva, 2014)
 
 ### Tu 18-04-2017
 **10:30-12:15**: Read (Kirss, 2007) and (Chen, 2014).
+
+### We 19-04-2017
+**15:00-16:00:** Read (Choi, 2016 #1), (Choi, 2016 #2) and (Wu, 2015).
