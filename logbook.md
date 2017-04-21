@@ -21,10 +21,19 @@ __**Mo 17-04-2017**__
 **14:00-:14:30** Read (Siva, 2014)
 
 __**Tu 18-04-2017**__  
-**10:30-12:15**: Read (Kirss, 2007) and (Chen, 2014).
+**10:30-12:15:** Read (Kirss, 2007) and (Chen, 2014).
 
 __**We 19-04-2017**__  
 **15:00-16:00:** Read (Choi, 2016 #1), (Choi, 2016 #2) and (Wu, 2015).
 
 ## Week 2
 __**Th 20-04-2017**__  
+**11:00-11:30:** Update deliberation. I am well on schedule. The proposal will focus on electronic music,
+it will use a proven algorithm (probably Wu or Choi), but it will innovate on the scale of classes/genres.  
+My plan for the coming week:  
+* Write & hand in research proposal (may run it by supervisors first)
+* Prepare a presentation for the proposal (run by supervisors first)
+* Have a concrete plan for an architecture by monday April 2nd.
+
+__**Fr 21-04-2017**__
+**12:00-18:45:** Completed the 'What is AI Research?' assignment and literature draft.
