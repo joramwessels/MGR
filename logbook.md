@@ -32,8 +32,10 @@ __**Th 20-04-2017**__
 it will use a proven algorithm (probably Wu or Choi), but it will innovate on the scale of classes/genres.  
 My plan for the coming week:  
 * Write & hand in research proposal (may run it by supervisors first)
-* Prepare a presentation for the proposal (run by supervisors first)
+* ✔ Prepare a presentation for the proposal (run by supervisors first)
 * Have a concrete plan for an architecture by monday April 2nd.
 
 __**Fr 21-04-2017**__
-**12:00-18:45:** Completed the 'What is AI Research?' assignment and literature draft.
+**12:00-18:45:** Completed the 'What is AI Research?' assignment and literature draft.  
+
+__**9:30-14:00:**__ Project proposal presentation
