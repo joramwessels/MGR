@@ -2,7 +2,7 @@
 
 ## Week 1
 __**Th 13-04-2017**__  
-**11:00-11:45:** Introductory brainstorm. The current plan is to directly apply an RNN to the signal, using ID3 tags as target variables. The dataset will include Electronic subgenres only, but this may change depending on early results.  
+**11:00-11:45:** Introductory meeting. The current plan is to directly apply an RNN to the signal, using ID3 tags as target variables. The dataset will include Electronic subgenres only, but this may change depending on early results.  
 My next coarse of action:
  * ✔ Research different types of RNNs
  * ✔ Search for existing MGR algorithms using RNNs/NNs (ISMIR, MGR challenges)
@@ -28,7 +28,7 @@ __**We 19-04-2017**__
 
 ## Week 2
 __**Th 20-04-2017**__  
-**11:00-11:30:** Update deliberation. I am well on schedule. The proposal will focus on electronic music,
+**11:00-11:30:** Second meeting. I am well on schedule. The proposal will focus on electronic music,
 it will use a proven algorithm (probably Wu or Choi), but it will innovate on the scale of classes/genres.  
 My plan for the coming week:  
 * Write & hand in research proposal (may run it by supervisors first)
