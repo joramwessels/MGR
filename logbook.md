@@ -35,7 +35,8 @@ My plan for the coming week:
 * ✔ Prepare a presentation for the proposal (run by supervisors first)
 * Have a concrete plan for an architecture by monday April 2nd.
 
-__**Fr 21-04-2017**__
+__**Fr 21-04-2017**__  
 **12:00-18:45:** Completed the 'What is AI Research?' assignment and literature draft.  
 
-__**9:30-14:00:**__ Project proposal presentation
+__**Mo 24-04-2017**__  
+**9:30-14:00:** Project proposal presentation
