@@ -40,3 +40,9 @@ __**Fr 21-04-2017**__
 
 __**Mo 24-04-2017**__  
 **9:30-14:00:** Project proposal presentation
+
+__**Tu 25-04-2017**__  
+**10:15-12:00:** Research proposal
+
+__**We 26-04-2017**__  
+**10:30-:** Research proposal: finished the literature review
