@@ -33,7 +33,7 @@ it will use a proven algorithm (probably Wu or Choi), but it will innovate on th
 My plan for the coming week:  
 * ✔ Write & hand in research proposal (✖ may run it by supervisors first)
 * ✔ Prepare a presentation for the proposal (✔ run by supervisors first)
-* Have a concrete plan for an architecture by monday April 2nd.
+* Have a concrete plan for an architecture by Tuesday April 2nd.
 
 __**Fr 21-04-2017**__  
 **12:00-18:45:** Completed the 'What is AI Research?' assignment and literature draft.  
@@ -48,4 +48,9 @@ __**We 26-04-2017**__
 **10:30-11:30:** Research proposal: finished the literature review  
 **19:45-21:30:** Finished research proposal
 
-__**Th 27-04-2017**__  
+## Week 3
+__**Fr 28-04-2017**__  
+**10:30-13:00:** Searched for CNN-RNN hybrids, found a very interesting research by (Shi, 2016). Explored the basics of NN design and -implementation with Keras and it appears
+to be very feasible. Dove deeper into CNN mechanics. More work was required to get an architecture down than expected. I'm
+planning to continue researching the exact implementations of CNN-RNN hybrids on Monday, and to have a concrete plan by the
+end of the day (or at the very least an outline without a detailed NN implementation) so there's something to discuss on Tuesday.

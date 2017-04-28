@@ -77,3 +77,10 @@ The way song-level patterns (like hooks, drops and verses) are combined with bea
 electronic music) give insight into what defines a genre. This could be a very interesting aspect to keep in mind while
 engineering a neural network alternative.  
 Wu, M.J. and Jang, J.S.R. (2015). *Combining acoustic and multilevel visual features for music genre classification*. ACM Transactions on Multimedia Computing, Communications, and Applications (TOMM), 12(1), p.10.
+
+### (Iloga, 2016)
+Scored an accuracy of 91.6% on the GTZAN dataset through hierarchical pattern matching. (not finished reading)
+
+### (Shi, 2016)
+Developed 'ShuttleNet', a GRU RNN with both feedforward as feedback connections, and embedded it in a CNN-RNN network.
+It beat all 14 previous state of the art networks tested. (not finished reading)

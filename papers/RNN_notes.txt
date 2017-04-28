@@ -41,3 +41,21 @@ Music genres are often organized in a hierarchical fashion.
 I propose increasing the amount of subgenres and using a hierarchical genre representation to improve MGR results.
 
 Different approach using CNN/RNN. Directly on the signal?
+
+CNN
+https://adeshpande3.github.io/adeshpande3.github.io/A-Beginner's-Guide-To-Understanding-Convolutional-Neural-Networks/
+	- 3 dimensional input
+	- Convolutional layer (filters -> activation maps)
+	- Activation/feature map
+
+NN Design
+	- Sigmoid activation
+	- Propability/confidence
+	- Hierarchical? Multiple labels?
+
+
+Evaluation
+	- Algorithm -> In context of MGR, other datasets
+	- Genre partitioning -> Train on EDM subgenres and other genres, and train on 'Electronic' and other genres (maybe 1 in-between stage)
+	- Amount of target variables -> Optimize for EDM subgenres, vary target variables from 1 to 20 and graph results
+	- Dataset size -> vary training samples and graph results
