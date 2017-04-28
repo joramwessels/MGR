@@ -33,7 +33,7 @@ it will use a proven algorithm (probably Wu or Choi), but it will innovate on th
 My plan for the coming week:  
 * ✔ Write & hand in literature review (✖ may run it by supervisors first)
 * ✔ Prepare the proposal presentation (✔ run by supervisors first)
-* ✔ Write & hand in research proposal (✖ run it by supervisors first)
+* ✔ Write & hand in research proposal (✖ run by supervisors first)
 * Have a concrete plan for an architecture by Tuesday April 2nd.
 
 __**Fr 21-04-2017**__  
