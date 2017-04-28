@@ -31,8 +31,9 @@ __**Th 20-04-2017**__
 **11:00-11:30:** Second meeting. I am well on schedule. The proposal will focus on electronic music,
 it will use a proven algorithm (probably Wu or Choi), but it will innovate on the scale of classes/genres.  
 My plan for the coming week:  
-* ✔ Write & hand in research proposal (✖ may run it by supervisors first)
-* ✔ Prepare a presentation for the proposal (✔ run by supervisors first)
+* ✔ Write & hand in literature review (✖ may run it by supervisors first)
+* ✔ Prepare the proposal presentation (✔ run by supervisors first)
+* ✔ Write & hand in research proposal (✖ run it by supervisors first)
 * Have a concrete plan for an architecture by Tuesday April 2nd.
 
 __**Fr 21-04-2017**__  
