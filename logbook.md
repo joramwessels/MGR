@@ -59,4 +59,5 @@ end of the day (or at the very least an outline without a detailed NN implementa
 __**Mo 01-05-2017**__  
 **10:30-12:00:** Pipeline design, NN architecture research. I believe I can realize confidence scores using a softmax layer.
 The input will be the Mel spectogram, so as to not deviate from previous research too much. I am unsure about multiple target
-variables and predictions to accomodate genre hierarchies.
+variables and predictions to accomodate genre hierarchies.  
+**15:30-17:30:** CNN layers research.

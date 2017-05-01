@@ -47,6 +47,12 @@ https://adeshpande3.github.io/adeshpande3.github.io/A-Beginner's-Guide-To-Unders
 	- 3 dimensional input
 	- Convolutional layer (filters -> activation maps)
 	- Activation/feature map
+	- Subsampling/pooling (reduced complexity, prevent overfitting)
+	- Fully Connected Layer (Softmax)
+	o Batch (Epoch (Forward pass, Loss function, Backward pass, Weight update)
+
+RNN
+https://adeshpande3.github.io/adeshpande3.github.io/Deep-Learning-Research-Review-Week-3-Natural-Language-Processing
 
 NN Design
 	- Sigmoid activation
