@@ -55,3 +55,8 @@ __**Fr 28-04-2017**__
 to be very feasible. Dove deeper into CNN mechanics. More work was required to get an architecture down than expected. I'm
 planning to continue researching the exact implementations of CNN-RNN hybrids on Monday, and to have a concrete plan by the
 end of the day (or at the very least an outline without a detailed NN implementation) so there's something to discuss on Tuesday.
+
+__**Mo 01-05-2017**__  
+**10:30-12:00:** Pipeline design, NN architecture research. I believe I can realize confidence scores using a softmax layer.
+The input will be the Mel spectogram, so as to not deviate from previous research too much. I am unsure about multiple target
+variables and predictions to accomodate genre hierarchies.

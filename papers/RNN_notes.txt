@@ -50,7 +50,7 @@ https://adeshpande3.github.io/adeshpande3.github.io/A-Beginner's-Guide-To-Unders
 
 NN Design
 	- Sigmoid activation
-	- Propability/confidence
+	- Propability/confidence (last layer, ->SoftMax, Bernoulli)
 	- Hierarchical? Multiple labels?
 
 
