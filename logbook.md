@@ -58,7 +58,7 @@ end of the day (or at the very least an outline without a detailed NN implementa
 
 __**Mo 01-05-2017**__  
 **10:30-12:00:** Pipeline design, NN architecture research. I believe I can realize confidence scores using a softmax layer.
-The input will be the Mel spectogram, so as to not deviate from previous research too much. I am unsure about multiple target
+The input will be the Mel spectrogram, so as to not deviate from previous research too much. I am unsure about multiple target
 variables and predictions to accomodate genre hierarchies.  
 **15:30-17:30:** CNN layers research.
 
@@ -68,3 +68,6 @@ __**Tu 02-05-2017**__
 * Determine the dimensions of the convolutional filters
 * Get access to the UvA DAS
 * Start implementing the preprocessing
+
+__**Th 03-05-2017**__  
+**09:30-11:00** I tried to make spectrograms of some sample beats, but I stumbled upon multiple librosa import errors.
