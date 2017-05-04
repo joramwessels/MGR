@@ -63,11 +63,21 @@ variables and predictions to accomodate genre hierarchies.
 **15:30-17:30:** CNN layers research.
 
 __**Tu 02-05-2017**__  
-**13:30-14:30** Third meeting. My design so far is insufficient. It lacks detailed descriptions of window- and filter sizes. The plan for the coming two weeks is to implement a simple CNN pipeline similar to (Choi, 2016). My deadline for Tuesday the 9th is to
+**13:30-14:30:** Third meeting. My design so far is insufficient. It lacks detailed descriptions of window- and filter sizes. The plan for the coming two weeks is to implement a simple CNN pipeline similar to (Choi, 2016). My deadline for Tuesday the 9th is to
 * Determine the size and ΔT for the FFT
 * Determine the dimensions of the convolutional filters
 * Get access to the UvA DAS
 * Start implementing the preprocessing
 
+## Week 4 - 🔍 Details
 __**Th 03-05-2017**__  
-**09:30-11:00** I tried to make spectrograms of some sample beats, but I stumbled upon multiple librosa import errors.
+**09:30-11:00:** I tried to make spectrograms of some sample beats, but I stumbled upon multiple librosa import errors.  
+**13:00-15:30:** I made the spectrograms with an online tool instead, analysed some drum loops and individual samples, and found the properties presented below.In order to recognize a the smallest element, the FFT window will be 20ms with a stride of 10ms. The convolutional filter will be a vertical slice, 20kHz x 60ms, with a stride of 20ms.
+
+| sample  | len (ms) | freq (kHz) |
+|---------|----------|------------|
+| kicks   | 50       | 0-0.25     |
+| snares  | 100-250  | 0-15       |
+| hi-hats | 100      | 4-20       |
+
+__**Fr 04-05-2017**__  
