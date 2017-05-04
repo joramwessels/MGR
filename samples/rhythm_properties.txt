@@ -1,0 +1,4 @@
+sample		len			freq
+kicks		50ms		0-0.25kHz
+snares		100-250ms	0-15kHz
+hihats		10ms		4-20kHz
