@@ -34,7 +34,7 @@ My plan for the coming week:
 * ✔ Write & hand in literature review (✖ may run it by supervisors first)
 * ✔ Prepare the proposal presentation (✔ run by supervisors first)
 * ✔ Write & hand in research proposal (✖ run by supervisors first)
-* Have a concrete plan for an architecture by Tuesday April 2nd.
+* ✖ Have a concrete plan for an architecture by Tuesday April 2nd.
 
 __**Fr 21-04-2017**__  
 **12:00-18:45:** Completed the 'What is AI Research?' assignment and literature draft.  
@@ -61,3 +61,10 @@ __**Mo 01-05-2017**__
 The input will be the Mel spectogram, so as to not deviate from previous research too much. I am unsure about multiple target
 variables and predictions to accomodate genre hierarchies.  
 **15:30-17:30:** CNN layers research.
+
+__**Tu 02-05-2017**__  
+**13:30-14:30** Third meeting. My design so far is insufficient. It lacks detailed descriptions of window- and filter sizes. The plan for the coming two weeks is to implement a simple CNN pipeline similar to (Choi, 2016). My deadline for Tuesday the 9th is to
+* Determine the size and ΔT for the FFT
+* Determine the dimensions of the convolutional filters
+* Get access to the UvA DAS
+* Start implementing the preprocessing
