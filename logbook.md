@@ -64,9 +64,9 @@ variables and predictions to accomodate genre hierarchies.
 
 __**Tu 02-05-2017**__  
 **13:30-14:30:** Third meeting. My design so far is insufficient. It lacks detailed descriptions of window- and filter sizes. The plan for the coming two weeks is to implement a simple CNN pipeline similar to (Choi, 2016). My deadline for Tuesday the 9th is to
-* Determine the size and ΔT for the FFT
-* Determine the dimensions of the convolutional filters
-* Get access to the UvA DAS
+* ✔ Determine the size and ΔT for the FFT
+* ✔ Determine the dimensions of the convolutional filters
+* ✔ Get access to the UvA DAS
 * Start implementing the preprocessing
 
 ## Week 4 - 🔍 Details
