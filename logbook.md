@@ -69,7 +69,7 @@ __**Tu 02-05-2017**__
 * ✔ Get access to the UvA DAS
 * Start implementing the preprocessing
 
-## Week 4 - 🔍 Details
+## Week 4 - 🔬 Details
 __**Th 03-05-2017**__  
 **09:30-11:00:** I tried to make spectrograms of some sample beats, but I stumbled upon multiple librosa import errors.  
 **13:00-15:30:** I made the spectrograms with an online tool instead, analysed some drum loops and individual samples, and found the properties presented below. In order to recognize the smallest element, the FFT window will be 20ms with a stride of 10ms. The convolutional filter will be a vertical slice, 20kHz x 60ms, with a stride of 20ms.
