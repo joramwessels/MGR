@@ -1,6 +1,7 @@
 # Logbook
 
 ## Week 1 - 📚 literary research
+*total: 10.5 hrs*
 __**Th 13-04-2017**__  
 **11:00-11:45:** Introductory meeting. The current plan is to directly apply an RNN to the signal, using ID3 tags as target variables. The dataset will include Electronic subgenres only, but this may change depending on early results.  
 My next coarse of action:
@@ -27,6 +28,7 @@ __**We 19-04-2017**__
 **15:00-16:00:** Read (Choi, 2016 #1), (Choi, 2016 #2) and (Wu, 2015).
 
 ## Week 2 - 📝 Proposal
+*total: 16.25 hrs*
 __**Th 20-04-2017**__  
 **11:00-11:30:** Second meeting. I am well on schedule. The proposal will focus on electronic music,
 it will use a proven algorithm (probably Wu or Choi), but it will innovate on the scale of classes/genres.  
@@ -50,6 +52,7 @@ __**We 26-04-2017**__
 **19:45-21:30:** Finished research proposal
 
 ## Week 3 - 🖼️ Design
+*total: 5 hrs*
 __**Fr 28-04-2017**__  
 **10:30-13:00:** Searched for CNN-RNN hybrids, found a very interesting research by (Shi, 2016). Explored the basics of NN design and -implementation with Keras and it appears
 to be very feasible. Dove deeper into CNN mechanics. More work was required to get an architecture down than expected. I'm
@@ -70,6 +73,7 @@ __**Tu 02-05-2017**__
 * ✖ Start implementing the preprocessing
 
 ## Week 4 - 🔬 Details
+*total: 4.5 hrs*
 __**Th 03-05-2017**__  
 **09:30-11:00:** I tried to make spectrograms of some sample beats, but I stumbled upon multiple librosa import errors.  
 **13:00-15:30:** I made the spectrograms with an online tool instead, analysed some drum loops and individual samples, and found the properties presented below. In order to recognize the smallest element, the FFT window will be 20ms with a stride of 10ms. The convolutional filter will be a vertical slice, 20kHz x 60ms, with a stride of 20ms.
@@ -81,4 +85,13 @@ __**Th 03-05-2017**__
 | hi-hats | 100      | 4-20       |
 
 __**Tu 09-05-2017**__  
-**10:00-:** Fourth meeting.
+**10:00-10:30:** Fourth meeting. I've had a busy week and little results. My hypothesis was interesting, but it's still better to start with a preexisting architecture.
+The four things to do before Friday the 19th is to
+* Put in a minimum of 30 hours a week (or 5 hours a day)
+* Get comfortable with the DAS (attend the introduction on Thursday)
+* Start to write the paper, especially the skeleton, intro, related work and preprocessing
+* Get as far as possible on implementing a simple CNN in Tensorflow
+	* Change to Python 2.7 and Anaconda
+	* Install Librosa
+	* Preprocessing
+	* CNN network
