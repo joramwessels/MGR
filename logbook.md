@@ -67,7 +67,7 @@ __**Tu 02-05-2017**__
 * ✔ Determine the size and ΔT for the FFT
 * ✔ Determine the dimensions of the convolutional filters
 * ✔ Get access to the UvA DAS
-* Start implementing the preprocessing
+* ✖ Start implementing the preprocessing
 
 ## Week 4 - 🔬 Details
 __**Th 03-05-2017**__  
@@ -80,4 +80,5 @@ __**Th 03-05-2017**__
 | snares  | 100-250  | 0-15       |
 | hi-hats | 100      | 4-20       |
 
-__**Fr 04-05-2017**__  
+__**Tu 09-05-2017**__  
+**10:00-:** Fourth meeting.
