@@ -95,3 +95,5 @@ The four things to do before Friday the 19th is to
 	* Install Librosa
 	* Preprocessing
 	* CNN network
+
+**10:30-12:30:** Planning and paper set-up  
