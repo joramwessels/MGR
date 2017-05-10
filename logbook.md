@@ -91,12 +91,15 @@ The four things to do before Friday the 19th is to
 * Get comfortable with the DAS (attend the introduction on Thursday)
 * Start to write the paper, especially the skeleton, intro, related work and preprocessing
 * Get as far as possible on implementing a simple CNN in Tensorflow
-	* Change to Python 2.7 and Anaconda
-	* Install Librosa
+	* ✔ Change to Python 2.7 and Anaconda
+	* ✔ Install Librosa
 	* Preprocessing
+		* Mel Spectrogram
+		* Extract genre
+		* Cut to 30s
 	* CNN network
 
 **10:30-12:30:** Planning and paper set-up  
 
 __**We 10-05-2017**__  
-**10:00-:** Switching to Anaconda and Python 2.7
+**10:00-:** Switching to Anaconda and Python 2.7. The librosa import "no backend error" was solved by 'channeling' the conda install.

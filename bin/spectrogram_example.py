@@ -1,6 +1,7 @@
 import sys
-import librosa
+import librosa, librosa.display
 import matplotlib.pyplot as plt
+import numpy as np
 
 # Load sound file
 y, sr = librosa.load(sys.argv[1])
