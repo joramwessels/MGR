@@ -102,4 +102,5 @@ The four things to do before Friday the 19th is to
 **10:30-12:30:** Planning and paper set-up  
 
 __**We 10-05-2017**__  
-**10:00-:** Switching to Anaconda and Python 2.7. The librosa import "no backend error" was solved by 'channeling' the conda install.
+**10:00-11:30:** Switching to Anaconda and Python 2.7. The librosa import "no backend error" was solved by 'channeling' the conda install.  
+**12:45-14:00:** Started writing preprocessing.py 
