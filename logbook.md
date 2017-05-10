@@ -94,8 +94,8 @@ The four things to do before Friday the 19th is to
 	* ✔ Change to Python 2.7 and Anaconda
 	* ✔ Install Librosa
 	* Preprocessing
+		* ✔ Extract genre
 		* Mel Spectrogram
-		* Extract genre
 		* Cut to 30s
 	* CNN network
 
@@ -103,4 +103,7 @@ The four things to do before Friday the 19th is to
 
 __**We 10-05-2017**__  
 **10:00-11:30:** Switching to Anaconda and Python 2.7. The librosa import "no backend error" was solved by 'channeling' the conda install.  
-**12:45-14:00:** Started writing preprocessing.py 
+**12:45-14:00:** Started writing preprocessing.py  
+**18:45-20:00:** Tested and debugged the ID3 extraction and Mel spectrogramification. Both work. I only need to save the results to storage.
+
+__**Th 11-05-2017**__  

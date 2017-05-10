@@ -4,16 +4,20 @@
 # date:				10-05-2017
 # python versoin:	2.7
 # dependencies:		librosa
-# public functions:	
-# description:		
+# public functions:	prepare_data
+# description:		Prepares the raw data for the training
 
 import sys, logging
-from os import listdir
-from os.path import isfile, join
+from os import walk
 import librosa
+import numpy as np
+from mutagen.id3 import ID3
 
-logging.basicConfig(filename='../logs/preprocessing.log')
-log = logging.getLogger(preprocessing)
+# Creates a logger
+logging.basicConfig(filename='../logs/preprocessing.log', level=logging.DEBUG,
+	format="%(asctime)s.%(msecs)03d: %(levelname)s: %(module)s."
+	+ "%(funcName)s: %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
+log = logging.getLogger("preprocessing")
 
 def main(argv):
 	prepare_data(argv[1])
@@ -26,22 +30,24 @@ def prepare_data(folder):
 	Returs:
 		A list with tuples containing spectrograms (numpy.array) and targets (str)
 	"""
+	err = False
 	raw_data = []
-	for (dirpath, dirnames, filenames) in walk(main_data_folder):
-		raw_data.extend([f for f in filenames if f.endswith(".mp3")])
+	for (dirpath, dirnames, filenames) in walk(folder):
+		raw_data.extend([dirpath + f for f in filenames if f.endswith(".mp3")])
 	processed = []
 	for filename in raw_data:
 		try:
 			target = str(ID3(filename)["TCON"].text[0])
 			spectrogram = to_spectrogram(filename)
 			processed.append([spectrogram, target])
-		except e:
-			logging.warning("Exception caught in preprocessing")
+		except Exception as e:
+			err = True
 			log.error(str(e))
+	if (err): print("Exception(s) caught and logged during preprocessing")
 	return processed
 
-def to_spectrogram(filename):
-	"""Computes the Mel Spectrogram of a given mp3 file
+def to_spectrogram(filename, n_mels=128):
+	"""Computes the Mel Spectrogram for the first minute of a given mp3 file
 	
 	Args:
 		filename:	The path to the mp3 file
@@ -49,7 +55,10 @@ def to_spectrogram(filename):
 		A numpy.array representing the Mel spectrogram
 	
 	"""
-	return
+	y, sr = librosa.load(filename, offset=0, duration=60)
+	S = librosa.feature.melspectrogram(y, sr=sr, n_mels=n_mels)
+	mel_spectrogram = librosa.logamplitude(S, ref_power=np.max)
+	return mel_spectrogram
 
 if __name__ == "__main__":
 	main(sys.argv)
