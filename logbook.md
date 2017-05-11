@@ -73,7 +73,7 @@ __**Tu 02-05-2017**__
 * ✖ Start implementing the preprocessing
 
 ## Week 4 - 🔬 Details
-### *(total: 14.25 hrs)*  
+### *(total: 10.5 hrs)*  
 __**Th 03-05-2017**__  
 **09:30-11:00:** I tried to make spectrograms of some sample beats, but I stumbled upon multiple librosa import errors.  
 **13:00-15:30:** I made the spectrograms with an online tool instead, analysed some drum loops and individual samples, and found the properties presented below. In order to recognize the smallest element, the FFT window will be 20ms with a stride of 10ms. The convolutional filter will be a vertical slice, 20kHz x 60ms, with a stride of 20ms.
@@ -103,6 +103,8 @@ __**We 10-05-2017**__
 **12:45-14:00:** Started writing preprocessing.py  
 **18:45-20:00:** Tested and debugged the ID3 extraction and Mel spectrogramification. Both work. I only need to save the results to storage.
 
+## Week 5 - ⚗️ Prototype
+### *(total: 3.75 hrs)*
 __**Th 11-05-2017**__  
 **09:15-11:00:** Wrote a save_to_file and read_from_file function. Rein has fallen ill so the DAS introduction has been suspended.  
 **13:30-15:30:** Tested the read- and write functions. Wrote and tested the k-fold cross validation function.  
