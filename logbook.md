@@ -88,7 +88,7 @@ __**Tu 09-05-2017**__
 **10:00-10:30:** Fourth meeting. I've had a busy week and little results. My hypothesis was interesting, but it's still better to start with a preexisting architecture.
 The four things to do before Friday the 19th is to
 * Put in a minimum of 30 hours a week (or 5 hours a day)
-* Get comfortable with the DAS (attend the introduction on Thursday)
+* Get comfortable with the DAS (✖ attend the introduction on Thursday)
 * Start to write the paper, especially the skeleton, intro, related work and preprocessing
 * Get as far as possible on implementing a simple CNN in Tensorflow
 	* ✔ Change to Python 2.7 and Anaconda
@@ -110,3 +110,5 @@ __**Th 11-05-2017**__
 **13:30-15:30:** Tested the read- and write functions. Wrote and tested the k-fold cross validation function.  
 
 __**Fr 12-06-2017**__  
+**10:00:11:00:** Started writing [the report](https://www.sharelatex.com/project/58e0fb33c37936547fda88b0). The paper skeleton and introduction are done (for now).  
+**13:15-:** In my opinion, the Related Work section requires a lot more field orientation before it can be written. Anticipating on the academic English assignment that's due next week, I reckon it's best to continue the literary search now (in absense of the Tensorflow/DAS explanation) in order to facilitate the assignment.
