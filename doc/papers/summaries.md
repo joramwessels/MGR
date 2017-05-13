@@ -61,7 +61,7 @@ last layers being RNNs instead of convolutions. The CRNN outperformed k2c2 CNNs 
 sacraficed speed and memory to do so.
 
 ### (Iloga, 2016)
-Scored an accuracy of 91.6% on the GTZAN dataset through hierarchical pattern matching. (not finished reading)
+Scored an accuracy of 91.6% on the GTZAN dataset through hierarchical pattern matching. It aims at unsupervised taxonomy generation using K-nearest neighbor.
 
 ### (Shi, 2016)
 Developed 'ShuttleNet', a GRU RNN with both feedforward as feedback connections, and embedded it in a CNN-RNN network.

@@ -73,6 +73,8 @@ Reynolds, S. (2012). Energy flash: A journey through rave music and dance cultur
 Butler, M. J. (2006). Unlocking the groove: Rhythm, meter, and musical design in electronic dance music. Bloomington: Indiana University Press.
 (Paul, 2014) <- EDM is muy popular
 EDM rules Shazam in 2013: genre leaders such as Avicii and Storm Queen prove hugely popular on the music-tagging service last year. (2014).
+(Iloga, 2016) <- Justifies the use of Taxonomies / hierarchies
+(Costa, 2017) <- Justifies the use of CNN in MGR
 
 Malay music MGR
 Golzari, S., Doraisamy, S., Sulaiman, M.N. and Udzir, N.I., 2008, August. A hybrid approach to traditional Malay music genre classification: Combining feature selection and artificial immune recognition system. In Information Technology, 2008. ITSim 2008. International Symposium on (Vol. 2, pp. 1-6). IEEE.

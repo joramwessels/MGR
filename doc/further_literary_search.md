@@ -26,13 +26,21 @@
 	(Wu, 2014)
 	(Xu2, 2014)
 	(Xu3, 2014)
+	(Markov, 2014)
 	(Cai, 2015)
 	(Foleiss, 2016)
 	(Wu, 2016)
 
 ## NN Approaches
-	(Lidy, 2016) - CNN
+	(Li, 2010) - CNN
+	(Goel, 2014) - Multi-Layer perceptron network
 	(Siva, 2014) - PNN
+	(Prabhu, 2014) - 'Improved' NN
+	(Lidy, 2016) - CNN
+	(Vogler, 2016) - CNN-LSTM
+	(Choi, 2016) - CRNN
+	(Shi, 2016) - ShuttleNet (Not applied on MGR)
+	(Sigtia, 2014) - RNN
 
 ## Other
 	(Chen, 2014) - GMM

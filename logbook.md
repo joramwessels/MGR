@@ -115,4 +115,5 @@ __**Fr 12-06-2017**__
 
 __**Sa 12-05-2017**__  
 **09:00-10:15:** Mapped all MIREX MGR submissions since 2014 (found in doc/further_literary_search.md). What suprised me is that only (Lidy, 2016) uses a network, and everyone else has used a SVM (which contradicts my earlier findings).  
-**10:30-11:30:** Further investigated MGR research directed at electronic music. Another task that can be done while waiting for the DAS access is deciding on what subgenres to use, and to justify that choice.
+**10:30-11:30:** Further investigated MGR research directed at electronic music (UvA library). Another task that can be done while waiting for the DAS access is deciding on what subgenres to use, and to justify that choice.  
+**13:00-14:00:** Searched specifically for CNN- and RNN-based MGR papers in the online UvA library. Sturm appears to be a prominent MGR meta-critic interested in the use of CNNs. Next, I should explore Google Scholar for the same three keywords.
