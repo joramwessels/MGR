@@ -12,7 +12,14 @@
 	Mixed	(Wu, 2014) (Seyerlehner, 2011) (Seyerlehner, 2014) (Baek1, 2014)  
 	Latin	(Wu, 2014) (Xu2, 2014) (Xu3, 2014) (Seyerlehner, 2014) (Seyerlehner, 2011)  
 
+## Electronic specific
+	(Siva, 2014)
+	(Panteli, 2016)
+	(Kirss, 2007)
+	(Chen, 2014)
+
 ## SVM Approaches
+	(Kirss, 2007)
 	(Baek1, 2014)
 	(Seyerlehner, 2011)
 	(Seyerlehner, 2014)
@@ -23,6 +30,9 @@
 	(Foleiss, 2016)
 	(Wu, 2016)
 
-## CNN Approaches
-	(Lidy, 2016)
-	
+## NN Approaches
+	(Lidy, 2016) - CNN
+	(Siva, 2014) - PNN
+
+## Other
+	(Chen, 2014) - GMM

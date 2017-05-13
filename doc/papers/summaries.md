@@ -47,6 +47,10 @@ electronic music) give insight into what defines a genre. This could be a very i
 engineering a neural network alternative.  
 Wu, M.J. and Jang, J.S.R. (2015). *Combining acoustic and multilevel visual features for music genre classification*. ACM Transactions on Multimedia Computing, Communications, and Applications (TOMM), 12(1), p.10.
 
+### (Panteli, 2016)
+Models the similarity between timbre and rhythm in electronic music. Rhythmic elements are best to describe electronic music.
+Panteli, M., Rocha, B., Bogaards, N. and Honingh, A., 2016. A model for rhythm and timbre similarity in electronic dance music. Musicae Scientiae, p.1029864916655596.
+
 ### (Choi, 2016 #1)
 Deconvolutes a CNN trained to classify music using the process of auralisation.  
 Choi, K., Fazekas, G. and Sandler, M. (2016). *Explaining deep convolutional neural networks on music classification*. arXiv preprint arXiv:1607.02444.
