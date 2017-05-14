@@ -104,7 +104,7 @@ __**We 10-05-2017**__
 **18:45-20:00:** Tested and debugged the ID3 extraction and Mel spectrogramification. Both work. I only need to save the results to storage.
 
 ## Week 5 - ⚗️ Prototype
-### *(total: 11 hrs)*
+### *(total: 12 hrs)*
 __**Th 11-05-2017**__  
 **09:15-11:00:** Wrote a save_to_file and read_from_file function. Rein has fallen ill so the DAS introduction has been suspended.  
 **13:30-15:30:** Tested the read- and write functions. Wrote and tested the k-fold cross validation function.  
@@ -116,13 +116,13 @@ __**Fr 12-06-2017**__
 __**Sa 12-05-2017**__  
 **09:00-10:15:** Mapped all MIREX MGR submissions since 2014 (found in doc/further_literary_search.md). What suprised me is that only (Lidy, 2016) uses a network, and everyone else has used a SVM (which contradicts my earlier findings).  
 **10:30-11:30:** Searched UvA library for "electronic", "dance" and "EDM". Another task that can be done while waiting for the DAS access is deciding on what subgenres to use, and to justify that choice.  
-**13:00-14:00:** Searched UvA library for "cnn", "convnet", "rnn" and "LSTM".  
+**13:00-14:00:** Searched UvA library for "CNN", "ConvNet", "RNN" and "LSTM".  
 
 __**Su 13-05-2017**__  
 **10:00-11:00:** Searched Google Scholar for "electronic", "dance" and "EDM".  
 **11:00-12:00:** Searched Google Scholar for "neural network".  
-**12:30-13:15:** Searched Google Scholar for "cnn".  
-**18:00-19:00:** Searched Google Scholar for "convnet", "rnn" and "LSTM". All relevant papers I have found are listed below. I have only taken into account MGR research specifically (no related MIR tasks). I found more neural network approaches, although they remain countable (in contrast to SVM approaches). The 'Features' column consists of papers that discuss or define what features ought to be used/aimed at.  
+**12:30-13:15:** Searched Google Scholar for "CNN".  
+**18:00-19:15:** Searched Google Scholar for "ConvNet", "RNN" and "LSTM". All relevant papers I have found are listed below. I have only taken into account MGR research specifically (no related MIR tasks). I found some more neural network approaches, although they remain countable (in contrast to SVM approaches). The 'Features' column consists of papers that discuss or define what features ought to be used/targeted.  
 
 | Electronic   | MIREX Veterans                            | Neural Networks                 | CNN        | RNN               | Hybrids                | Features                          | Other                                  |
 |--------------|-------------------------------------------|---------------------------------|------------|-------------------|------------------------|-----------------------------------|----------------------------------------|
