@@ -104,7 +104,7 @@ __**We 10-05-2017**__
 **18:45-20:00:** Tested and debugged the ID3 extraction and Mel spectrogramification. Both work. I only need to save the results to storage.
 
 ## Week 5 - ⚗️ Prototype
-### *(total: 3.75 hrs)*
+### *(total: 11 hrs)*
 __**Th 11-05-2017**__  
 **09:15-11:00:** Wrote a save_to_file and read_from_file function. Rein has fallen ill so the DAS introduction has been suspended.  
 **13:30-15:30:** Tested the read- and write functions. Wrote and tested the k-fold cross validation function.  
@@ -117,3 +117,18 @@ __**Sa 12-05-2017**__
 **09:00-10:15:** Mapped all MIREX MGR submissions since 2014 (found in doc/further_literary_search.md). What suprised me is that only (Lidy, 2016) uses a network, and everyone else has used a SVM (which contradicts my earlier findings).  
 **10:30-11:30:** Further investigated MGR research directed at electronic music (UvA library). Another task that can be done while waiting for the DAS access is deciding on what subgenres to use, and to justify that choice.  
 **13:00-14:00:** Searched specifically for CNN- and RNN-based MGR papers in the online UvA library. Sturm appears to be a prominent MGR meta-critic interested in the use of CNNs. Next, I should explore Google Scholar for the same three keywords.
+
+__**Su 13-05-2017**__  
+**10:00-11:00:** Found no additional Electronic MGR papers on Google Scholar.  
+**11:00-12:00:** I have explored the first three pages of both the UvA library and Google Scholar for MGR papers including the search terms "music genre recognition" in combination with each one of: "electronic", "EDM", "dance", "cnn", "convnet", "rnn", "neural network".  
+**12:30-13:15:** All relevant papers I have found up till now:  
+
+| Electronic   | MIREX Veterans                            | Neural Networks                 | CNN        | RNN             | Hybrids                | Features                          | Other                                  |
+|--------------|-------------------------------------------|---------------------------------|------------|-----------------|------------------------|-----------------------------------|----------------------------------------|
+| Siva_2014    | Seyerlehner_2011                          | Klec_2015                       | Li_2010    | Dai_2016 (LSTM) | Vogler_2016 (CNN-LSTM) | Ullrich_2014                      | Sturm_Evaluation (Evaluation problems) |
+| Panteli_2016 | Wu_2013                                   | Goel_2014 (MLP Network)         | Lidy_2016  | Sigtia_2014     | Choi_2016 (CRNN)       | Geng_2016                         | Shi_2016 (ShuttleNet)                  |
+| Kirss_2007   | Foleiss_2016                              | Siva_2014 (PNN)                 | Kong_2014  |                 |                        | Su_2014 (BoF eval)                | Iloga_2016 (Taxonomies)                |
+| Chen_2014    | Lidy_2016 (CNN)                           | Prabhu_2014 ('Improved' NN)     | Costa_2017 |                 |                        | Reynolds_2007 (Rhythm importance) | Nasridinov_2014                        |
+|              | Pikrakis_2013 (*Recreated by Sturm_2015*) | Alexandridis_2014 (RBF Network) |            |                 |                        | Gwardys_2014 (Image similarity)   | Sturm_2012 (1998-1012 Summary)         |
+|              |                                           | Dai_2015 (Multi-DNN)            |            |                 |                        | Sturm_Features                    | Sturm_GTZAN (Dataset problems)         |
+|              |                                           | Pikrakis_2013 (Rhythm Modeling) |            |                 |                        |                                   | Widmer_2017 (Challenges)               |

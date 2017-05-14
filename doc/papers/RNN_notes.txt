@@ -78,3 +78,5 @@ EDM rules Shazam in 2013: genre leaders such as Avicii and Storm Queen prove hug
 
 Malay music MGR
 Golzari, S., Doraisamy, S., Sulaiman, M.N. and Udzir, N.I., 2008, August. A hybrid approach to traditional Malay music genre classification: Combining feature selection and artificial immune recognition system. In Information Technology, 2008. ITSim 2008. International Symposium on (Vol. 2, pp. 1-6). IEEE.
+
+Search for G.S. rnn, convnet

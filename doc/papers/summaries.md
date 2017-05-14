@@ -36,6 +36,12 @@ Once agian, the size of the dataset is insufficient, which damages the reliabili
 tracks that ought to represent an entire subgenre are artist duplicates.  
 Chen, A.C. (2014). 'Automatic Classification of Electronic Music and Speech/Music Audio Content', ECE MSc Thesis, University of Illinois, Urbana, Illinois.
 
+### (Alexandridis, 2014)
+Alexandridis, A., Chondrodima, E., Paivana, G., Stogiannos, M., Zois, E. and Sarimveis, H., 2014, September. Music genre classification using radial basis function networks and particle swarm optimization. In Computer Science and Electronic Engineering Conference (CEEC), 2014 6th (pp. 35-40). IEEE.
+
+### (Sturm, 2015)
+Sturm B.L., Kereliuk C., Larsen J. (2015) ¿El Caballo Viejo? Latin Genre Recognition with Deep Learning and Spectral Periodicity. In: Collins T., Meredith D., Volk A. (eds) Mathematics and Computation in Music. MCM 2015. Lecture Notes in Computer Science, vol 9110. Springer, Cham
+
 ### (Wu, 2015)
 In response to the bag-of-frames approaches, Wu argued that time-frequency analysis is important as well. Wu won the MIREX
 mixed genre classification contests 2011-2016. It extracts multilevel visual features from the spectrogram and their temporal
@@ -46,6 +52,12 @@ The way song-level patterns (like hooks, drops and verses) are combined with bea
 electronic music) give insight into what defines a genre. This could be a very interesting aspect to keep in mind while
 engineering a neural network alternative.  
 Wu, M.J. and Jang, J.S.R. (2015). *Combining acoustic and multilevel visual features for music genre classification*. ACM Transactions on Multimedia Computing, Communications, and Applications (TOMM), 12(1), p.10.
+
+### (Geng, 2016)
+Geng, S., Ren, G. and Ogihara, M., 2016, September. A Hierarchical Sonification Framework Based on Convolutional Neural Network Modeling of Musical Genre. In Audio Engineering Society Convention 141. Audio Engineering Society.
+
+### (Dai, 2016)
+Dai, J., Liang, S., Xue, W., Ni, C. and Liu, W., 2016, October. Long short-term memory recurrent neural network based segment features for music genre classification. In Chinese Spoken Language Processing (ISCSLP), 2016 10th International Symposium on (pp. 1-5). IEEE.
 
 ### (Panteli, 2016)
 Models the similarity between timbre and rhythm in electronic music. Rhythmic elements are best to describe electronic music.
