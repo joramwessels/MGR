@@ -113,12 +113,12 @@ __**Fr 12-06-2017**__
 **10:00-11:00:** Started writing [the report](https://www.sharelatex.com/project/58e0fb33c37936547fda88b0). The paper skeleton and introduction are done (for now).  
 **13:15-13:30:** In my opinion, the Related Work section requires a lot more field orientation before it can be written. Anticipating on the academic English assignment that's due next week, I reckon it's best to continue the literary search now (in absense of the Tensorflow/DAS explanation) in order to facilitate the assignment. Tomorrow I will explore the first three pages of search results on the UvA library and Google Scholar for the keywords "music genre recognition" in combination with any one of: "electronic", "dance", "EDM", "neural network", "cnn", "convnet", "rnn" or "LSTM".  
 
-__**Sa 12-05-2017**__  
+__**Sa 13-05-2017**__  
 **09:00-10:15:** Mapped all MIREX MGR submissions since 2014 (found in doc/further_literary_search.md). What suprised me is that only (Lidy, 2016) uses a network, and everyone else has used a SVM (which contradicts my earlier findings).  
 **10:30-11:30:** Searched UvA library for "electronic", "dance" and "EDM". Another task that can be done while waiting for the DAS access is deciding on what subgenres to use, and to justify that choice.  
 **13:00-14:00:** Searched UvA library for "CNN", "ConvNet", "RNN" and "LSTM".  
 
-__**Su 13-05-2017**__  
+__**Su 14-05-2017**__  
 **10:00-11:00:** Searched Google Scholar for "electronic", "dance" and "EDM".  
 **11:00-12:00:** Searched Google Scholar for "neural network".  
 **12:30-13:15:** Searched Google Scholar for "CNN".  
@@ -134,3 +134,7 @@ __**Su 13-05-2017**__
 |              |                                           | Dai_2015 (Multi-DNN)            |            |                   |                        | Sturm_Features (deconvolution)    | Sturm_GTZAN (Dataset problems)         |
 |              |                                           | Pikrakis_2013 (Rhythm Modeling) |            |                   |                        | Nakashika_2012 (how2use CNN)      | Widmer_2017 (Challenges)               |
 |              |                                           | Reid_2014                       |            |                   |                        |                                   |                                        |
+
+__**Tu 15-05-2017**__  
+**12:45-13:45:** Adjusted the introduction to the new information found in my literary search. Wrote the structure of the Related Work section.  
+**14:00-15:00:** Wrote the Related Work section.
