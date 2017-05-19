@@ -137,4 +137,7 @@ __**Su 14-05-2017**__
 
 __**Tu 15-05-2017**__  
 **12:45-13:45:** Adjusted the introduction to the new information found in my literary search. Wrote the structure of the Related Work section.  
-**14:00-15:00:** Wrote the Related Work section.
+**14:00-15:00:** Started writing the Related Work section
+
+__**Th 17-05-2017**__  
+**09:00-10:00:** Wrote the Related Work
