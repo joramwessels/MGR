@@ -167,8 +167,8 @@ is scheduled on May 24, and before then I need to:
 | Monday   | CNN          | Tensorflow       |
 | Tuesday  | Finish CNN   | Assemble Dataset |
 
-**13:00-15:30:** Continued writing the Related Work and planned the coming week.
-**18:00-20:00:** Continued writing. Explored the various datasets used.
-**20:30-22:00:** Finished the Related Work section, but I'll need to finish the bibliography before I can hand it in.
+**13:00-15:30:** Continued writing the Related Work and planned the coming week.  
+**18:00-20:00:** Continued writing. Explored the various datasets used.  
+**20:30-22:00:** Finished the Related Work section, but I'll need to finish the bibliography before I can hand it in.  
 
 __**Sa 19-05-2017**__  
