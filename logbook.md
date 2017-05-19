@@ -158,5 +158,13 @@ is scheduled on May 24, and before then I need to:
 * Write the subsection on preprocessing
 * Write a subsection on Tensorflow
 * Start constructing a database (and justify choices)
-I will finish the Related Work section tonight, start on the CNN tomorrow, write the NN intro that night, the preprocessing the night after, the Tensorflow section Monday night, and I will tend to the database whenever I encounter a writer's block or neck strain (from programming).
+
+|          | Daytime      | Evening          |
+|----------|--------------|------------------|
+| Today    | Related Work | Related Work     |
+| Saturday | Start CNN    | NN intro         |
+| Sunday   | CNN          | Preprocessing    |
+| Monday   | CNN          | Tensorflow       |
+| Tuesday  | Finish CNN   | Assemble Dataset |
+
 **13:00-15:30:** Continued writing the Related Work and planned the coming week.
