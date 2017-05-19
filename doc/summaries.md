@@ -18,6 +18,8 @@ lowest level, linking rhythmic features within 2 bars together. All higher
 abstractions are useless.  
 Li, T.L., Chan, A.B., Chun, A. (2010). *Automatic Musical Pattern Feature Extraction Using Convolutional Neural Network*. In *In Proc. IMECS*.
 
+
+
 ### (Sturm, 2014)
 Overview of previous work, the different approaches, datasets and their
 analyses. (haven't finished reading)  
@@ -42,6 +44,8 @@ Alexandridis, A., Chondrodima, E., Paivana, G., Stogiannos, M., Zois, E. and Sar
 ### (Kong, 2014)
 Used a CNN and got 72.4% on the GTZAN dataset.
 
+
+
 ### (Sturm, 2015)
 Sturm B.L., Kereliuk C., Larsen J. (2015) ¿El Caballo Viejo? Latin Genre Recognition with Deep Learning and Spectral Periodicity. In: Collins T., Meredith D., Volk A. (eds) Mathematics and Computation in Music. MCM 2015. Lecture Notes in Computer Science, vol 9110. Springer, Cham
 
@@ -55,6 +59,8 @@ The way song-level patterns (like hooks, drops and verses) are combined with bea
 electronic music) give insight into what defines a genre. This could be a very interesting aspect to keep in mind while
 engineering a neural network alternative.  
 Wu, M.J. and Jang, J.S.R. (2015). *Combining acoustic and multilevel visual features for music genre classification*. ACM Transactions on Multimedia Computing, Communications, and Applications (TOMM), 12(1), p.10.
+
+
 
 ### (Geng, 2016)
 Geng, S., Ren, G. and Ogihara, M., 2016, September. A Hierarchical Sonification Framework Based on Convolutional Neural Network Modeling of Musical Genre. In Audio Engineering Society Convention 141. Audio Engineering Society.
@@ -98,6 +104,8 @@ Winner of the MIREX 2016 Latin Genre Classification. Uses a sequential CNN and a
 Softmax layer makes it a distribution. A dense layer with 20% dropout reduces overfitting. Implemented in Python-Keras-Theano.
 Managed a 69.54% accuracy on latin genres, and 73.14% on the mixed genres (lost to (Wu, 2015)).  
 Lidy, T., Schindler, A. (2016). *Parallel Convolutional Neural Networks for Music Genre and Mood Classification*. MIREX2016.
+
+
 
 ### (Costa, 2017)
 Compares the internal representations of CNNs with the most common handpicked features. Concludes that the use of CNNs is

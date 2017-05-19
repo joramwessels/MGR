@@ -127,7 +127,7 @@ __**Su 14-05-2017**__
 | Electronic   | MIREX Veterans                            | Neural Networks                 | CNN        | RNN               | Hybrids                | Features                          | Other                                  |
 |--------------|-------------------------------------------|---------------------------------|------------|-------------------|------------------------|-----------------------------------|----------------------------------------|
 | Siva_2014    | Seyerlehner_2011                          | Klec_2015                       | Li_2010    | Dai_2016 (LSTM)   | Vogler_2016 (CNN-LSTM) | Ullrich_2014 (CNN boundary det.)  | Sturm_Evaluation (Evaluation problems) |
-| Panteli_2016 | Wu_2013                                   | Goel_2014 (MLP Network)         | Lidy_2016  | Sigtia_2014       | Choi_2016 (CRNN)       | Geng_2016 (CNN hierarchy)         | Shi_2016 (ShuttleNet)                  |
+| Panteli_2016 | Wu_2013                                   | Goel_2014 (MLP Network)         | Lidy_2016  | Sigtia_2014 (no MGR) | Choi_2016 (CRNN)       | Geng_2016 (CNN hierarchy)         | Shi_2016 (ShuttleNet)                  |
 | Kirss_2007   | Foleiss_2016                              | Siva_2014 (PNN)                 | Kong_2014  | Irvin_2016 (LSTM) |                        | Su_2014 (BoF eval)                | Iloga_2016 (Taxonomies)                |
 | Chen_2014    | Lidy_2016 (CNN)                           | Prabhu_2014 ('Improved' NN)     | Costa_2017 |                   |                        | Reynolds_2007 (Rhythm importance) | Nasridinov_2014 (automatic feature ext)|
 |              | Pikrakis_2013 (*Recreated by Sturm_2015*) | Alexandridis_2014 (RBF Network) |            |                   |                        | Gwardys_2014 (Image similarity)   | Sturm_2012 (1998-1012 Summary)         |
@@ -140,7 +140,7 @@ __**Tu 15-05-2017**__
 **14:00-15:00:** Started writing the Related Work section
 
 ## Week 6 - ⚗️ Prototype
-### *(total: 1 hrs)*
+### *(total: 7 hrs)*
 __**Th 17-05-2017**__  
 **09:00-10:00:** Continued writing the Related Work
 
@@ -160,3 +160,7 @@ is scheduled on May 24, and before then I need to:
 * Start constructing a database (and justify choices)
 I will finish the Related Work section tonight, start on the CNN tomorrow, write the NN intro that night, the preprocessing the night after, the Tensorflow section Monday night, and I will tend to the database whenever I encounter a writer's block or neck strain (from programming).
 **13:00-15:30:** Continued writing the Related Work and planned the coming week.
+**18:00-20:00:** Continued writing. Explored the various datasets used.
+**20:30-22:00:** Finished the Related Work section, but I'll need to finish the bibliography before I can hand it in.
+
+__**Sa 19-05-2017**__  

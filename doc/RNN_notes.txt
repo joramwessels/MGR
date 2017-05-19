@@ -30,6 +30,22 @@ Electronic MGR
 	Kirss, 2007
 	Chen, 2014
 
+http://www.ismir.net/resources.html
+
+GTZAN
+	Wu
+
+UBM
+	Wu
+
+Unique Dataset (Seyerlehner 2010)
+	Wu
+
+MASD (Schindler et al. 2012)
+	Wu
+
+Million Song Dataset
+	Choi
 
 Electronic music is too diverse to be considered a single target class
 I propose a hybrid MGR classifier that is specialized in electronic subgenres,
@@ -68,7 +84,7 @@ Evaluation
 	
 	
 (Reynolds, 2007) <- Rhythm most important for EDM
-Reynolds, S. (2012). Energy flash: A journey through rave music and dance culture. London, UK: Picador. 
+Reynolds, S. (2012). Energy flash: A journey through rave music and dance culture. London, UK: Picador. pp 312–329
 (Butler, 2006) <- 'Structural changes' in EDM
 Butler, M. J. (2006). Unlocking the groove: Rhythm, meter, and musical design in electronic dance music. Bloomington: Indiana University Press.
 (Paul, 2014) <- EDM is muy popular
@@ -80,3 +96,8 @@ Malay music MGR
 Golzari, S., Doraisamy, S., Sulaiman, M.N. and Udzir, N.I., 2008, August. A hybrid approach to traditional Malay music genre classification: Combining feature selection and artificial immune recognition system. In Information Technology, 2008. ITSim 2008. International Symposium on (Vol. 2, pp. 1-6). IEEE.
 African and Greek MGR
 Antonopoulos, I., Pikrakis, A., Theodoridis, S., Cornelis, O., Moelants, D. and Leman, M., 2007. Music retrieval by rhythmic similarity applied on greek and african traditional music. In Proceedings of the 8th International Conference on Music Information Retrieval (pp. 297-300).
+
+Million Song Database
+Thierry Bertin-Mahieux, Daniel P.W. Ellis, Brian Whitman, and Paul Lamere. 
+The Million Song Dataset. In Proceedings of the 12th International Society
+for Music Information Retrieval Conference (ISMIR 2011), 2011.
