@@ -145,5 +145,18 @@ __**Th 17-05-2017**__
 **09:00-10:00:** Continued writing the Related Work
 
 __**Fr 18-05-2017**__  
-**10:00-10:30** Fifth meeting.
-**13:00-:** 
+**10:00-10:30** Fifth meeting. The aforementioned introduction of the DAS is not required to be able to start programming the network.
+Coming week will therefore likely see the first CNN prototype. If any complications do arise, I can call upon Bas Visser's experience
+or address them during the next meeting. My progress on the report was below expectations. I have therefore decided to write for one hour
+every business day. The coming 6 weeks (week 6-11) are reallocated as follows. Week 6-7 are concerned with implementing the algorithm,
+while keeping track of the steps I take in the report. Week 8-10 are reserved for the evaluation and for writing the corresponding sections of the report.
+The start of week 11 is my self-imposed deadline for the end report. The report is due Friday June 30 of that week. Our next meeting
+is scheduled on May 24, and before then I need to:
+* Implement a CNN prototype
+* Include a part about NNs in the intro
+* Finish the Related Work section (elaborating on each citation)
+* Write the subsection on preprocessing
+* Write a subsection on Tensorflow
+* Start constructing a database (and justify choices)
+I will finish the Related Work section tonight, start on the CNN tomorrow, write the NN intro that night, the preprocessing the night after, the Tensorflow section Monday night, and I will tend to the database whenever I encounter a writer's block or neck strain (from programming).
+**13:00-15:30:** Continued writing the Related Work and planned the coming week.

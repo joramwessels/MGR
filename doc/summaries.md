@@ -39,6 +39,9 @@ Chen, A.C. (2014). 'Automatic Classification of Electronic Music and Speech/Musi
 ### (Alexandridis, 2014)
 Alexandridis, A., Chondrodima, E., Paivana, G., Stogiannos, M., Zois, E. and Sarimveis, H., 2014, September. Music genre classification using radial basis function networks and particle swarm optimization. In Computer Science and Electronic Engineering Conference (CEEC), 2014 6th (pp. 35-40). IEEE.
 
+### (Kong, 2014)
+Used a CNN and got 72.4% on the GTZAN dataset.
+
 ### (Sturm, 2015)
 Sturm B.L., Kereliuk C., Larsen J. (2015) ¿El Caballo Viejo? Latin Genre Recognition with Deep Learning and Spectral Periodicity. In: Collins T., Meredith D., Volk A. (eds) Mathematics and Computation in Music. MCM 2015. Lecture Notes in Computer Science, vol 9110. Springer, Cham
 
