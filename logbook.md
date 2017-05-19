@@ -87,14 +87,14 @@ __**Th 03-05-2017**__
 __**Tu 09-05-2017**__  
 **10:00-10:30:** Fourth meeting. I've had a busy week and little results. My hypothesis was interesting, but it's still better to start with a preexisting architecture.
 The four things to do before Friday the 19th is to
-* Put in a minimum of 30 hours a week (or 5 hours a day)
-* Get comfortable with the DAS (✖ attend the introduction on Thursday)
-* Start to write the paper, especially the skeleton, intro, related work and preprocessing
-* Get as far as possible on implementing a simple CNN in Tensorflow
+* ✖ Put in a minimum of 30 hours a week (or 5 hours a day)
+* ✖ Get comfortable with the DAS (✖ attend the introduction on Thursday)
+* ✔ Start to write the paper, especially the ✔ skeleton, ✔ intro, ✔ related work and ✖ preprocessing
+* ✔ Get as far as possible on implementing a simple CNN in Tensorflow
 	* ✔ Change to Python 2.7 and Anaconda
 	* ✔ Install Librosa
 	* ✔ Preprocessing
-	* CNN network
+	* ✖ CNN network
 
 **10:30-12:30:** Planning and paper set-up  
 
@@ -103,8 +103,8 @@ __**We 10-05-2017**__
 **12:45-14:00:** Started writing preprocessing.py  
 **18:45-20:00:** Tested and debugged the ID3 extraction and Mel spectrogramification. Both work. I only need to save the results to storage.
 
-## Week 5 - ⚗️ Prototype
-### *(total: 12 hrs)*
+## Week 5 - 📝 Writing
+### *(total: 15.25 hrs)*
 __**Th 11-05-2017**__  
 **09:15-11:00:** Wrote a save_to_file and read_from_file function. Rein has fallen ill so the DAS introduction has been suspended.  
 **13:30-15:30:** Tested the read- and write functions. Wrote and tested the k-fold cross validation function.  
@@ -139,5 +139,10 @@ __**Tu 15-05-2017**__
 **12:45-13:45:** Adjusted the introduction to the new information found in my literary search. Wrote the structure of the Related Work section.  
 **14:00-15:00:** Started writing the Related Work section
 
+## Week 6 - ⚗️ Prototype
+### *(total: 1 hrs)*
 __**Th 17-05-2017**__  
-**09:00-10:00:** Wrote the Related Work
+**09:00-10:00:** Continued writing the Related Work
+
+__**Fr 18-05-2017**__  
+**10:00-10:30** Fifth meeting.
