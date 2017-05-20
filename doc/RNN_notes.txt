@@ -34,6 +34,7 @@ http://www.ismir.net/resources.html
 
 GTZAN
 	Wu
+	Irvin
 
 UBM
 	Wu
@@ -97,7 +98,20 @@ Golzari, S., Doraisamy, S., Sulaiman, M.N. and Udzir, N.I., 2008, August. A hybr
 African and Greek MGR
 Antonopoulos, I., Pikrakis, A., Theodoridis, S., Cornelis, O., Moelants, D. and Leman, M., 2007. Music retrieval by rhythmic similarity applied on greek and african traditional music. In Proceedings of the 8th International Conference on Music Information Retrieval (pp. 297-300).
 
-Million Song Database
+Million Song Dataset
 Thierry Bertin-Mahieux, Daniel P.W. Ellis, Brian Whitman, and Paul Lamere. 
 The Million Song Dataset. In Proceedings of the 12th International Society
 for Music Information Retrieval Conference (ISMIR 2011), 2011.
+
+
+Unused citations:
+	Iloga_2016
+	Shi_2016
+	Su_2014
+	Ullrich_2014
+	Gwardys_2014
+	Sturm_features
+	Nakashika_2012
+	Sturm_2015
+	Widmer_2017
+	Nasridinov_2014
