@@ -140,7 +140,7 @@ __**Tu 15-05-2017**__
 **14:00-15:00:** Started writing the Related Work section
 
 ## Week 6 - ⚗️ Prototype
-### *(total: 7 hrs)*
+### *(total: 12.25 hrs)*
 __**Th 17-05-2017**__  
 **09:00-10:00:** Continued writing the Related Work
 
@@ -174,4 +174,6 @@ is scheduled on May 24, and before then I need to:
 __**Sa 19-05-2017**__  
 **10:00-11:30** Explored how to install Tensorflow, figured I'd best use the installation on the DAS, tried to log in to the DAS and failed, installed the UvAVPN and tried agian, failed again.  
 **14:00-16:00:** Created half the bib file, which took a lot more time than expected.  
-**16:30-18:15:** Finished the bib file and handed in Academic English assignment 1.  
+**16:30-18:15:** Finished the bib file and handed in Academic English assignment 1. I'm already one day behind on the schedule from yesterday.  
+
+__**Su 20-05-2017**__  
