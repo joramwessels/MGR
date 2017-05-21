@@ -114,7 +114,7 @@ __**Fr 12-06-2017**__
 **13:15-13:30:** In my opinion, the Related Work section requires a lot more field orientation before it can be written. Anticipating on the academic English assignment that's due next week, I reckon it's best to continue the literary search now (in absense of the Tensorflow/DAS explanation) in order to facilitate the assignment. Tomorrow I will explore the first three pages of search results on the UvA library and Google Scholar for the keywords "music genre recognition" in combination with any one of: "electronic", "dance", "EDM", "neural network", "cnn", "convnet", "rnn" or "LSTM".  
 
 __**Sa 13-05-2017**__  
-**09:00-10:15:** Mapped all MIREX MGR submissions since 2014 (found in doc/further_literary_search.md). What suprised me is that only (Lidy, 2016) uses a network, and everyone else has used a SVM (which contradicts my earlier findings).  
+**09:00-10:15:** Mapped all MIREX MGR submissions since 2014 (found in `doc/further_literary_search.md`). What suprised me is that only (Lidy, 2016) uses a network, and everyone else has used a SVM (which contradicts my earlier findings).  
 **10:30-11:30:** Searched UvA library for "electronic", "dance" and "EDM". Another task that can be done while waiting for the DAS access is deciding on what subgenres to use, and to justify that choice.  
 **13:00-14:00:** Searched UvA library for "CNN", "ConvNet", "RNN" and "LSTM".  
 
@@ -177,4 +177,5 @@ __**Sa 19-05-2017**__
 **16:30-18:15:** Finished the bib file and handed in Academic English assignment 1. I'm already one day behind on the schedule from yesterday.  
 
 __**Su 20-05-2017**__  
-**13:00-:** Got access to the DAS (using the UvA-MN head node) and installed Anaconda. I followed the instructions in `/home/koelma/tensorflow_pkg/readme.txt` but got stuck trying to install wheel, upgrade pip and install Tensorflow.
+**13:00-14:30:** Got access to the DAS (using the UvA-MN head node) and installed Anaconda. I followed the instructions in `/home/koelma/tensorflow_pkg/readme.txt` but got stuck trying to install wheel, upgrade pip and install Tensorflow.  
+**15:00-:** 
