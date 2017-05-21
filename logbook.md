@@ -177,3 +177,4 @@ __**Sa 19-05-2017**__
 **16:30-18:15:** Finished the bib file and handed in Academic English assignment 1. I'm already one day behind on the schedule from yesterday.  
 
 __**Su 20-05-2017**__  
+**13:00-:** Got access to the DAS (using the UvA-MN head node) and installed Anaconda. I followed the instructions in `/home/koelma/tensorflow_pkg/readme.txt` but got stuck trying to install wheel, upgrade pip and install Tensorflow.
