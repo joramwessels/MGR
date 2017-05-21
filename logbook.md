@@ -178,4 +178,5 @@ __**Sa 19-05-2017**__
 
 __**Su 20-05-2017**__  
 **13:00-14:30:** Got access to the DAS (using the UvA-MN head node) and installed Anaconda. I followed the instructions in `/home/koelma/tensorflow_pkg/readme.txt` but got stuck trying to install wheel, upgrade pip and install Tensorflow.  
-**15:00-:** 
+**15:30-17:00:** Explored dataset options. I found sources for  the popularity of subgenres, I inventarized my personal collection as of now, and I listed sources with which to enrich the collection.  
+**18:00-20:00:** 

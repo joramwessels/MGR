@@ -103,6 +103,9 @@ Thierry Bertin-Mahieux, Daniel P.W. Ellis, Brian Whitman, and Paul Lamere.
 The Million Song Dataset. In Proceedings of the 12th International Society
 for Music Information Retrieval Conference (ISMIR 2011), 2011.
 
+Most popular EDM in the US
+http://edm.com/articles/2015/10/28/most-popular-edm-genre-us
+
 
 Unused citations:
 	Iloga_2016
@@ -115,3 +118,47 @@ Unused citations:
 	Sturm_2015
 	Widmer_2017
 	Nasridinov_2014
+
+
+Dataset composition
+	Trap
+	Dubstep
+	Electro House
+	(No Deep House)
+	Trance
+	Drum & Bass
+	Progressive House
+	Hardstyle
+	Techno
+	Big Room House
+	Tropical House
+
+Sources
+	UKF
+	Monstercat
+	NCS
+	Goblins from Mars
+	Galaxy Music
+	Tasty
+	Spinnin' Records
+	xKito
+
+Electronic
+	Trap (12)
+		- Future Bass (147)
+	Dubstep (506)
+		- Chillstep (0)
+	House (58)
+		- Electro (332)
+		- Progressive (259)
+		- Big Room (0)
+		- Tropical (0)
+	Trance (45)
+		- Psy Trance (0)
+	Drum & Bass (540)
+		- Liquid Funk (157)
+		- Neurofunk (134)
+	Hardstyle (4)
+		- 
+	Techno (22)
+		- 
