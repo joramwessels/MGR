@@ -140,7 +140,7 @@ __**Tu 15-05-2017**__
 **14:00-15:00:** Started writing the Related Work section
 
 ## Week 6 - ⚗️ Prototype
-### *(total: 12.25 hrs)*
+### *(total: 17.75 hrs)*
 __**Th 17-05-2017**__  
 **09:00-10:00:** Continued writing the Related Work
 
@@ -153,11 +153,11 @@ while keeping track of the steps I take in the report. Week 8-10 are reserved fo
 The start of week 11 is my self-imposed deadline for the end report. The report is due Friday June 30 of that week. Our next meeting
 is scheduled on May 24, and before then I need to:
 * Implement a CNN prototype
-* Include a part about NNs in the intro
-* Finish the Related Work section (elaborating on each citation)
+* Include a part about NNs in the report
+* ✔ Finish the Related Work section (elaborating on each citation)
 * Write the subsection on preprocessing
 * Write a subsection on Tensorflow
-* Start constructing a database (and justify choices)
+* ✔ Start constructing a database (and justify choices)
 
 |          | Daytime      | Evening          |
 |----------|--------------|------------------|
@@ -180,4 +180,6 @@ __**Su 20-05-2017**__
 **13:00-14:30:** Got access to the DAS (using the UvA-MN head node) and installed Anaconda. I followed the instructions in `/home/koelma/tensorflow_pkg/readme.txt` but got stuck trying to install wheel, upgrade pip and install Tensorflow.  
 **15:30-17:00:** Explored dataset options. I found sources for  the popularity of subgenres, I inventarized my personal collection as of now, and I listed sources with which to enrich the collection.  
 **19:00-20:00:** Restructured the skeleton (by looking at old dissertations supervised by Taco or Rein) and wrote the neural network introduction.  
-**20:30-22:00** 
+**20:30-22:00** Wrote the CNN background, started the RNN background and constructed a visual of an RNN. I still haven't completed what I should've completed last night; the DAS is a complex environment.
+
+__**Mo 21-05-2017**__  
