@@ -153,7 +153,7 @@ while keeping track of the steps I take in the report. Week 8-10 are reserved fo
 The start of week 11 is my self-imposed deadline for the end report. The report is due Friday June 30 of that week. Our next meeting
 is scheduled on May 24, and before then I need to:
 * Implement a CNN prototype
-* Include a part about NNs in the report
+* ✔ Include a part about NNs in the report
 * ✔ Finish the Related Work section (elaborating on each citation)
 * Write the subsection on preprocessing
 * Write a subsection on Tensorflow
@@ -183,4 +183,5 @@ __**Su 20-05-2017**__
 **20:30-22:00** Wrote the CNN background, started the RNN background and constructed a visual of an RNN. I've asked Bas and Rein for help with the DAS. I still haven't completed what I should've completed last night; the DAS is a complex environment.
 
 __**Mo 21-05-2017**__  
-**08:00-11:00:** Awaiting a response about the DAS, I've continued writing the report. I finished the paragraphs on the LSTM and GRU, and thus the RNN background as a whole. I also created another, clearer visual.  
+**08:00-11:00:** Awaiting a response about the DAS, I've continued writing the report. I finished the paragraphs on the LSTM and GRU, but I've added a header for a paragraph on CNN-RNN hybrids that I might write some other time. I also created another clearer visual of RNNs.
+**12:30-:** 
