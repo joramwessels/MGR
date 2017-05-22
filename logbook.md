@@ -180,6 +180,7 @@ __**Su 20-05-2017**__
 **13:00-14:30:** Got access to the DAS (using the UvA-MN head node) and installed Anaconda. I followed the instructions in `/home/koelma/tensorflow_pkg/readme.txt` but got stuck trying to install wheel, upgrade pip and install Tensorflow.  
 **15:30-17:00:** Explored dataset options. I found sources for  the popularity of subgenres, I inventarized my personal collection as of now, and I listed sources with which to enrich the collection.  
 **19:00-20:00:** Restructured the skeleton (by looking at old dissertations supervised by Taco or Rein) and wrote the neural network introduction.  
-**20:30-22:00** Wrote the CNN background, started the RNN background and constructed a visual of an RNN. I still haven't completed what I should've completed last night; the DAS is a complex environment.
+**20:30-22:00** Wrote the CNN background, started the RNN background and constructed a visual of an RNN. I've asked Bas and Rein for help with the DAS. I still haven't completed what I should've completed last night; the DAS is a complex environment.
 
 __**Mo 21-05-2017**__  
+**08:00-11:00:** Awaiting a response about the DAS, I've continued writing the report. I finished the paragraphs on the LSTM and GRU, and thus the RNN background as a whole. I also created another, clearer visual.  
