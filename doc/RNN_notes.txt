@@ -1,4 +1,4 @@
-Jurgen Schmidhuber, Sepp Hochreiter, Alex Graves
+﻿Jurgen Schmidhuber, Sepp Hochreiter, Alex Graves
 
 feed forward = one directional
 fading gradient -> gating (LSTM, GRU)
@@ -149,16 +149,21 @@ Electronic
 	Dubstep (506)
 		- Chillstep (0)
 	House (58)
-		- Electro (332)
-		- Progressive (259)
-		- Big Room (0)
-		- Tropical (0)
+		- Electro House (332)
+			- Big Room (0)
+		- Progressive House (259)
+		- Deep House
+			- Tropical House (0)
+			- Future House
 	Trance (45)
-		- Psy Trance (0)
+		- Psy Trance
+		- Goa
 	Drum & Bass (540)
 		- Liquid Funk (157)
 		- Neurofunk (134)
-	Hardstyle (4)
-		- 
+	Hard Dance(4)
+		- Hardstyle
+		- Hardcore
 	Techno (22)
+		- Detroid Techno
 		- 
