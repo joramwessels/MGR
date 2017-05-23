@@ -146,7 +146,7 @@ __**Th 17-05-2017**__
 
 __**Fr 18-05-2017**__  
 **10:00-10:30** Fifth meeting. The aforementioned introduction of the DAS is not required to be able to start programming the network.
-Coming week will therefore likely see the first CNN prototype. If any complications do arise, I can call upon Bas Visser's experience
+Coming week will therefore likely see the first CNN prototype. If any complications do arise, I can call upon *Bas Visser*'s experience
 or address them during the next meeting. My progress on the report was below expectations. I have therefore decided to write for one hour
 every business day. The coming 6 weeks (week 6-11) are reallocated as follows. Week 6-7 are concerned with implementing the algorithm,
 while keeping track of the steps I take in the report. Week 8-10 are reserved for the evaluation and for writing the corresponding sections of the report.
@@ -184,9 +184,9 @@ __**Su 20-05-2017**__
 
 __**Mo 21-05-2017**__  
 **08:00-11:00:** Awaiting a response about the DAS, I've continued writing the report. I finished the paragraphs on the LSTM and GRU, but I've added a header for a paragraph on CNN-RNN hybrids that I might write some other time. I also created another clearer visual of RNNs.  
-**12:30-14:00:** Used Bas' tips to install Tensorflow. I cloned my repos and tried to test preprocessing.py on the new machine but ran into the old "no backend error" problem. I've done a crash course on command line Emacs and learned how to use UNIX screen. I (think I) have requested a GPU node using `qrsh`, but it apperas that will take a while. I am unsure if I am supposed to reserve it only once, or do so everytime I want to run my code. I created cheat sheets for everything I did on the way. I'll need to fix the `ffmpeg` import using conda channels, but I can't seem to remember the command that lists all channels.  
+**12:30-14:00:** Used Bas' tips to install Tensorflow. I cloned my repos and tried to test preprocessing.py on the new machine but ran into the old "no backend error" problem. I've done a crash course on command line Emacs and learned how to use `screen`. I (think I) have requested a GPU node using `qrsh`, but it apperas that will take a while. I am unsure if I am supposed to reserve it only once, or do so everytime I want to run my code. I created cheat sheets for everything I did on the way. I'll need to fix the `ffmpeg` import using conda channels, but I can't seem to remember the command that lists all channels.  
 **16:00-17:00:** Wrote something about the DAS, and struggled a little with LaTeX headers and layout.  
 
 __**Tu 22-05-2017**__  
-**09:00-10:30:** Looked into the Librosa/audioread error. Managed to install fmpeg. Apparently there is no Git installation on the GPU node?  
-**12:30-:** 
+**09:00-10:30:** Looked into the `Librosa`/`audioread` error. Managed to install `ffmpeg`. Apparently there is no Git installation on the GPU node?  
+**12:00-13:00:** For some reason the DAS Python console has no `readline` (shouldn't I have noticed that earlier if it was already like this, or did I break something?). I have tried to fix it by installing `readline` and creating a `.pythonstartup` file, but it only started throwing more errors.
