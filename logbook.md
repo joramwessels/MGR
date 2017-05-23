@@ -185,4 +185,8 @@ __**Su 20-05-2017**__
 __**Mo 21-05-2017**__  
 **08:00-11:00:** Awaiting a response about the DAS, I've continued writing the report. I finished the paragraphs on the LSTM and GRU, but I've added a header for a paragraph on CNN-RNN hybrids that I might write some other time. I also created another clearer visual of RNNs.  
 **12:30-14:00:** Used Bas' tips to install Tensorflow. I cloned my repos and tried to test preprocessing.py on the new machine but ran into the old "no backend error" problem. I've done a crash course on command line Emacs and learned how to use UNIX screen. I (think I) have requested a GPU node using `qrsh`, but it apperas that will take a while. I am unsure if I am supposed to reserve it only once, or do so everytime I want to run my code. I created cheat sheets for everything I did on the way. I'll need to fix the `ffmpeg` import using conda channels, but I can't seem to remember the command that lists all channels.  
-**16:00-17:00:** Wrote something about the DAS, and struggled a little with LaTeX headers and layout.
+**16:00-17:00:** Wrote something about the DAS, and struggled a little with LaTeX headers and layout.  
+
+__**Tu 22-05-2017**__  
+**09:00-10:30:** Looked into the Librosa/audioread error. Managed to install fmpeg. Apparently there is no Git installation on the GPU node?  
+**12:30-:** 
