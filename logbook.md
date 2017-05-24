@@ -152,11 +152,11 @@ every business day. The coming 6 weeks (week 6-11) are reallocated as follows. W
 while keeping track of the steps I take in the report. Week 8-10 are reserved for the evaluation and for writing the corresponding sections of the report.
 The start of week 11 is my self-imposed deadline for the end report. The report is due Friday June 30 of that week. Our next meeting
 is scheduled on May 24, and before then I need to:
-* Implement a CNN prototype
+* ✖ Implement a CNN prototype
 * ✔ Include a part about NNs in the report
 * ✔ Finish the Related Work section (elaborating on each citation)
-* Write the subsection on preprocessing
-* Write a subsection on Tensorflow
+* ✖ Write the subsection on preprocessing
+* ✖ Write a subsection on Tensorflow
 * ✔ Start constructing a database (and justify choices)
 
 |          | Daytime      | Evening          |
@@ -190,3 +190,12 @@ __**Mo 21-05-2017**__
 __**Tu 22-05-2017**__  
 **09:00-10:30:** Looked into the `Librosa`/`audioread` error. Managed to install `ffmpeg`. Apparently there is no Git installation on the GPU node?  
 **12:00-13:00:** For some reason the DAS Python console has no `readline` (shouldn't I have noticed that earlier if it was already like this, or did I break something?). I have tried to fix it by installing `readline` and creating a `.pythonstartup` file, but it only started throwing more errors.
+
+__**We 23-05-2017**__  
+**10:00-10:30:** Sixth meeting. I shouldn't waste any more time on logistical DAS problems. I will proceed to write the CNN locally using a CPU based Tensorflow installation, and port it to the DAS when it's finishen. By next week Tuesday I intend to have:
+* A working local prototype
+* Written the Preprocessing paragraph
+* Written the Tensorflow paragraph
+* Added more detail to the NN paragraphs
+
+**17:45-19:00:** I fixed the readline problem by channeling the install through `conda-forge`. Sent supervisors a ShareLaTeX invite. Increased the line spacing. Tried to install Tensorflow, which is apparently only available for Python 3.5 on Windows, so I hope it won't result in too many problems when porting to the DAS.
