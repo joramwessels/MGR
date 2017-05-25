@@ -201,4 +201,20 @@ __**We 23-05-2017**__
 **17:45-19:00:** I fixed the readline problem by channeling the install through `conda-forge`. Sent supervisors a ShareLaTeX invite. Increased the line spacing. I installed Tensorflow, which is apparently only available for Python 3.5 on Windows, so I hope it won't result in too many problems when porting to the DAS.
 
 __**Th 24-05-2017**__  
-**9:45-:** My local Anaconda installation has stopped responding after installing Tensorflow. Since I fixed `readline`, I continued on the DAS. I was unable to git push, supposedly because I cloned using https, so I switched it to SSH. I was then also unable to pull because I haven't set up my SSH keys. I'll stick to HTTPS, write my code locally, and manually copy changes I make while debugging.
+**9:45-11:30:** My local Anaconda installation has stopped responding after installing Tensorflow. Since I fixed `readline`, I continued on the DAS. I was unable to git push, supposedly because I cloned using https, so I switched it to SSH. I was then also unable to pull because I haven't set up my SSH keys. I'll stick to HTTPS, write my code locally, and manually copy changes I make while debugging.  
+**12:30-:** I need to fix this bug before I can access my dataset:  
+```
+>>> isfile('/var/scratch/jwessels/MGR/doc/experiments/Techno.mp3')
+True
+>>> load('/var/scratch/jwessels/MGR/doc/experiments/Techno.mp3')
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/var/scratch/jwessels/anaconda/lib/python2.7/site-packages/librosa/core/audio.py", line 107, in load
+    with audioread.audio_open(os.path.realpath(path)) as input_file:
+  File "/var/scratch/jwessels/anaconda/lib/python2.7/site-packages/audioread/__init__.py", line 109, in audio_open
+    return ffdec.FFmpegAudioFile(path)
+  File "/var/scratch/jwessels/anaconda/lib/python2.7/site-packages/audioread/ffdec.py", line 150, in __init__
+    self._get_info()
+  File "/var/scratch/jwessels/anaconda/lib/python2.7/site-packages/audioread/ffdec.py", line 206, in _get_info
+    raise IOError('file not found')
+IOError: file not found```  
