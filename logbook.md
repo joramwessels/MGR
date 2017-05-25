@@ -198,4 +198,7 @@ __**We 23-05-2017**__
 * Written the Tensorflow paragraph
 * Added more detail to the NN paragraphs
 
-**17:45-19:00:** I fixed the readline problem by channeling the install through `conda-forge`. Sent supervisors a ShareLaTeX invite. Increased the line spacing. Tried to install Tensorflow, which is apparently only available for Python 3.5 on Windows, so I hope it won't result in too many problems when porting to the DAS.
+**17:45-19:00:** I fixed the readline problem by channeling the install through `conda-forge`. Sent supervisors a ShareLaTeX invite. Increased the line spacing. I installed Tensorflow, which is apparently only available for Python 3.5 on Windows, so I hope it won't result in too many problems when porting to the DAS.
+
+__**Th 24-05-2017**__  
+**9:45-:** My local Anaconda installation has stopped responding after installing Tensorflow. Since I fixed `readline`, I continued on the DAS. I was unable to git push, supposedly because I cloned using https, so I switched it to SSH. I was then also unable to pull because I haven't set up my SSH keys. I'll stick to HTTPS, write my code locally, and manually copy changes I make while debugging.
