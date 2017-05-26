@@ -225,4 +225,7 @@ IOError: file not found
 
 __**Fr 25-05-2017**__  
 **10:00-13:00** I now completely understand the k2c2 algorithm in (Choi, 2016) I am trying to recreate. Tensorflow appears quite intuitive and easy, although I haven't executed any code so far. Yesterday's StackOverflow question hasn't yielded any answers so far. I just asked [another one](https://stackoverflow.com/questions/44199665/tensorflow-cnn-mnist-example-weight-dimensions) regarding the weight dimensions in a CNN Tensorflow example.  
-**14:30-15:30** These two problems prevent me from finishing the first code, and running the code. I've written a little on Tensorflow in the report.
+**14:30-15:30** These two problems prevent me from finishing the first code, and running the code. I've written a little on Tensorflow in the report.  
+**21:00-22:00:** Finished the paragraph about Tensorflow (wouldn't know what else to write about it). Searched for CNN formulas to add to the NN paragraphs. I found some, but I reckon I'll need a quick refresh on backprop in MLPs first before looking into CNN backprop. I am well on schedule, but I do need to fix my logistical issues by tomorrow in order not to stall the actual programming for too long.
+
+__**Sa 26-05-2017**__  
