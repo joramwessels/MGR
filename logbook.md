@@ -224,4 +224,5 @@ IOError: file not found
 **14:00-15:00** Posted [a question](https://stackoverflow.com/questions/44179007/librosa-load-file-not-found-error-using-anaconda) about it on StackOverflow, and in the meantime introduced myself to Tensorflow.
 
 __**Fr 25-05-2017**__  
-**10:00-13:00** I now completely understand the k2c2 algorithm in (Choi, 2016) I am trying to recreate. Tensorflow appears quite intuitive and easy, although I haven't executed any code so far. Yesterday's StackOverflow question hasn't yielded any answers so far. I just asked [another one](https://stackoverflow.com/questions/44199665/tensorflow-cnn-mnist-example-weight-dimensions) regarding the weight dimensions in a CNN Tensorflow example.
+**10:00-13:00** I now completely understand the k2c2 algorithm in (Choi, 2016) I am trying to recreate. Tensorflow appears quite intuitive and easy, although I haven't executed any code so far. Yesterday's StackOverflow question hasn't yielded any answers so far. I just asked [another one](https://stackoverflow.com/questions/44199665/tensorflow-cnn-mnist-example-weight-dimensions) regarding the weight dimensions in a CNN Tensorflow example.  
+**14:30-15:30** These two problems prevent me from finishing the first code, and running the code. I've written a little on Tensorflow in the report.
