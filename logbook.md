@@ -230,4 +230,5 @@ __**Fr 25-05-2017**__
 
 __**Sa 26-05-2017**__  
 **09:30-10:30** Rein helped me tackle the first bug. The `ffmpeg` package was already installed through `conda-forge`, but installing it again using `conda install -c menpo ffmpeg=3.1.3` did the trick.  
-**12:45-:** StackOverflow answered my second question. I've written the CNN.
+**12:45-16:00:** StackOverflow answered my second question. I've finished the CNN (conceptually, debugging awaits).  
+**16:45-17:45:** Looked into data feeding. Wrote a batch dispenser. Tomorow I'll do error handling, finish the data input and test it on the DAS.
