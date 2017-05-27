@@ -4,11 +4,12 @@
 # date:				11-05-2017
 # python versoin:	2.7
 # dependencies:		tensorflow
-# public functions:	
+# public functions:	train
 # description:		Reads the prepared data from a file and trains the network
 
 import sys, json, logging
 import numpy as np
+import Choi2016
 
 # Creates a logger
 logging.basicConfig(filename='../logs/training.log', level=logging.DEBUG,
@@ -18,11 +19,12 @@ log = logging.getLogger("training")
 
 def main(argv):
 	data = read_from_file(argv[1])
-	(train, test) = cross_validate(data, 0.2)
-	coefficients = train(data)
+	CV = cross_validate(data, 5)
+	(train, test) = CV(1)
+	coefficients = train_Choi2016(train)
 	save_to_file(argv[2], coefficients)
 
-def train(data):
+def train_Choi2016(data):
 	return
 
 def cross_validate(data, k, seed=None):
@@ -46,6 +48,7 @@ def cross_validate(data, k, seed=None):
 	
 	"""
 	if (len(data) < k): raise Exception("Length of data < k")
+	if (seed): np.random.seed(seed=seed)
 	np.random.shuffle(data)
 	l = len(data)/k
 	folds = [(data[l*i-l:l*i] if i<k else data[l*i:]) for i in range(1,k+1)]
