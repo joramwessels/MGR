@@ -229,5 +229,5 @@ __**Fr 25-05-2017**__
 **21:00-22:00:** Finished the paragraph about Tensorflow (wouldn't know what else to write about it). Searched for CNN formulas to add to the NN paragraphs. I found some, but I reckon I'll need a quick refresh on backprop in MLPs first before looking into CNN backprop. I am well on schedule, but I do need to fix my logistical issues by tomorrow in order not to stall the actual programming for too long.
 
 __**Sa 26-05-2017**__  
-**09:30-10:30**
-**12:45-:** Rein helped me tackle the first bug. The `ffmpeg` package was already installed through `conda-forge`, but installing it again using `conda install -c menpo ffmpeg=3.1.3` did the trick.
+**09:30-10:30** Rein helped me tackle the first bug. The `ffmpeg` package was already installed through `conda-forge`, but installing it again using `conda install -c menpo ffmpeg=3.1.3` did the trick.  
+**12:45-:** StackOverflow answered my second question. I've written the CNN.
