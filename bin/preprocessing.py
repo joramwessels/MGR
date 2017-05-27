@@ -10,7 +10,8 @@
 import sys, logging
 from os import walk
 import numpy as np
-from librosa import load, logamplitude
+from librosa import load
+from librosa.core.spectrum import power_to_db
 from librosa.feature import melspectrogram
 from mutagen.id3 import ID3
 
@@ -66,7 +67,7 @@ def to_spectrogram(filename, n_fft, stride, n_mels):
 	"""
 	y, sr = load(filename, offset=0, duration=60)
 	S = melspectrogram(y, sr=sr, n_fft=n_fft, hop_length=stride, n_mels=n_mels)
-	mel_spectrogram = logamplitude(S, ref_power=np.max)
+	mel_spectrogram = power_to_db(S, ref_power=np.max)
 	return mel_spectrogram
 
 if __name__ == "__main__":
