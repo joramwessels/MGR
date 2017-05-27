@@ -135,7 +135,7 @@ __**Su 14-05-2017**__
 |              |                                           | Pikrakis_2013 (Rhythm Modeling) |            |                   |                        | Nakashika_2012 (how2use CNN)      | Widmer_2017 (Challenges)               |
 |              |                                           | Reid_2014                       |            |                   |                        |                                   |                                        |
 
-__**Tu 15-05-2017**__  
+__**Tu 16-05-2017**__  
 **12:45-13:45:** Adjusted the introduction to the new information found in my literary search. Wrote the structure of the Related Work section.  
 **14:00-15:00:** Started writing the Related Work section
 
@@ -144,7 +144,7 @@ __**Tu 15-05-2017**__
 __**Th 17-05-2017**__  
 **09:00-10:00:** Continued writing the Related Work
 
-__**Fr 18-05-2017**__  
+__**Fr 19-05-2017**__  
 **10:00-10:30** Fifth meeting. The aforementioned introduction of the DAS is not required to be able to start programming the network.
 Coming week will therefore likely see the first CNN prototype. If any complications do arise, I can call upon *Bas Visser*'s experience
 or address them during the next meeting. My progress on the report was below expectations. I have therefore decided to write for one hour
@@ -171,27 +171,27 @@ is scheduled on May 24, and before then I need to:
 **18:00-20:00:** Continued writing. Explored the various datasets used.  
 **20:30-22:00:** Finished the Related Work section, but I'll need to finish the bibliography before I can hand it in.  
 
-__**Sa 19-05-2017**__  
+__**Sa 20-05-2017**__  
 **10:00-11:30** Explored how to install Tensorflow, figured I'd best use the installation on the DAS, tried to log in to the DAS and failed, installed the UvAVPN and tried agian, failed again.  
 **14:00-16:00:** Created half the bib file, which took a lot more time than expected.  
 **16:30-18:15:** Finished the bib file and handed in Academic English assignment 1. I'm already one day behind on the schedule from yesterday.  
 
-__**Su 20-05-2017**__  
+__**Su 21-05-2017**__  
 **13:00-14:30:** Got access to the DAS (using the UvA-MN head node) and installed Anaconda. I followed the instructions in `/home/koelma/tensorflow_pkg/readme.txt` but got stuck trying to install wheel, upgrade pip and install Tensorflow.  
 **15:30-17:00:** Explored dataset options. I found sources for  the popularity of subgenres, I inventarized my personal collection as of now, and I listed sources with which to enrich the collection.  
 **19:00-20:00:** Restructured the skeleton (by looking at old dissertations supervised by Taco or Rein) and wrote the neural network introduction.  
 **20:30-22:00** Wrote the CNN background, started the RNN background and constructed a visual of an RNN. I've asked Bas and Rein for help with the DAS. I still haven't completed what I should've completed last night; the DAS is a complex environment.
 
-__**Mo 21-05-2017**__  
+__**Mo 22-05-2017**__  
 **08:00-11:00:** Awaiting a response about the DAS, I've continued writing the report. I finished the paragraphs on the LSTM and GRU, but I've added a header for a paragraph on CNN-RNN hybrids that I might write some other time. I also created another clearer visual of RNNs.  
 **12:30-14:00:** Used Bas' tips to install Tensorflow. I cloned my repos and tried to test preprocessing.py on the new machine but ran into the old "no backend error" problem. I've done a crash course on command line Emacs and learned how to use `screen`. I (think I) have requested a GPU node using `qrsh`, but it apperas that will take a while. I am unsure if I am supposed to reserve it only once, or do so everytime I want to run my code. I created cheat sheets for everything I did on the way. I'll need to fix the `ffmpeg` import using conda channels, but I can't seem to remember the command that lists all channels.  
 **16:00-17:00:** Wrote something about the DAS, and struggled a little with LaTeX headers and layout.  
 
-__**Tu 22-05-2017**__  
+__**Tu 23-05-2017**__  
 **09:00-10:30:** Looked into the `Librosa`/`audioread` error. Managed to install `ffmpeg`. Apparently there is no Git installation on the GPU node?  
 **12:00-13:00:** For some reason the DAS Python console has no `readline` (shouldn't I have noticed that earlier if it was already like this, or did I break something?). I have tried to fix it by installing `readline` and creating a `.pythonstartup` file, but it only started throwing more errors.
 
-__**We 23-05-2017**__  
+__**We 24-05-2017**__  
 **10:00-10:30:** Sixth meeting. I shouldn't waste any more time on logistical DAS problems. I will proceed to write the CNN locally using a CPU based Tensorflow installation, and port it to the DAS when it's finishen. By next week Tuesday I intend to have:
 * A working local prototype
 * Written the Preprocessing paragraph
@@ -201,8 +201,8 @@ __**We 23-05-2017**__
 **17:45-19:00:** I fixed the readline problem by channeling the install through `conda-forge`. Sent supervisors a ShareLaTeX invite. Increased the line spacing. I installed Tensorflow, which is apparently only available for Python 3.5 on Windows, so I hope it won't result in too many problems when porting to the DAS.
 
 ## Week 7 - ⚗️ Prototype
-### *(total: 8.75 hrs)*
-__**Th 24-05-2017**__  
+### *(total: 15 hrs)*
+__**Th 25-05-2017**__  
 **9:45-11:30:** My local Anaconda installation has stopped responding after installing Tensorflow. Since I fixed `readline`, I continued on the DAS. I was unable to git push, supposedly because I cloned using https, so I switched it to SSH. I was then also unable to pull because I haven't set up my SSH keys. I'll stick to HTTPS, write my code locally, and manually copy changes I make while debugging.  
 **12:30-13:30:** I need to fix this bug before I can access my dataset:  
 ```
@@ -223,12 +223,15 @@ IOError: file not found
 ```  
 **14:00-15:00** Posted [a question](https://stackoverflow.com/questions/44179007/librosa-load-file-not-found-error-using-anaconda) about it on StackOverflow, and in the meantime introduced myself to Tensorflow.
 
-__**Fr 25-05-2017**__  
+__**Fr 26-05-2017**__  
 **10:00-13:00** I now completely understand the k2c2 algorithm in (Choi, 2016) I am trying to recreate. Tensorflow appears quite intuitive and easy, although I haven't executed any code so far. Yesterday's StackOverflow question hasn't yielded any answers so far. I just asked [another one](https://stackoverflow.com/questions/44199665/tensorflow-cnn-mnist-example-weight-dimensions) regarding the weight dimensions in a CNN Tensorflow example.  
 **14:30-15:30** These two problems prevent me from finishing the first code, and running the code. I've written a little on Tensorflow in the report.  
 **21:00-22:00:** Finished the paragraph about Tensorflow (wouldn't know what else to write about it). Searched for CNN formulas to add to the NN paragraphs. I found some, but I reckon I'll need a quick refresh on backprop in MLPs first before looking into CNN backprop. I am well on schedule, but I do need to fix my logistical issues by tomorrow in order not to stall the actual programming for too long.
 
-__**Sa 26-05-2017**__  
+__**Sa 27-05-2017**__  
 **09:30-10:30** Rein helped me tackle the first bug. The `ffmpeg` package was already installed through `conda-forge`, but installing it again using `conda install -c menpo ffmpeg=3.1.3` did the trick.  
 **12:45-16:00:** StackOverflow answered my second question. I've finished the CNN (conceptually, debugging awaits).  
 **16:45-17:45:** Looked into data feeding. Wrote a batch dispenser. Tomorow I'll do error handling, finish the data input and test it on the DAS.
+**20:30-21:30:** Got my backprop straight and looked into CNN backprop.
+
+__**Su 27-05-2017**__  
