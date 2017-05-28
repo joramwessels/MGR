@@ -6,7 +6,7 @@
 # dependencies:		None
 # description:		The exception for any problemm with the MGR package
 
-import traceback
+import sys, traceback
 
 class MGRException(Exception):
 	
