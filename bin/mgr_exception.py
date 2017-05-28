@@ -6,15 +6,17 @@
 # dependencies:		None
 # description:		The exception for any problemm with the MGR package
 
-import Exception, traceback
+import traceback
 
 class MGRException(Exception):
 	
-	def __init__(self, e):
-		ex_type, ex, tb = sys.exc_info()
-		message = str(ex_type) + ': ' + ex.message
-		super(Exception, self).__init__(message)
-		self.traceback = traceback.format_exc(tb)
+	def __init__(self, ex=None, message=None):
+		if (message): super(Exception, self).__init__(message)
+		else if (ex):
+			tb = traceback.extract_stack()
+			message = str(type(ex).__name__) + ': ' + ex.message
+			super(Exception, self).__init__(message)
+			self.traceback = tb
 	
 	def __str__(self):
-		return self.message + ' \n ' + self.traceback
+		return self.message + '\n' + str(self.traceback)
