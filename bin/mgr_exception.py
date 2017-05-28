@@ -12,7 +12,7 @@ class MGRException(Exception):
 	
 	def __init__(self, ex=None, message=None):
 		if (message): super(Exception, self).__init__(message)
-		else if (ex):
+		elif (ex):
 			tb = traceback.extract_stack()
 			message = str(type(ex).__name__) + ': ' + ex.message
 			super(Exception, self).__init__(message)
