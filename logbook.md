@@ -201,7 +201,7 @@ __**We 24-05-2017**__
 **17:45-19:00:** I fixed the readline problem by channeling the install through `conda-forge`. Sent supervisors a ShareLaTeX invite. Increased the line spacing. I installed Tensorflow, which is apparently only available for Python 3.5 on Windows, so I hope it won't result in too many problems when porting to the DAS.
 
 ## Week 7 - ⚗️ Prototype
-### *(total: 15 hrs)*
+### *(total: 18.5 hrs)*
 __**Th 25-05-2017**__  
 **9:45-11:30:** My local Anaconda installation has stopped responding after installing Tensorflow. Since I fixed `readline`, I continued on the DAS. I was unable to git push, supposedly because I cloned using https, so I switched it to SSH. I was then also unable to pull because I haven't set up my SSH keys. I'll stick to HTTPS, write my code locally, and manually copy changes I make while debugging.  
 **12:30-13:30:** I need to fix this bug before I can access my dataset:  
@@ -234,4 +234,8 @@ __**Sa 27-05-2017**__
 **16:45-17:45:** Looked into data feeding. Wrote a batch dispenser. Tomorow I'll do error handling, finish the data input and test it on the DAS.  
 **20:30-21:30:** Got my backprop straight and looked into CNN backprop.
 
-__**Su 27-05-2017**__  
+__**Su 28-05-2017**__  
+**14:00-15:30** Started exception handling.  
+**16:00-18:00** Sank way too much time into exception handling. I used the python distribution on the DAS, but the WiFi here shut down periodically, after which I had to establish the VPN and SSH connections again before redeclaring my variables in the pyton console.  
+
+__**Mo 29-05-2017**__  
