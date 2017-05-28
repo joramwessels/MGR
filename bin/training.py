@@ -9,6 +9,7 @@
 
 import sys, json, logging
 import numpy as np
+import tensorflow as tf
 import Choi2016
 
 # Creates a logger
@@ -17,14 +18,15 @@ logging.basicConfig(filename='../logs/training.log', level=logging.DEBUG,
 	+ "%(funcName)s: %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
 log = logging.getLogger("training")
 
-def main(argv):
+def main(argv, batch_size=50):
 	data = read_from_file(argv[1])
 	CV = cross_validate(data, 5)
 	(train, test) = CV(1)
-	coefficients = train_Choi2016(train)
+	data_batch = batch_generator(train, batch_size)
+	coefficients = train_Choi2016(data_batch)
 	save_to_file(argv[2], coefficients)
 
-def train_Choi2016(data):
+def train_Choi2016(data_batch):
 	return
 
 def cross_validate(data, k, seed=None):
@@ -52,12 +54,32 @@ def cross_validate(data, k, seed=None):
 	np.random.shuffle(data)
 	l = len(data)/k
 	folds = [(data[l*i-l:l*i] if i<k else data[l*i:]) for i in range(1,k+1)]
+	
 	def func(fold):
 		if (fold > k or fold < 1):
 			raise Exception(str(fold) +" fold does not exist")
 		train = [e for f in (folds[:fold-1] + folds[fold:]) for e in f]
 		return (train, folds[fold-1])
+	
 	return func
+
+def batch_generator(data, batch_size):
+	"""Returns a generator closure that dispenses data batches
+	
+	Args:
+		data:		The dataset to dispense
+		batch_size:	The size of each batch
+	Returns:
+		A closure that yields (labels, images) tuples
+	
+	"""
+	def gen():
+		for batch_id in range(0, len(data), batch_size):
+			labels_batch = data[batch_id : batch_id + batch_size][:,1]
+			images_batch = data[batch_id : batch_id + batch_size][:,2]
+			yield (labels_batch, images_batch.astype("float32"))
+	
+	return gen
 
 def read_from_file(filename):
 	"""Reads out the dataset from storage

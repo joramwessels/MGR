@@ -46,7 +46,8 @@ def prepare_data(folder, destination, n_fft=2048, stride=512, n_mels=128):
 		try:
 			target = str(ID3(filename)["TCON"].text[0])
 			spectrogram = to_spectrogram(filename, n_fft, stride, n_mels)
-			out.write(target + "; " + str(spectrogram.tolist()) + '\n')
+			out.write(filename + '; ' + target + '; '
+						+ str(spectrogram.tolist()) + '\n')
 		except Exception as e:
 			err = True
 			log.error(str(e))
