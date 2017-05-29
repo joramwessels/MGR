@@ -155,6 +155,6 @@ def test(log, filename, dataset):
 		saver.restore(sess, filename)
 		acc = sess.run(accuracy, feed_dict={x: dataset.get_test_x()[:data_size],
 											y: dataset.get_test_y()[:data_size],
-											keep_prob: 1.}))
+											keep_prob: 1.})
 	log.info("The acc of " + filename + " is " + str(acc))
 	return acc
