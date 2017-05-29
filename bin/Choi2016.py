@@ -44,7 +44,7 @@ def maxpool2d(x, k=2):
                           padding='SAME')
 
 def conv_net(x, weights, biases):
-    x = tf.reshape(x, shape=[96, 1366])
+    x = tf.reshape(x, shape=[-1, 96, 1366, 1])
 
     conv1 = conv2d(x, weights['wc1'], biases['bc1'])
     conv1 = maxpool2d(conv1, k=2)
@@ -111,20 +111,25 @@ def train(log, dataset, dir=None, id=None):
 		sess.run(init)
 		step = 1
 		# Keep training until reach max iterations
-		while step * dataset.batch_size < training_iters:
-			batch_y, batch_x = dataset.next_batch()
-			# Run optimization op (backprop)
-			sess.run(optimizer, feed_dict={x: batch_x, y: batch_y,
-										   keep_prob: dropout})
-			if step % display_step == 0:
-				# Calculate batch loss and accuracy
-				loss, acc = sess.run([cost, accuracy], feed_dict={x: batch_x,
-																  y: batch_y,
-																  keep_prob: 1.})
-				log.info("Iter " + str(step*batch_size) + ", Minibatch Loss= " \
-					  + "{:.6f}".format(loss) + ", Training Accuracy= " \
-					  + "{:.5f}".format(acc))
-			step += 1
+		while (step * dataset.batch_size < training_iters):
+			try:
+				batch_y, batch_x = dataset.next_batch()
+				# Run optimization op (backprop)
+				sess.run(optimizer, feed_dict={x: batch_x, y: batch_y,
+											   keep_prob: dropout})
+				if step % display_step == 0:
+					# Calculate batch loss and accuracy
+					loss, acc = sess.run([cost, accuracy],
+							feed_dict={x: batch_x, y: batch_y, keep_prob: 1.})
+					log.info("Iter " + str(step*batch_size) + ", Minibatch " \
+						  + "Loss= {:.6f}".format(loss) + ", Training " \
+						  + "Accuracy= {:.5f}".format(acc))
+				step += 1
+			except StopIteration as si:
+				pass
+			except Exception as e:
+				err += 1
+				log.error(str(MGRException(ex=e)))
 		log.info("Optimization Finished.")
 
 		# Calculate accuracy for all test images
@@ -139,7 +144,7 @@ def train(log, dataset, dir=None, id=None):
 		return save_path
 	else: return
 
-def test(log, filename, dataset):
+def test(log, dataset, filename):
 	"""Loads and tests a model on the given cross validated dataset.
 	
 	Args:

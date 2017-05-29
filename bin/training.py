@@ -22,25 +22,25 @@ def main(argv):
 def train_Choi2016(filename, batch_size=50, k=1, savedir="./models/"):
 	global err
 	log.info("Started training of dataset: " + filename)
-	data = read_from_file(filename)
-	CV = cross_validate(data, k)
+	dataset = Dataset(filename, batch_size, k)
 	acc = k*[0.0]
 	for fold in range(1,k):
 		try:
-			(trainset, testset) = CV(1)
-			train_batch_gen = batch_generator(trainset, batch_size)
-			savefile = Choi2016.train(log, train_batch_gen, dir=savedir, id=1)
-			test_batch_gen = batch_generator(testset, batch_size)
-			acc[k-1] = Choi2016.test(log, savefile, test_batch_gen)
+			dataset.new_batch_generator('train')
+			savefile = Choi2016.train(log, dataset, dir=savedir, id=1)
+			dataset.new_batch_generator('test')
+			acc[k-1] = Choi2016.test(log, dataset, savefile)
 		except Exception as e:
 			err += 1
 			log.error(str(MGRException(ex=e)))
+	log.info("=========================================")
 	log.info("=========================================")
 	log.info("Training complete. K2C2 Choi2016 network trained on the " + \
 			 filename + " dataset(" + str(len(data)) + " samples), using " + \
 			 str(k) + "-fold cross validation. " + str(err) + " error(s) " + \
 			 "were caught and logged. The average cross validated accuracy " + \
 			 "is " + np.mean(acc))
+	log.info("=========================================")
 	log.info("=========================================")
 
 class Dataset:
@@ -57,14 +57,14 @@ class Dataset:
 		batch_size:	The size of each batch fed to the network
 		k:			The amount of cross validation partitions
 		fold:		The current cross validation fold
-		folds:		The 
-		train:		The
-		test:		The
+		folds:		The partitioned dataset
+		train:		The training partition of the current fold
+		test:		The testing partition of the current fold
 	Raises:
 		MGRException:	
 	
 	"""
-	def __init__(self, filename, batch_size=50, k=1, seed=None):
+	def __init__(self, filename, batch_size, k, seed=None):
 		if (not(sys.path.isfile(filename))):
 			raise MGRException(msg="File does not exist: " + str(filename))
 		if (not(type(batch_size) is int) or batch_size < 1):
@@ -77,12 +77,7 @@ class Dataset:
 		self.batch_size = batch_size
 		self.k = k
 		self.data = self.read_from_file()
-		if (k>1): self.cross_validate()
-		else:
-			self.fold = 1
-			self.train = self.data
-			self.test = self.data
-		self.mode = 'train'
+		self.cross_validate()
 	
 	def cross_validate(self):
 		"""Divides the data into k partitions for k-fold cross validation
@@ -102,14 +97,19 @@ class Dataset:
 			MGRException:	If 'k' is invalid
 		
 		"""
-		if (self.seed): np.random.seed(seed=seed)
-		np.random.shuffle(self.data)
-		if (len(self.data) < self.k): raise MGRException(msg="Length of data < k")
-		l = len(self.data)/self.k
-		self.folds = [(self.data[l*i-l:l*i] if i<self.k else \
-						self.data[l*i:]) for i in range(1,k+1)]
-		self.fold = 0
-		self.next_fold()
+		if (self.k > 1):
+			if (self.seed): np.random.seed(seed=seed)
+			np.random.shuffle(self.data)
+			if (len(self.data) < self.k): raise MGRException(msg="Length of data < k")
+			l = len(self.data)/self.k
+			self.folds = [(self.data[l*i-l:l*i] if i<self.k else \
+							self.data[l*i:]) for i in range(1,k+1)]
+			self.fold = 0
+			self.next_fold()
+		else:
+			self.fold = 1
+			self.train = self.data
+			self.test = self.data
 	
 	def next_fold(self):
 		"""Sets the internal data representation to the next CV fold
@@ -124,19 +124,28 @@ class Dataset:
 						self.folds[self.fold:]) for e in f]
 		self.test = self.folds[self.fold-1]
 	
-	def next_batch(self):
-		"""Generates the next batch and yields it as a tuple
+	def new_batch_generator(self, mode):
+		"""Resets the batch generator using the given node
 		
-		Yields:
-			A (labels_batch, images_batch) tuple
+		The resulting generator in self.next_batch yields
+		(labels_batch, images_batch) tuples ready for training/testing.
+		
+		Args:
+			mode:	Either 'train' or 'test'
+		Raises:
+			MGRException: If mode is invalid
 		
 		"""
-		if (self.mode == 'train'): data = self.train
-		elif (self.mode == 'test'): data = self.test
-		for batch_id in range(0, len(data), self.batch_size):
-			labels_batch = data[batch_id : batch_id + self.batch_size][:,1]
-			images_batch = data[batch_id : batch_id + self.batch_size][:,2]
-			yield (labels_batch, images_batch.astype("float32"))
+		if (not(mode == 'train' or mode == 'test')):
+			raise MGRException(msg="Invalid data mode: " + mode)
+		def gen():
+			if (mode == 'train'): data = self.train
+			elif (mode == 'test'): data = self.test
+			for batch_id in range(0, len(data), self.batch_size):
+				labels_batch = data[batch_id : batch_id + self.batch_size][:,1]
+				images_batch = data[batch_id : batch_id + self.batch_size][:,2]
+				yield (labels_batch, images_batch.astype("float32"))
+		self.next_batch = gen
 	
 	@trackExceptions
 	def read_from_file(self):
@@ -175,18 +184,6 @@ class Dataset:
 	
 	def get_test_x(self):
 		return self.test[:,2]
-	
-	def set_data_mode(self, mode):
-		"""Sets the dataset required from now on
-		
-		Args:
-			mode:	Either 'train' or 'test'
-		Raises:
-			MGRException: If mode is invalid
-		
-		"""
-		if (mode == 'train' or mode == 'test'): self.mode = mode
-		else: raise MGRException(msg="Invalid data type: " + mode)
 
 if __name__ == "__main__":
 	main(sys.argv)
