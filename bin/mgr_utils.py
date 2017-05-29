@@ -7,7 +7,7 @@
 # public functions:	None
 # description:		Provides logging, exceptions and decorators
 
-import sys, traceback, logger
+import sys, traceback, logging
 
 # Creates a logger
 logging.basicConfig(filename='../logs/main.log', level=logging.DEBUG,
