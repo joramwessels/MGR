@@ -59,13 +59,13 @@ class trackExceptions(object):
 	
 	def __call__(self, *args, **kwargs):
 		global_ns = self.f.__globals__
-		gloabl_ns['err'] = 0
+		global_ns['err'] = 0
 		res = None
 		try:
 			res = self.f(*args, **kwargs)
 		except Exception as e:
 			global_ns['err'] += 1
 			log.error(str(MGRException(ex=e)))
-		if (gloabl_ns['err']): print(str(gloabl_ns['err']) + \
+		if (global_ns['err']): print(str(gloabl_ns['err']) + \
 			" exception(s) caught and logged while in " + self.f.__name__	)
 		return res
