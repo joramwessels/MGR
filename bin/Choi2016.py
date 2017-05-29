@@ -3,20 +3,26 @@
 # author:			Joram Wessels, Aymeric Damien
 # date:				25-05-2017
 # python versoin:	2.7
+# source:			https://github.com/aymericdamien/TensorFlow-Examples/
 # dependencies:		numpy, tensorflow
-# public functions:	
-# description:		
+# public functions:	train, test
+# description:		A tensorflow network modeled after the fully convolutional
+#					k2c2 network described in (Choi, 2016)
 
 import numpy as np
 import tensorflow as tf
+from mgr_utils import log
+from mgr_utils import MGRException
+from mgr_utils import trackExceptions
 
+# The maximum dataset size
 data_size = 256
 
 # Parameters
 learning_rate = 0.001
 training_iters = 200000
 batch_size = 128
-display_step = 10
+display_step = 25
 
 # Network Parameters
 n_input = 131136 # data input (img shape: 96*1366)
@@ -85,23 +91,28 @@ init = tf.global_variables_initializer()
 # Add ops to save and restore all the variables
 saver = tf.train.Saver()
 
-def train(log, save_location=None, id=None):
+@trackExceptions
+def train(log, dataset, dir=None, id=None):
 	"""Trains a k2c2 network as described in (Choi, 2016).
 	
 	Args:
-		log:			A logger object to track the progress
-		save_location:	The directory to save the model in, if required
-		id:				The name of the model to be trained
+		log:		A logger object to track the progress
+		dataset:	A Dataset object handling the data
+		dir:		The directory to save the model in, if required
+		id:			The name of the model to be trained
+	Returns:
+		The path to the save file, if dir and id were given, None otherwise
 	
 	"""
+	global err
 	log.info("Training Choi2016 k2c2 network...")
 	# Launch the graph
 	with tf.Session() as sess:
 		sess.run(init)
 		step = 1
 		# Keep training until reach max iterations
-		while step * batch_size < training_iters:
-			batch_x, batch_y = mnist.train.next_batch(batch_size)
+		while step * dataset.batch_size < training_iters:
+			batch_y, batch_x = dataset.next_batch()
 			# Run optimization op (backprop)
 			sess.run(optimizer, feed_dict={x: batch_x, y: batch_y,
 										   keep_prob: dropout})
@@ -118,26 +129,32 @@ def train(log, save_location=None, id=None):
 
 		# Calculate accuracy for all test images
 		log.info("Testing accuracy on training set:", \
-			sess.run(accuracy, feed_dict={x: mnist.test.images[:data_size],
-										  y: mnist.test.labels[:data_size],
+			sess.run(accuracy, feed_dict={x: dataset.get_test_x()[:data_size],
+										  y: dataset.get_test_y()[:data_size],
 										  keep_prob: 1.}))
 	# Save the variables to storage
-	if save_location and id:
-		  save_path = saver.save(sess, save_location + id + '.ckpt')
-		  log.info("Model saved in file: %s" % save_path)
+	if dir and id:
+		save_path = saver.save(sess, dir + str(id) + '.ckpt')
+		log.info("Model saved in file: %s" % save_path)
+		return save_path
+	else: return
 
 def test(log, filename, dataset):
-	"""Loads and tests a model on the given dataset.
+	"""Loads and tests a model on the given cross validated dataset.
 	
 	Args:
 		log:			A logger object to track the progress
 		filename:		The path to the file with the model
-		dataset:		The test set to test its accuracy on
+		dataset:		The Dataset object with the test set test on
+	Returns:
+		The accuracy of the cross validated test
 	
 	"""
 	info.log("Testing " + filename + "...")
 	with tf.Session() as sess:
 		saver.restore(sess, filename)
-		sess.run(accuracy, feed_dict={x: mnist.test.images[:data_size],
-										  y: mnist.test.labels[:data_size],
-										  keep_prob: 1.}))
+		acc = sess.run(accuracy, feed_dict={x: dataset.get_test_x()[:data_size],
+											y: dataset.get_test_y()[:data_size],
+											keep_prob: 1.}))
+	log.info("The acc of " + filename + " is " + str(acc))
+	return acc

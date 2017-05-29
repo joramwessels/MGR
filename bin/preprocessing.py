@@ -7,23 +7,21 @@
 # public functions:	prepare_data
 # description:		Prepares the raw data for the training
 
-import sys, logging
+import sys
 from os import walk
 import numpy as np
 from librosa import load
 from librosa.core.spectrum import power_to_db
 from librosa.feature import melspectrogram
 from mutagen.id3 import ID3
-
-# Creates a logger
-logging.basicConfig(filename='../logs/preprocessing.log', level=logging.DEBUG,
-	format="%(asctime)s.%(msecs)03d: %(levelname)s: %(module)s."
-	+ "%(funcName)s: %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
-log = logging.getLogger("preprocessing")
+from mgr_utils import MGRException
+from mgr_utils import trackExceptions
+from mgr_utils import log
 
 def main(argv):
 	prepare_data(argv[1], argv[2])
 
+@trackExceptions
 def prepare_data(folder, destination, n_fft=2048, stride=512, n_mels=128):
 	"""Processes the raw data into trainable datapoints
 	
@@ -35,8 +33,8 @@ def prepare_data(folder, destination, n_fft=2048, stride=512, n_mels=128):
 		n_mels:			The amount of Mel frequency bins
 	
 	"""
+	global err
 	log.info("Started preprocessing of folder: " + folder)
-	err = False
 	count = 0
 	out = open(destination, 'w')
 	raw_data = []
@@ -49,13 +47,13 @@ def prepare_data(folder, destination, n_fft=2048, stride=512, n_mels=128):
 			out.write(filename + '; ' + target + '; '
 						+ str(spectrogram.tolist()) + '\n')
 		except Exception as e:
-			err = True
-			log.error(str(e))
+			err += 1
+			log.error(str(MGRException(ex=e)))
 		count = count+1
 		if (count % 500 == 0): log.info(count, "files processed...")
 	out.close()
-	log.info("Preprocessing complete. " + str(count) + " files processed.")
-	if (err): print("Exception(s) caught and logged during preprocessing")
+	log.info("Preprocessing complete. " + str(count) + " files processed." \
+			 + str(err) + " errors caught and logged.")
 
 def to_spectrogram(filename, n_fft, stride, n_mels):
 	"""Computes the Mel Spectrogram for the first minute of a given mp3 file
