@@ -34,7 +34,7 @@ x = tf.placeholder(tf.float32, [None, n_input])
 y = tf.placeholder(tf.str, [None, n_classes])
 keep_prob = tf.placeholder(tf.float32) #dropout (keep probability)
 
-def conv2d(x, F, bias, strides=1, dropout):
+def conv2d(x, F, bias, strides=1):
     x = tf.nn.conv2d(x, F, strides=[1, strides, strides, 1], padding='SAME')
     x = tf.nn.bias_add(x, bias)
     return tf.nn.relu(x)
