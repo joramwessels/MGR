@@ -237,7 +237,8 @@ __**Sa 27-05-2017**__
 __**Su 28-05-2017**__  
 **14:00-15:30** Started exception handling.  
 **16:00-18:00** Sank way too much time into exception handling. I used the python distribution on the DAS, but the WiFi here shut down periodically, after which I had to establish the VPN and SSH connections again before redeclaring my variables in the pyton console.  
-**21:00-23:30** Writing Electronic Music theoretical background intro.
+**21:00-23:30** Writing Electronic Music theoretical background intro. Mailed my supervisors for feedback.
 
 __**Mo 29-05-2017**__  
 **10:00-12:30** Wrote a `Dataset` class to handle data feeding.  
+**13:00-14:30** Finished data feeding. Tested everything on the DAS. I managed to debug `mgr_utils.py` by running `preprocessing.py`, but due to a Tensorflow installation problem, `training.py` and `Choi2016.py` can't be debugged yet. I emailed Bas for help.
