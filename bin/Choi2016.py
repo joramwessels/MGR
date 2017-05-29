@@ -45,10 +45,10 @@ def maxpool2d(x, k=2):
 
 def conv_net(x, weights, biases):
     x = tf.reshape(x, shape=[-1, 96, 1366, 1])
-
+	
     conv1 = conv2d(x, weights['wc1'], biases['bc1'])
     conv1 = maxpool2d(conv1, k=2)
-
+	
     conv2 = conv2d(conv1, weights['wc2'], biases['bc2'])
     conv2 = maxpool2d(conv2, k=2)
 	
@@ -57,8 +57,11 @@ def conv_net(x, weights, biases):
 	
     conv4 = conv2d(conv3, weights['wc4'], biases['bc4'])
     conv4 = maxpool2d(conv4, k=2)
-
-    out = tf.add(tf.matmul(conv4, weights['out']), biases['out'])
+	
+    conv5 = conv2d(conv4, weights['wc5'], biases['bc5'])
+    conv5 = maxpool2d(conv5, k=2)
+	
+    out = tf.add(tf.matmul(conv5, weights['out']), biases['out'])
     return out
 
 weights = {
