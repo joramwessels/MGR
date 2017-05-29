@@ -241,4 +241,5 @@ __**Su 28-05-2017**__
 
 __**Mo 29-05-2017**__  
 **10:00-12:30** Wrote a `Dataset` class to handle data feeding.  
-**13:00-14:30** Finished data feeding. Tested everything on the DAS. I managed to debug `mgr_utils.py` by running `preprocessing.py`, but due to a Tensorflow installation problem, `training.py` and `Choi2016.py` can't be debugged yet. I emailed Bas for help.
+**13:00-14:30** Finished data feeding. Tested everything on the DAS. I managed to debug `mgr_utils.py` by running `preprocessing.py`, but due to a Tensorflow installation problem, `training.py` and `Choi2016.py` can't be debugged yet. I emailed Bas for help.  
+**15:45-17:00** Bas once again saved the day. I've debugged a couple of errors but got stuck on a tensor dimension related problem.
