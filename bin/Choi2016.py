@@ -31,7 +31,7 @@ dropout = 0.75 # Dropout, probability to keep units (unused)
 
 # tf Graph input
 x = tf.placeholder(tf.float32, [None, n_input])
-y = tf.placeholder(tf.str, [None, n_classes])
+y = tf.placeholder(tf.string, [None, n_classes])
 keep_prob = tf.placeholder(tf.float32) #dropout (keep probability)
 
 def conv2d(x, F, bias, strides=1):
