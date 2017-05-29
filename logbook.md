@@ -240,3 +240,4 @@ __**Su 28-05-2017**__
 **21:00-23:30** Writing Electronic Music theoretical background intro.
 
 __**Mo 29-05-2017**__  
+**10:00-12:30** Wrote a `Dataset` class to handle data feeding.  
