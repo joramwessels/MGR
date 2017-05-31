@@ -193,10 +193,10 @@ __**Tu 23-05-2017**__
 
 __**We 24-05-2017**__  
 **10:00-10:30:** Sixth meeting. I shouldn't waste any more time on logistical DAS problems. I will proceed to write the CNN locally using a CPU based Tensorflow installation, and port it to the DAS when it's finishen. By next week Tuesday I intend to have:
-* A working local prototype
-* Written the Preprocessing paragraph
-* Written the Tensorflow paragraph
-* Added more detail to the NN paragraphs
+* ✖ A working local prototype
+* ✔ Written the Preprocessing paragraph
+* ✔ Written the Tensorflow paragraph
+* ✖ Added more detail to the NN paragraphs
 
 **17:45-19:00:** I fixed the readline problem by channeling the install through `conda-forge`. Sent supervisors a ShareLaTeX invite. Increased the line spacing. I installed Tensorflow, which is apparently only available for Python 3.5 on Windows, so I hope it won't result in too many problems when porting to the DAS.
 
@@ -255,5 +255,5 @@ __**Tu 30-05-2017**__
 
 __**We 31-06-2017**__  
 **09:30-10:30:** The tensor dimension problem probably has to do with the input dimensions. The preprocessing parameters of (Choi, 2016) don't add up, but my test dataset so far consists of songs of insufficient length anyway. I will therefore first compose the final dataset and extract a test segment from that.  
-**10:30-11:30:** Labeled Monstercat albums.  
-**12:00-:** Dennis urged me not to leave the GPU idle when reserved. Seeing as I am preoccupied with other tasks until Saturday I've terminated my reservation. This means that I won't be able to debug Tensorflow code until then. I've continued assembling the dataset.
+**10:30-12:30:** Labeled Monstercat albums.  
+**13:00-15:00:** Dennis urged me not to leave the GPU idle when reserved. Seeing as I am preoccupied with other tasks until Saturday I've terminated my reservation. This means that I won't be able to debug Tensorflow code until then. I've started preparing the presentation.  
