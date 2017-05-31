@@ -144,8 +144,10 @@ Sources
 	xKito
 
 Electronic
-	Trap (12)
-		- Future Bass (147)
+	Hip Hop
+		- Trap (12)
+			- Future Bass (147)
+		- Chillhop (598)
 	Dubstep (506)
 		- Chillstep (0)
 	House (58)
@@ -167,3 +169,23 @@ Electronic
 	Techno (22)
 		- Detroid Techno
 		- 
+
+https://en.wikipedia.org/wiki/Monstercat#Monstercat_001_.E2.80.93_Launch_Week
+So far
+	Breaks	3
+	Drum & Bass	147
+	Drumstep 3
+	Dubstep 138
+	EDM	31
+	Electro 3
+	Electronic 790
+	Future Bass 9
+
+Changes
+	The Force - Monstercat 001 -> Dubstep
+	Paperchase - Monstercat 009 -> Reggae/Drum & Bass/Drumstep
+	Wuxia - Monstercat 015 -> Trance
+	Changes - Monstercat 015 -> Electro House
+	Warhead - Monstercat 023 -> Drumstep
+	Chardonnay - Monstercat Uncaged -> House
+	Spectrum - Monstercat Uncaged -> Drumstep
