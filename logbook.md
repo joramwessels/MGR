@@ -254,4 +254,5 @@ __**Tu 30-05-2017**__
 **16:00-18:00** Finished the Electronic Music paragraph.
 
 __**We 31-06-2017**__  
-**09:30-:**
+**09:30-10:30:** The tensor dimension problem probably has to do with the input dimensions. The preprocessing parameters of (Choi, 2016) don't add up, but my test dataset so far consists of songs of insufficient length anyway. I will therefore first compose the final dataset and extract a test segment from that.  
+**10:30-:** 
