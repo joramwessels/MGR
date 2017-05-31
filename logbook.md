@@ -201,7 +201,7 @@ __**We 24-05-2017**__
 **17:45-19:00:** I fixed the readline problem by channeling the install through `conda-forge`. Sent supervisors a ShareLaTeX invite. Increased the line spacing. I installed Tensorflow, which is apparently only available for Python 3.5 on Windows, so I hope it won't result in too many problems when porting to the DAS.
 
 ## Week 7 - ⚗️ Prototype
-### *(total: 21 hrs)*
+### *(total: 23.5 hrs)*
 __**Th 25-05-2017**__  
 **9:45-11:30:** My local Anaconda installation has stopped responding after installing Tensorflow. Since I fixed `readline`, I continued on the DAS. I was unable to git push, supposedly because I cloned using https, so I switched it to SSH. I was then also unable to pull because I haven't set up my SSH keys. I'll stick to HTTPS, write my code locally, and manually copy changes I make while debugging.  
 **12:30-13:30:** I need to fix this bug before I can access my dataset:  
@@ -237,9 +237,21 @@ __**Sa 27-05-2017**__
 __**Su 28-05-2017**__  
 **14:00-15:30** Started exception handling.  
 **16:00-18:00** Sank way too much time into exception handling. I used the python distribution on the DAS, but the WiFi here shut down periodically, after which I had to establish the VPN and SSH connections again before redeclaring my variables in the pyton console.  
-**21:00-23:30** Writing Electronic Music theoretical background intro. Mailed my supervisors for feedback.
+**21:00-23:30** Started writing Electronic Music theoretical background intro. Mailed my supervisors for feedback.
 
 __**Mo 29-05-2017**__  
 **10:00-12:30** Wrote a `Dataset` class to handle data feeding.  
 **13:00-14:30** Finished data feeding. Tested everything on the DAS. I managed to debug `mgr_utils.py` by running `preprocessing.py`, but due to a Tensorflow installation problem, `training.py` and `Choi2016.py` can't be debugged yet. I emailed Bas for help.  
 **15:45-17:00** Bas once again saved the day. I've debugged a couple of errors but got stuck on a tensor dimension related problem.
+
+__**Tu 30-05-2017**__  
+**10:00-10:30** Seventh meeting. Things have turned around, and if I keep this tempo up everything will work out fine. My writing thus far was in accordance with Taco's standards. Tomorrow and the day after are reserved for writing the presentation and studying for my other exam. On Friday I will give the presentation and do the exam, which leaves little time left to do some actual work until this weekend. Nonethelss, before the end of next week I intend to
+* Finalize the assembly of the dataset (deadline: Saturday)
+* Get the CNN up and running (deadline: Tuesday)
+* Test the CNN on the dataset (deadline: Wednesday)
+* Start on the RNN implementation (deadline: Thursday)
+
+**16:00-18:00** Finished the Electronic Music paragraph.
+
+__**We 31-06-2017**__  
+**09:30-:**
