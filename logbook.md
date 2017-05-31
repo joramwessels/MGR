@@ -255,4 +255,5 @@ __**Tu 30-05-2017**__
 
 __**We 31-06-2017**__  
 **09:30-10:30:** The tensor dimension problem probably has to do with the input dimensions. The preprocessing parameters of (Choi, 2016) don't add up, but my test dataset so far consists of songs of insufficient length anyway. I will therefore first compose the final dataset and extract a test segment from that.  
-**10:30-:** 
+**10:30-11:30:** Labeled Monstercat albums.  
+**12:00-:** Dennis urged me not to leave the GPU idle when reserved. Seeing as I am preoccupied with other tasks until Saturday I've terminated my reservation. This means that I won't be able to debug Tensorflow code until then. I've continued assembling the dataset.
