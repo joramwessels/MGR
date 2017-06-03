@@ -266,4 +266,5 @@ __**Fr 02-06-2017**__
 
 __**Sa 03-06-2017**__  
 **10:00-11:30:** I tried to uncover Choi's exact preprocessing parameters, which can't be the exact numbers he reported. I fetched a small testing set from the actual dataset. I won't be able to develop and debug the network on the DAS-4 anymore, so I'll have to fix my local Anaconda after all.  
-**12:30-:** Reinstalling Anaconda and enriching the dataset in the mean time.
+**12:30-14:30:** Reinstalling Anaconda and enriching the dataset in the mean time. After manually adding the python executable to the windows path I can run the interpreter in powershell (not in mingw bash). Still, `conda`, `anaconda`, and `pip` are not recognized as commands. The installer usually takes care of these things itself.  
+**14:40-:** Dataset assembly and writing
