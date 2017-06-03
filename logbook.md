@@ -266,4 +266,4 @@ __**Fr 02-06-2017**__
 
 __**Sa 03-06-2017**__  
 **10:00-11:30:** I tried to uncover Choi's exact preprocessing parameters, which can't be the exact numbers he reported. I fetched a small testing set from the actual dataset. I won't be able to develop and debug the network on the DAS-4 anymore, so I'll have to fix my local Anaconda after all.  
-**12:00-:** Fixing Anaconda
+**12:30-:** Reinstalling Anaconda and enriching the dataset in the mean time.
