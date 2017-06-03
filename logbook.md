@@ -261,8 +261,9 @@ __**We 31-06-2017**__
 ## Week 8 - 🌡️ Results
 ### *(total: 2 hrs)*
 __**Fr 02-06-2017**__  
-**9:30-11:00:** Practicing- and performing presentation.
+**9:30-11:00:** Preparing- and performing presentation.  
 **16:00-16:30:** Wrote- and handed in Academic English assignment 2
 
 __**Sa 03-06-2017**__  
-**10:00-:** Debugging CNN
+**10:00-11:30:** I tried to uncover Choi's exact preprocessing parameters, which can't be the exact numbers he reported. I fetched a small testing set from the actual dataset. I won't be able to develop and debug the network on the DAS-4 anymore, so I'll have to fix my local Anaconda after all.  
+**12:00-:** Fixing Anaconda
