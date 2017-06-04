@@ -259,7 +259,7 @@ __**We 31-06-2017**__
 **13:00-15:00:** Dennis urged me not to leave the GPU idle when reserved. Seeing as I am preoccupied with other tasks until Saturday I've terminated my reservation. This means that I won't be able to debug Tensorflow code until then. I've started preparing the presentation.  
 
 ## Week 8 - 🌡️ Results
-### *(total: 2 hrs)*
+### *(total: 7 hrs)*
 __**Fr 02-06-2017**__  
 **9:30-11:00:** Preparing- and performing presentation.  
 **16:00-16:30:** Wrote- and handed in Academic English assignment 2
@@ -270,4 +270,4 @@ __**Sa 03-06-2017**__
 **14:30-16:00:** Wrote a paragraph on deep house, and half a paragraph on hip hop. Found enough sources to finish the dataset and started assembling them. I check each track by hand to see if it is labeled correctly and if it is a typical (i.e. non-ambiguous) example of the genre.
 
 __**Su 04-06-2017**__  
-**09:30-:** 
+**12:30-14:30:** Finished the paragraph on hip hop. Prepared paragraphs on house and dubstep.  
