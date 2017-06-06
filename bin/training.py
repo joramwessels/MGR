@@ -7,16 +7,16 @@
 # public functions:	train
 # description:		Reads the prepared data from a file and trains the network
 
-import sys, json, logging
+import sys, os, json, logging
 import numpy as np
-import tensorflow as tf
 from mgr_utils import log
+from mgr_utils import log_exception
 from mgr_utils import MGRException
 from mgr_utils import trackExceptions
 import Choi2016		# The K2C2 Tensorflow implementation
 
 def main(argv):
-	train_Choi2016(argv[1], batch_size=argv[2], k=argv[3])
+	train_Choi2016(argv[1], batch_size=int(argv[2]), k=int(argv[3]))
 
 @trackExceptions
 def train_Choi2016(filename, batch_size=50, k=1, savedir="./models/"):
@@ -32,7 +32,7 @@ def train_Choi2016(filename, batch_size=50, k=1, savedir="./models/"):
 			acc[k-1] = Choi2016.test(log, dataset, savefile)
 		except Exception as e:
 			err += 1
-			log.error(str(MGRException(ex=e)))
+			log_exception(e)
 	log.info("=========================================")
 	log.info("=========================================")
 	log.info("Training complete. K2C2 Choi2016 network trained on the " + \
@@ -60,23 +60,28 @@ class Dataset:
 		folds:		The partitioned dataset
 		train:		The training partition of the current fold
 		test:		The testing partition of the current fold
+		batch_gen:	The batch generator closure
 	Raises:
 		MGRException:	
 	
 	"""
 	def __init__(self, filename, batch_size, k, seed=None):
-		if (not(sys.path.isfile(filename))):
+		if (not(os.path.isfile(filename))):
 			raise MGRException(msg="File does not exist: " + str(filename))
 		if (not(type(batch_size) is int) or batch_size < 1):
 			raise MGRException(msg="Invalid batch size: " + str(batch_size))
 		if (k < 1 or not(type(k) is int)):
 			raise MGRException(msg="Invalid k value: " + str(k))
-		if (not(type(seed) is int or type(seed) is Nonetype) or seed < 1):
+		if (seed and (not(type(seed) is int) or seed < 1)):
 			raise MGRException(msg="Invalid seed: " + str(seed))
 		self.filename = filename
 		self.batch_size = batch_size
+		self.decoder = {}
+		self.dec_iter = 0
 		self.k = k
-		self.data = self.read_from_file()
+		self.data = read_from_file(self)
+		if (seed): np.random.seed(seed=seed)
+		np.random.shuffle(self.data)
 		self.cross_validate()
 	
 	def cross_validate(self):
@@ -98,12 +103,11 @@ class Dataset:
 		
 		"""
 		if (self.k > 1):
-			if (self.seed): np.random.seed(seed=seed)
-			np.random.shuffle(self.data)
-			if (len(self.data) < self.k): raise MGRException(msg="Length of data < k")
-			l = len(self.data)/self.k
+			if (len(self.data) < self.k):
+				raise MGRException(msg="Length of data < k")
+			l = int(len(self.data)/self.k)
 			self.folds = [(self.data[l*i-l:l*i] if i<self.k else \
-							self.data[l*i:]) for i in range(1,k+1)]
+							self.data[l*i:]) for i in range(1,self.k+1)]
 			self.fold = 0
 			self.next_fold()
 		else:
@@ -118,7 +122,8 @@ class Dataset:
 			MGRException: If there are no more folds left
 		
 		"""
-		if (self.fold >= k): raise MGRException(msg="There is no next fold")
+		if (self.fold >= self.k):
+			raise MGRException(msg="There is no next cross validation fold")
 		self.fold += 1
 		self.train = [e for f in (self.folds[:self.fold-1] + \
 						self.folds[self.fold:]) for e in f]
@@ -142,30 +147,49 @@ class Dataset:
 			if (mode == 'train'): data = self.train
 			elif (mode == 'test'): data = self.test
 			for batch_id in range(0, len(data), self.batch_size):
-				labels_batch = data[batch_id : batch_id + self.batch_size][:,1]
-				images_batch = data[batch_id : batch_id + self.batch_size][:,2]
+				batch = data[batch_id : batch_id + self.batch_size]
+				labels_batch = [s.pop(0) for s in batch]
+				images_batch = np.array(batch)
 				yield (labels_batch, images_batch.astype("float32"))
-		self.next_batch = gen
+		self.batch_gen = gen
 	
-	@trackExceptions
-	def read_from_file(self):
-		"""Reads out the dataset from storage
+	def next_batch(self):
+		"""Executes the batch generator closure and returns the next batch
 		
 		Returns:
-			A list of tuples with a target (str) and a spectrogram (numpy.array)
+			A (labels <list>, images <np.array>) tuple of size batch_size
 		
 		"""
-		global err
-		file = open(self.filename, 'r')
-		data = []
-		for line in file:
-			try:
-				l = line.split(';')
-				data.append([l[0], np.array(json.loads(l[1]))])
-			except Exception as e:
-				err += 1
-				log.error(str(MGRException(ex=e)))
-		return data
+		return self.batch_gen().__next__()
+	
+	def encode_label(self, label):
+		"""Encodes a class label string to an int and adds the key to the dict
+		
+		Args:
+			label:	The label to encode
+		Returns:
+			The encoded label integer
+		
+		"""
+		if not(label in self.decoder):
+			self.decoder[label] = self.dec_iter
+			self.decoder[str(self.dec_iter)] = label
+			self.dec_iter += 1
+		return self.decoder[label]
+	
+	def decode_label(self, code):
+		"""Decodes a class label code to its original string
+		
+		Args:
+			code:	The integer code returned by the network
+		Returns:
+			The original class label string represented by the code
+		
+		"""
+		if not(str(code) in self.decoder):
+			raise MGRException(msg="Unknown label code: " + str(code))
+		else:
+			return self.decoder[str(code)]
 	
 	def get_train_ids(self):
 		return self.train[:,0]
@@ -184,6 +208,28 @@ class Dataset:
 	
 	def get_test_x(self):
 		return self.test[:,2]
+
+@trackExceptions
+def read_from_file(dataset):
+	"""Reads out the dataset from storage
+	
+	Args:
+		dataset:	The Dataset object that will manage the data
+	Returns:
+		A list of tuples with a target (str) and a spectrogram (numpy.array)
+	
+	"""
+	global err
+	file = open(dataset.filename, 'r')
+	data = []
+	for line in file:
+		try:
+			l = line.split(';')
+			data.append([dataset.encode_label(l[1]), json.loads(l[2])])
+		except Exception as e:
+			err += 1
+			log_exception(e)
+	return data
 
 if __name__ == "__main__":
 	main(sys.argv)

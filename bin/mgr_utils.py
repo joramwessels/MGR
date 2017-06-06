@@ -9,11 +9,18 @@
 
 import sys, traceback, logging
 
+mode = 'debug'
+
 # Creates a logger
-logging.basicConfig(filename='../logs/main.log', level=logging.DEBUG,
-	format="%(asctime)s.%(msecs)03d: %(levelname)s: %(module)s."
-	+ "%(funcName)s: %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
-log = logging.getLogger("main")
+if (mode == 'debug'):
+	logging.basicConfig(stream=sys.stdout, level=logging.DEBUG,
+		format="%(asctime)s.%(msecs)03d: %(levelname)s: %(module)s."
+		+ "%(funcName)s: %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
+elif (mode == 'run'):
+	logging.basicConfig(filename='../logs/main.log', level=logging.DEBUG,
+		format="%(asctime)s.%(msecs)03d: %(levelname)s: %(module)s."
+		+ "%(funcName)s: %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
+log = logging.getLogger()
 
 class MGRException(Exception):
 	"""The universal exception for any problems with the MGR package
@@ -24,22 +31,31 @@ class MGRException(Exception):
 	Args:
 		ex:		An exception to wrap in a new MGRException
 		msg:	An error message for a new MGRException
+	Attributes:
+		
 	
 	"""
-	def __init__(self, ex=None, msg=None):
-		if (message): super(Exception, self).__init__(message)
+	def __init__(self, ex=None, msg=None, mgr_utils=False):
+		if (msg):
+			super(Exception, self).__init__(msg)
+			self.traceback = traceback.extract_stack()[:-1]
 		elif (ex):
-			tb = traceback.extract_tb(sys.exc_info()[2])
-			message = str(type(ex).__name__) + ': ' + ex.message
-			super(Exception, self).__init__(message)
-			self.traceback = tb
+			if (type(ex) is MGRException):
+				super(Exception, self).__init__(ex.args[0])
+				self.traceback = ex.traceback
+			else:
+				tb = traceback.extract_tb(sys.exc_info()[2])
+				if (mgr_utils): tb = tb[1:]
+				message = str(type(ex).__name__) + ': ' + str(ex)
+				super(Exception, self).__init__(message)
+				self.traceback = tb
 		else:
 			message = "MGRException without arguments raised"
 			super(Exception, self).__init__(message)
 			self.traceback = traceback.extract_stack()
 	
 	def __str__(self):
-		return self.message + '. In: ' + str(self.traceback)
+		return self.args[0] + '. In: ' + str(self.traceback)
 
 class trackExceptions(object):
 	"""A decorator function that handles exception logging around a function
@@ -65,7 +81,12 @@ class trackExceptions(object):
 			res = self.f(*args, **kwargs)
 		except Exception as e:
 			global_ns['err'] += 1
-			log.error(str(MGRException(ex=e)))
-		if (global_ns['err']): print(str(gloabl_ns['err']) + \
+			log.error(str(MGRException(ex=e, mgr_utils=True)))
+			if (mode == 'debug'): sys.exit(1)
+		if (global_ns['err']): print(str(global_ns['err']) + \
 			" exception(s) caught and logged while in " + self.f.__name__	)
 		return res
+
+def log_exception(e):
+	log.error(str(MGRException(ex=e)))
+	if (mode == 'debug'): sys.exit(1)

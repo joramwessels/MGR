@@ -12,6 +12,7 @@
 import numpy as np
 import tensorflow as tf
 from mgr_utils import log
+from mgr_utils import log_exception
 from mgr_utils import MGRException
 from mgr_utils import trackExceptions
 
@@ -31,7 +32,7 @@ dropout = 0.75 # Dropout, probability to keep units (unused)
 
 # tf Graph input
 x = tf.placeholder(tf.float32, [None, n_input])
-y = tf.placeholder(tf.string, [None, n_classes])
+y = tf.placeholder(tf.int8, [None, n_classes])
 keep_prob = tf.placeholder(tf.float32) #dropout (keep probability)
 
 def conv2d(x, F, bias, strides=1):
@@ -39,27 +40,27 @@ def conv2d(x, F, bias, strides=1):
     x = tf.nn.bias_add(x, bias)
     return tf.nn.relu(x)
 
-def maxpool2d(x, k=2):
-    return tf.nn.max_pool(x, ksize=[1, k, k, 1], strides=[1, k, k, 1],
+def maxpool2d(x, k1=2, k2=2):
+    return tf.nn.max_pool(x, ksize=[1, k1, k2, 1], strides=[1, k1, k2, 1],
                           padding='SAME')
 
 def conv_net(x, weights, biases):
-    x = tf.reshape(x, shape=[-1, 96, 1366, 1])
+    x = tf.reshape(x, shape=[-1, 96, 1280, 1])
 	
     conv1 = conv2d(x, weights['wc1'], biases['bc1'])
-    conv1 = maxpool2d(conv1, k=2)
+    conv1 = maxpool2d(conv1, k1=2, k2=4)
 	
     conv2 = conv2d(conv1, weights['wc2'], biases['bc2'])
-    conv2 = maxpool2d(conv2, k=2)
+    conv2 = maxpool2d(conv2, k1=2, k2=4)
 	
     conv3 = conv2d(conv2, weights['wc3'], biases['bc3'])
-    conv3 = maxpool2d(conv3, k=2)
+    conv3 = maxpool2d(conv3, k1=2, k2=4)
 	
     conv4 = conv2d(conv3, weights['wc4'], biases['bc4'])
-    conv4 = maxpool2d(conv4, k=2)
+    conv4 = maxpool2d(conv4, k1=3, k2=5)
 	
     conv5 = conv2d(conv4, weights['wc5'], biases['bc5'])
-    conv5 = maxpool2d(conv5, k=2)
+    conv5 = maxpool2d(conv5, k1=4, k2=4)
 	
     out = tf.add(tf.matmul(conv5, weights['out']), biases['out'])
     return out
@@ -132,7 +133,7 @@ def train(log, dataset, dir=None, id=None):
 				pass
 			except Exception as e:
 				err += 1
-				log.error(str(MGRException(ex=e)))
+				log_exception(e)
 		log.info("Optimization Finished.")
 
 		# Calculate accuracy for all test images
@@ -158,7 +159,7 @@ def test(log, dataset, filename):
 		The accuracy of the cross validated test
 	
 	"""
-	info.log("Testing " + filename + "...")
+	log.info("Testing " + filename + "...")
 	with tf.Session() as sess:
 		saver.restore(sess, filename)
 		acc = sess.run(accuracy, feed_dict={x: dataset.get_test_x()[:data_size],
