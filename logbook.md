@@ -246,7 +246,7 @@ __**Mo 29-05-2017**__
 
 __**Tu 30-05-2017**__  
 **10:00-10:30** Seventh meeting. Things have turned around, and if I keep this tempo up everything will work out fine. My writing thus far was in accordance with Taco's standards. Tomorrow and the day after are reserved for writing the presentation and studying for my other exam. On Friday I will give the presentation and do the exam, which leaves little time left to do some actual work until this weekend. Nonethelss, before the end of next week I intend to
-* Finalize the assembly of the dataset (deadline: Saturday)
+* Finalize the assembly of the dataset (✖ deadline: Saturday)
 * Get the CNN up and running (deadline: Tuesday)
 * Test the CNN on the dataset (deadline: Wednesday)
 * Start on the RNN implementation (deadline: Thursday)
@@ -271,3 +271,8 @@ __**Sa 03-06-2017**__
 
 __**Su 04-06-2017**__  
 **12:30-14:30:** Finished the paragraph on hip hop. Prepared paragraphs on house and dubstep.  
+
+__**Tu 06-06-2017**__  
+**10:00-10:45:** Anaconda works in the special Anaconda prompt. I installed `librosa`, `ffmpeg`, and `mutagen` using `conda install -c conda-forge`, then created a python 3.5 environment for Tensorflow, installed Tensorflow, and reinstalled the aforementioned packages in the environment. Everything finally works, but Tensorflow urges me to [activate SSE instructions](https://stackoverflow.com/questions/43134753/tensorflow-wasnt-compiled-to-use-sse-etc-instructions-but-these-are-availab), which I might do later.  
+**10:45-12:00:** Solved small bugs in `mgr_utils.py` and `preprocessing.py`, and fixed the dimension problem in the network.  
+**13:00-:** 
