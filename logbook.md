@@ -259,7 +259,7 @@ __**We 31-06-2017**__
 **13:00-15:00:** Dennis urged me not to leave the GPU idle when reserved. Seeing as I am preoccupied with other tasks until Saturday I've terminated my reservation. This means that I won't be able to debug Tensorflow code until then. I've started preparing the presentation.  
 
 ## Week 8 - 🌡️ Results
-### *(total: 15 hrs)*
+### *(total: 21.5 hrs)*
 __**Fr 02-06-2017**__  
 **9:30-11:00:** Preparing- and performing presentation.  
 **16:00-16:30:** Wrote- and handed in Academic English assignment 2
@@ -281,3 +281,6 @@ __**We 07-06-2017**__
 **09:45-11:45** Debugged the system. Since a bug forced me to rewrite the memory allocation code, I also started rewriting the way the allocation works to make it more resource efficient.  
 **12:30-14:30** Finished rewriting the memory allocation.  
 **19:00-20:00** Debugged the CNN up untill the last 2 lines of the network. The last bug was `Cannot feed value of shape (6,) for Tensor 'Placeholder_1:0', which has shape '(?, 10)'`. Tomorrow I will also test the `Dataset` object extensively, as it is presumably still very buggy.  
+**20:30-22:00** Checked the trap entries of the dataset while writing a paragraph on future bass.
+
+__**Th 08-06-2017**__  
