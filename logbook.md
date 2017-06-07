@@ -279,4 +279,5 @@ __**Tu 06-06-2017**__
 
 __**We 07-06-2017**__  
 **09:45-11:45** Debugged the system. Since a bug forced me to rewrite the memory allocation code, I also started rewriting the way the allocation works to make it more resource efficient.  
-**12:30-14:30** Finished rewriting the memory allocation.
+**12:30-14:30** Finished rewriting the memory allocation.  
+**19:00-20:00** Debugged the CNN up untill the last 2 lines of the network. The last bug was `Cannot feed value of shape (6,) for Tensor 'Placeholder_1:0', which has shape '(?, 10)'`. Tomorrow I will also test the `Dataset` object extensively, as it is presumably still very buggy.  
