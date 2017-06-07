@@ -60,7 +60,7 @@ def prepare_data(folder, destination, dim, n_fft=2048, stride=256, n_mels=96):
 				raise MGRException(msg="Preprocessing of " + filename + " resu"\
 				"lted in fewer than the requested " + str(dim) + " samples")
 			elif(len(spectrogram[0])>dim):
-				spectrogram = [l[:dim] for l in spectrogram]
+				spectrogram = [list(l[:dim]) for l in spectrogram]
 			else: spectrogram = list(spectrogram)
 			out.write(filename + ';' + target + ';' + dumps(spectrogram) + '\n')
 		except Exception as e:

@@ -52,7 +52,7 @@ class Dataset:
 		k:			The amount of cross validation partitions
 		seed:		If required, a random gen seed to replicate CV results
 	Attributes:
-		data:		The complete dataset as a numpy matrix
+		data:		The complete dataset as a list of (label, np.matrix) tuples
 		filename:	The path to the preprocessed dataset
 		batch_size:	The size of each batch fed to the network
 		k:			The amount of cross validation partitions
@@ -61,6 +61,8 @@ class Dataset:
 		train:		The training partition of the current fold
 		test:		The testing partition of the current fold
 		batch_gen:	The batch generator closure
+		decoder:	The dictionary keeping track of class label codation
+		dec_iter:	The iterator keeping track of the number of class labels
 	Raises:
 		MGRException:	
 	
@@ -114,6 +116,8 @@ class Dataset:
 			self.fold = 1
 			self.train = self.data
 			self.test = self.data
+		def CV():
+			for f in [(self.data[l*i-l:l*i] if i<self.k else self.data[l*i:]) for i in range(1,self.k+1)]
 	
 	def next_fold(self):
 		"""Sets the internal data representation to the next CV fold
@@ -149,9 +153,35 @@ class Dataset:
 			for batch_id in range(0, len(data), self.batch_size):
 				batch = data[batch_id : batch_id + self.batch_size]
 				labels_batch = [s.pop(0) for s in batch]
-				images_batch = np.array(batch)
+				images_batch = np.reshape(batch, -1)
 				yield (labels_batch, images_batch.astype("float32"))
 		self.batch_gen = gen
+		
+		def gen_new():
+			if (mode == 'train'): folds = self.folds[0]
+			elif (mode == 'test'): folds = self.folds[1]
+			rng = folds[self.fold]
+			n = 0
+			batch = self.batch_size*[0]
+			residue = self.batch_size*[0]
+			extras = self.batch_size*[0]
+			while (self.fold < self.k-1 or n < rng[1] - rng[0]):
+				loc = rng[0] + n
+				dst = loc + self.batch_size
+				if (dst < rng[1]): batch = data(loc:dst)
+				else:
+					residue = data(loc:rng[1])
+					if (self.fold < self.k-1):
+						self.fold += 1
+						n = 0
+						dst -= rng[1]
+						rng = folds[self.fold]
+						extras = data(rng[0]:dst)
+						batch = residue + extras
+					else:
+						batch = residue
+				n = dst
+				yield [s.pop(0) for s in batch], np.reshape(batch, -1)
 	
 	def next_batch(self):
 		"""Executes the batch generator closure and returns the next batch
@@ -190,6 +220,15 @@ class Dataset:
 			raise MGRException(msg="Unknown label code: " + str(code))
 		else:
 			return self.decoder[str(code)]
+	
+	def get_n_classes(self):
+		return self.dec_iter
+	
+	def get_size(self):
+		return len(self.data)
+	
+	def get_data_dim(self):
+		return (len(self.data[0][1]), len(self.data[0][1][0]))
 	
 	def get_train_ids(self):
 		return self.train[:,0]

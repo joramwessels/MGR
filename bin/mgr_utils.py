@@ -80,13 +80,14 @@ class trackExceptions(object):
 		try:
 			res = self.f(*args, **kwargs)
 		except Exception as e:
+			if (mode == 'debug'): raise e
 			global_ns['err'] += 1
 			log.error(str(MGRException(ex=e, mgr_utils=True)))
-			if (mode == 'debug'): sys.exit(1)
 		if (global_ns['err']): print(str(global_ns['err']) + \
 			" exception(s) caught and logged while in " + self.f.__name__	)
 		return res
 
 def log_exception(e):
+	if (mode == 'debug'): raise e
 	log.error(str(MGRException(ex=e)))
 	if (mode == 'debug'): sys.exit(1)
