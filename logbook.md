@@ -278,4 +278,5 @@ __**Tu 06-06-2017**__
 **12:45-16:45:** Debugged the system. Ended with a json error saying that a list "is not JSON serializable".  
 
 __**We 07-06-2017**__  
-**09:45-11:45** 
+**09:45-11:45** Debugged the system. Since a bug forced me to rewrite the memory allocation code, I also started rewriting the way the allocation works to make it more resource efficient.  
+**12:30-14:30** Finished rewriting the memory allocation.
