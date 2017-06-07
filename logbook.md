@@ -259,7 +259,7 @@ __**We 31-06-2017**__
 **13:00-15:00:** Dennis urged me not to leave the GPU idle when reserved. Seeing as I am preoccupied with other tasks until Saturday I've terminated my reservation. This means that I won't be able to debug Tensorflow code until then. I've started preparing the presentation.  
 
 ## Week 8 - 🌡️ Results
-### *(total: 9 hrs)*
+### *(total: 15 hrs)*
 __**Fr 02-06-2017**__  
 **9:30-11:00:** Preparing- and performing presentation.  
 **16:00-16:30:** Wrote- and handed in Academic English assignment 2
@@ -276,3 +276,6 @@ __**Tu 06-06-2017**__
 **10:00-10:45:** Anaconda works in the special Anaconda prompt. I installed `librosa`, `ffmpeg`, and `mutagen` using `conda install -c conda-forge`, then created a python 3.5 environment for Tensorflow, installed Tensorflow, and reinstalled the aforementioned packages in the environment. Everything finally works, but Tensorflow urges me to [activate SSE instructions](https://stackoverflow.com/questions/43134753/tensorflow-wasnt-compiled-to-use-sse-etc-instructions-but-these-are-availab), which I might do later.  
 **10:45-12:00:** Solved small bugs in `mgr_utils.py` and `preprocessing.py`, and fixed the dimension problem in the network.  
 **12:45-16:45:** Debugged the system. Ended with a json error saying that a list "is not JSON serializable".  
+
+__**We 07-06-2017**__  
+**09:45-11:45** 
