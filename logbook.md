@@ -200,7 +200,7 @@ __**We 24-05-2017**__
 
 **17:45-19:00:** I fixed the readline problem by channeling the install through `conda-forge`. Sent supervisors a ShareLaTeX invite. Increased the line spacing. I installed Tensorflow, which is apparently only available for Python 3.5 on Windows, so I hope it won't result in too many problems when porting to the DAS.
 
-## Week 7 - ⚗️ Prototype
+## Week 7 - 🐛 Debugging
 ### *(total: 23.5 hrs)*
 __**Th 25-05-2017**__  
 **9:45-11:30:** My local Anaconda installation has stopped responding after installing Tensorflow. Since I fixed `readline`, I continued on the DAS. I was unable to git push, supposedly because I cloned using https, so I switched it to SSH. I was then also unable to pull because I haven't set up my SSH keys. I'll stick to HTTPS, write my code locally, and manually copy changes I make while debugging.  
@@ -246,10 +246,10 @@ __**Mo 29-05-2017**__
 
 __**Tu 30-05-2017**__  
 **10:00-10:30** Seventh meeting. Things have turned around, and if I keep this tempo up everything will work out fine. My writing thus far was in accordance with Taco's standards. Tomorrow and the day after are reserved for writing the presentation and studying for my other exam. On Friday I will give the presentation and do the exam, which leaves little time left to do some actual work until this weekend. Nonethelss, before the end of next week I intend to
-* Finalize the assembly of the dataset (✖ deadline: Saturday)
-* Get the CNN up and running (deadline: Tuesday)
-* Test the CNN on the dataset (deadline: Wednesday)
-* Start on the RNN implementation (deadline: Thursday)
+* ✖ Finalize the assembly of the dataset (✖ deadline: Saturday)
+* ✖ Get the CNN up and running (✖ deadline: Tuesday)
+* ✖ Test the CNN on the dataset (✖ deadline: Wednesday)
+* ✖ Start on the RNN implementation (✖ deadline: Thursday)
 
 **16:00-18:00** Finished the Electronic Music paragraph.
 
@@ -258,7 +258,7 @@ __**We 31-06-2017**__
 **10:30-12:30:** Labeled Monstercat albums.  
 **13:00-15:00:** Dennis urged me not to leave the GPU idle when reserved. Seeing as I am preoccupied with other tasks until Saturday I've terminated my reservation. This means that I won't be able to debug Tensorflow code until then. I've started preparing the presentation.  
 
-## Week 8 - 🌡️ Results
+## Week 8 - ⚗️ Prototype
 ### *(total: 21.5 hrs)*
 __**Fr 02-06-2017**__  
 **9:30-11:00:** Preparing- and performing presentation.  
@@ -283,4 +283,14 @@ __**We 07-06-2017**__
 **19:00-20:00** Debugged the CNN up untill the last 2 lines of the network. The last bug was `Cannot feed value of shape (6,) for Tensor 'Placeholder_1:0', which has shape '(?, 10)'`. Tomorrow I will also test the `Dataset` object extensively, as it is presumably still very buggy.  
 **20:30-22:00** Checked the trap entries of the dataset while writing a paragraph on future bass.
 
+
+## Week 9 - 🌡️ Results
+### *(total: 0 hrs)*
 __**Th 08-06-2017**__  
+**9:30-11:30** Experimented with placeholders to try and solve the dimension bug.  
+**13:00-14:15** Eighth meeting. There appears to be something wrong with our interpretation of Choi's k2c2 network. If the layers indeed do have (20, 41, 41, 62, 83) filters each, the output would be more than 173 million variables. Reijn will review the paper tomorrow, and in the meantime I will implement a simpler network of 3 conv layers and a softmax layer. The deadlines for next week:  
+* Finish dataset (Monday)
+* CNN evaluation (Tuesday)
+
+__**Fr 09-06-2017**__  
+**12:30-15:00:** Implementing the 3-layer CNN.
