@@ -188,4 +188,7 @@ Changes
 	Changes - Monstercat 015 -> Electro House
 	Warhead - Monstercat 023 -> Drumstep
 	Chardonnay - Monstercat Uncaged -> House
+
+Tensorflow input dimensions
+https://agray3.github.io/2016/11/29/Demystifying-Data-Input-to-TensorFlow-for-Deep-Learning.html
 	Spectrum - Monstercat Uncaged -> Drumstep

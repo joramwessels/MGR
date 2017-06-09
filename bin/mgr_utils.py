@@ -9,7 +9,7 @@
 
 import sys, traceback, logging
 
-mode = 'debug'
+mode = 'run'
 
 # Creates a logger
 if (mode == 'debug'):
@@ -84,7 +84,8 @@ class trackExceptions(object):
 			global_ns['err'] += 1
 			log.error(str(MGRException(ex=e, mgr_utils=True)))
 		if (global_ns['err']): print(str(global_ns['err']) + \
-			" exception(s) caught and logged while in " + self.f.__name__	)
+			" exception(s) caught and logged while in " + self.f.__module__ + \
+				'.' + self.f.__name__)
 		return res
 
 def log_exception(e):

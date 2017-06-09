@@ -13,33 +13,47 @@ from mgr_utils import log
 from mgr_utils import log_exception
 from mgr_utils import MGRException
 from mgr_utils import trackExceptions
-import Choi2016		# The K2C2 Tensorflow implementation
+import Choi2016		# The (Choi, 2016) K2C2 implementation
+import cnn			# The 3-layer CNN implementation
 
 def main(argv):
-	train_Choi2016(argv[1], batch_size=int(argv[2]), k=int(argv[3]))
+	train_CNN(argv[1])
+
+def train_Choi2016(filename, savedir="./models/"):
+	train(Choi2016, filename, batch_size=3, k=5, savedir=savedir)
+
+def train_CNN(filename, savedir="./models/"):
+	train(cnn, filename, batch_size=3, k=5, savedir=savedir)
 
 @trackExceptions
-def train_Choi2016(filename, batch_size=50, k=1, savedir="./models/"):
+def train(network, filename, batch_size=50, k=1, savedir="./models/"):
 	global err
+	log.info("")
 	log.info("Started training of dataset: " + filename)
-	dataset = Dataset(filename, batch_size, k)
+	log.info("network=%s, batch_size=%i, k=%i, savedir='%s'" \
+			%(network.__name__, batch_size, k, savedir))
+	dirname = os.path.dirname(savedir)
+	if (not os.path.exists(dirname)): os.mkdir(dirname)
+	data = Dataset(filename, batch_size, k)
 	acc = k*[0.0]
 	for fold in range(1,k):
 		try:
-			dataset.new_batch_generator('train')
-			savefile = Choi2016.train(log, dataset, dir=savedir, id=1)
-			dataset.new_batch_generator('test')
-			acc[k-1] = Choi2016.test(log, dataset, savefile)
+			data.new_batch_generator('train')
+			savefile = network.train(log, data, dir=savedir, id=1)
+			data.new_batch_generator('test')
+			acc[k-1] = network.test(log, data, savefile)
 		except Exception as e:
 			err += 1
 			log_exception(e)
 	log.info("=========================================")
-	log.info("=========================================")
-	log.info("Training complete. K2C2 Choi2016 network trained on the " + \
-			 filename + " dataset(" + str(len(data)) + " samples), using " + \
-			 str(k) + "-fold cross validation. " + str(err) + " error(s) " + \
-			 "were caught and logged. The average cross validated accuracy " + \
-			 "is " + np.mean(acc))
+	log.info("============Training complete============")
+	log.info("Network:     " + network.__name__)
+	log.info("Dataset:     " + filename)
+	log.info("Samples:     " + str(data.get_size()))
+	log.info("Validation:  " + str(k) + "-fold cross validation")
+	log.info("Accuracies:  " + str(acc))
+	log.info("Avg cv acc:  " + str(np.mean(acc)))
+	log.info(str(err) + " error(s) " + "were caught and logged during runtime")
 	log.info("=========================================")
 	log.info("=========================================")
 
@@ -87,19 +101,13 @@ class Dataset:
 		self.cross_validate()
 	
 	def cross_validate(self):
-		"""Divides the data into k partitions for k-fold cross validation
+		"""Collects references to the data for each fold
 		
 		If the data is not perfectly divisable by k, the last partition gets
-		the leftovers.
+		the leftovers. The resulting datastructure is saved in self.folds as a
+		4D [fold, train/test, partition, start/end] sequence, along with the
+		current fold in self. fold.
 		
-		Returns:
-			A closure that returns a (train, test) tuple for the given fold
-				Args:
-					fold:	The required fold (1-k)
-				Returns:
-					A tuple of train and test sets
-				Raises:
-					MGRException:	If 'fold' is invalid
 		Raises:
 			MGRException:	If 'k' is invalid
 		
@@ -108,16 +116,14 @@ class Dataset:
 			if (len(self.data) < self.k):
 				raise MGRException(msg="Length of data < k")
 			l = int(len(self.data)/self.k)
-			self.folds = [(self.data[l*i-l:l*i] if i<self.k else \
-							self.data[l*i:]) for i in range(1,self.k+1)]
-			self.fold = 0
-			self.next_fold()
+			overflow = int(len(self.data)%self.k)
+			part = [(l*f-l,l*f) if f<self.k else (l*f-l, l*f+overflow) \
+							for f in range(1, self.k+1)]
+			self.folds = [([(part[p] if (p < f) else part[p+1]) \
+				for p in range(self.k-1)],[part[f]]) for f in range(self.k)]
 		else:
-			self.fold = 1
-			self.train = self.data
-			self.test = self.data
-		def CV():
-			for f in [(self.data[l*i-l:l*i] if i<self.k else self.data[l*i:]) for i in range(1,self.k+1)]
+			self.folds = [([(0, len(self.data))], [(0, len(self.data))])]
+		self.fold = 0
 	
 	def next_fold(self):
 		"""Sets the internal data representation to the next CV fold
@@ -126,18 +132,20 @@ class Dataset:
 			MGRException: If there are no more folds left
 		
 		"""
-		if (self.fold >= self.k):
+		if (self.fold >= self.k-1):
 			raise MGRException(msg="There is no next cross validation fold")
 		self.fold += 1
-		self.train = [e for f in (self.folds[:self.fold-1] + \
-						self.folds[self.fold:]) for e in f]
-		self.test = self.folds[self.fold-1]
 	
 	def new_batch_generator(self, mode):
-		"""Resets the batch generator using the given node
+		"""(Re)sets the batch generator using the given mode
 		
-		The resulting generator in self.next_batch yields
-		(labels_batch, images_batch) tuples ready for training/testing.
+		The resulting generator in self.batch_gen yields
+		(id, labels_batch, images_batch) tuples ready for training/testing. The
+		generator can be run by calling next_batch() on the Dataset object. It
+		goes through the trouble of referencing the self.data object in order
+		to avoid holding the entire dataset in memory numerous times. This way,
+		only the original self.data object and the current batch are held in
+		memory.
 		
 		Args:
 			mode:	Either 'train' or 'test'
@@ -146,42 +154,39 @@ class Dataset:
 		
 		"""
 		if (not(mode == 'train' or mode == 'test')):
-			raise MGRException(msg="Invalid data mode: " + mode)
+			raise MGRException(msg="Invalid batch generator mode: " + str(mode))
 		def gen():
-			if (mode == 'train'): data = self.train
-			elif (mode == 'test'): data = self.test
-			for batch_id in range(0, len(data), self.batch_size):
-				batch = data[batch_id : batch_id + self.batch_size]
-				labels_batch = [s.pop(0) for s in batch]
-				images_batch = np.reshape(batch, -1)
-				yield (labels_batch, images_batch.astype("float32"))
-		self.batch_gen = gen
-		
-		def gen_new():
-			if (mode == 'train'): folds = self.folds[0]
-			elif (mode == 'test'): folds = self.folds[1]
-			rng = folds[self.fold]
+			if (mode == 'train'): folds = self.folds[self.fold][0]
+			elif (mode == 'test'): folds = self.folds[self.fold][1]
+			partition = 0
+			rng = folds[partition]
 			n = 0
 			batch = self.batch_size*[0]
 			residue = self.batch_size*[0]
 			extras = self.batch_size*[0]
-			while (self.fold < self.k-1 or n < rng[1] - rng[0]):
+			while (partition < len(folds)-1 or n < rng[1] - rng[0]):
 				loc = rng[0] + n
 				dst = loc + self.batch_size
-				if (dst < rng[1]): batch = data(loc:dst)
+				if (dst <= rng[1]):
+					batch = self.data[loc:dst]
 				else:
-					residue = data(loc:rng[1])
-					if (self.fold < self.k-1):
-						self.fold += 1
+					residue = self.data[loc:rng[1]]
+					if (partition < len(folds)-1):
 						n = 0
 						dst -= rng[1]
-						rng = folds[self.fold]
-						extras = data(rng[0]:dst)
+						partition += 1
+						rng = folds[partition]
+						dst += rng[0]
+						extras = self.data[rng[0]:dst]
 						batch = residue + extras
 					else:
 						batch = residue
-				n = dst
-				yield [s.pop(0) for s in batch], np.reshape(batch, -1)
+				n = dst-rng[0]
+				ids = [s[0] for s in batch]
+				labels = [[(1 if i in l else 0) for i in range(self.dec_iter)] \
+												for l in [s[1] for s in batch]]
+				yield (ids, labels, [np.reshape(s[2], -1) for s in batch])
+		self.batch_gen = gen()
 	
 	def next_batch(self):
 		"""Executes the batch generator closure and returns the next batch
@@ -190,7 +195,7 @@ class Dataset:
 			A (labels <list>, images <np.array>) tuple of size batch_size
 		
 		"""
-		return self.batch_gen().__next__()
+		return self.batch_gen.__next__()
 	
 	def encode_label(self, label):
 		"""Encodes a class label string to an int and adds the key to the dict
@@ -228,25 +233,41 @@ class Dataset:
 		return len(self.data)
 	
 	def get_data_dim(self):
-		return (len(self.data[0][1]), len(self.data[0][1][0]))
+		return (len(self.data[0][2]), len(self.data[0][2][0]))
 	
 	def get_train_ids(self):
-		return self.train[:,0]
+		p = self.folds[self.fold][0]
+		return [l[0] for (b,e) in p for l in self.data[b:e]]
 	
 	def get_train_y(self):
-		return self.train[:,1]
+		# Retrieves the begin and end of all train partitions, loops through all
+		# their targets (index 1), creates an array of length dec_iter\
+		# (n_classes) and adds a one to those indices that occur in the target
+		# array, such that the output for target [1,4] is [0,1,0,0,1,0,...,0].
+		p = self.folds[self.fold][0]
+		return [[(1 if i in l else 0) for i in range(self.dec_iter)] \
+						for l in [s[1] for (b,e) in p for s in self.data[b:e]]]
 	
 	def get_train_x(self):
-		return self.train[:,2]
+		p = self.folds[self.fold][0]
+		return [np.reshape(l[2], -1) for (b,e) in p for l in self.data[b:e]]
 	
 	def get_test_ids(self):
-		return self.test[:,0]
+		(b, e) = self.folds[self.fold][1][0]
+		return [l[0] for l in self.data[b:e]]
 	
 	def get_test_y(self):
-		return self.test[:,1]
+		# Retrieves the begin and end of the test partition, loops through all
+		# its targets (index 1), creates an array of length dec_iter (n_classes)
+		# and adds a one to those indices that occur in the target array, such
+		# that the output for target [1,4] is [0,1,0,0,1,0,...,0].
+		(b, e) = self.folds[self.fold][1][0]
+		return [[(1 if i in l else 0) for i in range(self.dec_iter)] \
+									  for l in [l[1] for l in self.data[b:e]]]
 	
 	def get_test_x(self):
-		return self.test[:,2]
+		(b, e) = self.folds[self.fold][1][0]
+		return [np.reshape(l[2], -1) for l in self.data[b:e]]
 
 @trackExceptions
 def read_from_file(dataset):
@@ -264,7 +285,8 @@ def read_from_file(dataset):
 	for line in file:
 		try:
 			l = line.split(';')
-			data.append([dataset.encode_label(l[1]), json.loads(l[2])])
+			targets = [dataset.encode_label(c) for c in l[1].split('/')]
+			data.append([l[0], targets, json.loads(l[2])])
 		except Exception as e:
 			err += 1
 			log_exception(e)

@@ -16,6 +16,7 @@ from mgr_utils import log_exception
 from mgr_utils import MGRException
 from mgr_utils import trackExceptions
 
+"""
 # The maximum dataset size
 data_size = 256
 
@@ -33,6 +34,7 @@ dropout = 0.75 # Dropout, probability to keep units (unused)
 x = tf.placeholder(tf.float32, [None, n_input])
 y = tf.placeholder(tf.int8, [None, n_classes])
 keep_prob = tf.placeholder(tf.float32) #dropout (keep probability)
+"""
 
 def conv2d(x, F, bias, strides=1):
     x = tf.nn.conv2d(x, F, strides=[1, strides, strides, 1], padding='SAME')
@@ -64,6 +66,7 @@ def conv_net(x, weights, biases):
     out = tf.add(tf.matmul(conv5, weights['out']), biases['out'])
     return out
 
+"""
 weights = {
 	# 3x3 conv, 1 input, 20 outputs (i.e. 20 filters)
 	'wc1': tf.Variable(tf.random_normal([3, 3, 1, 20])),
@@ -93,6 +96,7 @@ accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
 init = tf.global_variables_initializer()
 # Add ops to save and restore all the variables
 saver = tf.train.Saver()
+"""
 
 def construct_model(x, y, n_classes, lr):
 	weights = {
@@ -162,7 +166,7 @@ def train(log, dataset, dir=None, id=None, md=None, lr=.001, ti=2*10^5, ds=25):
 		# Keep training until reach max iterations
 		while (step * dataset.batch_size < ti):
 			try:
-				batch_y, batch_x = dataset.next_batch()
+				ids, batch_y, batch_x = dataset.next_batch()
 				# Run optimization op (backprop)
 				sess.run(optimizer, feed_dict={x: batch_x, y: batch_y,
 											   keep_prob: dropout})
@@ -179,6 +183,8 @@ def train(log, dataset, dir=None, id=None, md=None, lr=.001, ti=2*10^5, ds=25):
 			except Exception as e:
 				err += 1
 				log_exception(e)
+				log_exception(MGRException(msg="previous exception happened " +\
+					"during training of these files: " + ' --- '.join(ids)))
 		log.info("Optimization Finished.")
 
 		# Calculate accuracy for all test images
