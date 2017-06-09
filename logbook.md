@@ -293,4 +293,5 @@ __**Th 08-06-2017**__
 * CNN evaluation (Tuesday)
 
 __**Fr 09-06-2017**__  
-**12:30-15:00:** Implementing the 3-layer CNN.
+**12:30-15:00:** Implemented the 3-layer CNN. It runs, but reports only 0.0 accuarcies. The model saving procedure still errors, so I will need to check the Tensorflow manual to learn how it works.  
+**16:30-18:00** 
