@@ -285,7 +285,7 @@ __**We 07-06-2017**__
 
 
 ## Week 9 - 🌡️ Results
-### *(total: 0 hrs)*
+### *(total: 3.25 hrs)*
 __**Th 08-06-2017**__  
 **9:30-11:30** Experimented with placeholders to try and solve the dimension bug.  
 **13:00-14:15** Eighth meeting. There appears to be something wrong with our interpretation of Choi's k2c2 network. If the layers indeed do have (20, 41, 41, 62, 83) filters each, the output would be more than 173 million variables. Reijn will review the paper tomorrow, and in the meantime I will implement a simpler network of 3 conv layers and a softmax layer. The deadlines for next week:  
