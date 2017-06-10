@@ -296,4 +296,5 @@ __**Fr 09-06-2017**__
 **12:30-15:00:** Implemented the 3-layer CNN. It runs, but reports only 0.0 accuarcies. The model saving procedure still errors, so I will need to check the Tensorflow manual to learn how it works.  
 
 __**Sa 10-06-2017**__  
-**09:30-:** Reading Tensorflow `Saver` manual
+**09:30-12:00:** Read some Tensorflow `Saver` tutorials and changed the code. Now that I understand Tensorflow better, I might need to restructure my network code for clarity. I got stuck on an error about restoring saved variables, and three consecutive errors about variables of the same name already being in place. I'll need to debug the saving procedure next.  
+**12:30-:** 
