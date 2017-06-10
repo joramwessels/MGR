@@ -285,7 +285,7 @@ __**We 07-06-2017**__
 
 
 ## Week 9 - 🌡️ Results
-### *(total: 3.25 hrs)*
+### *(total: 5.75 hrs)*
 __**Th 08-06-2017**__  
 **9:30-11:30** Experimented with placeholders to try and solve the dimension bug.  
 **13:00-14:15** Eighth meeting. There appears to be something wrong with our interpretation of Choi's k2c2 network. If the layers indeed do have (20, 41, 41, 62, 83) filters each, the output would be more than 173 million variables. Reijn will review the paper tomorrow, and in the meantime I will implement a simpler network of 3 conv layers and a softmax layer. The deadlines for next week:  
@@ -294,4 +294,6 @@ __**Th 08-06-2017**__
 
 __**Fr 09-06-2017**__  
 **12:30-15:00:** Implemented the 3-layer CNN. It runs, but reports only 0.0 accuarcies. The model saving procedure still errors, so I will need to check the Tensorflow manual to learn how it works.  
-**16:30-18:00** 
+
+__**Sa 10-06-2017**__  
+**09:30-:** Reading Tensorflow `Saver` manual
