@@ -304,4 +304,4 @@ __**Sa 10-06-2017**__
 
 __**Su 11-06-2017**__  
 **10:00-12:00:** Fixed the saver by calling `restore` using the returned filename. Tried to fix the lost variables by naming the accuracy, x and y tensors individually using the optional `name` argument, and referencing them by their name rather than calling `get_tensor_by_name` (which probably creates a new tensor). I removed the weights and biases from the saver constructor to solve the uninitialized tensor errors. **The network now runs without errors!!!🎉🎊🎈** (but returns extremely poor results, of course). I'll run it on *Dataset-1* during lunch.  
-**12:30-:** 
+**12:30-14:15:** Preprocessing 400 files only took 11 minutes, and training using 5-fold cross validation less than 2 minutes. Accuracy results are nonzero, but terrible nonetheless. A few files errored due to encoding issues, but these were handled appropriately. There is an issue with the average accuracy calculation I'll need to solve. I've added the `monitor` log option and started writing an argparse main function for easy access during evaluation.  
