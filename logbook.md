@@ -297,9 +297,11 @@ __**Fr 09-06-2017**__
 
 __**Sa 10-06-2017**__  
 **09:30-12:00:** Read some Tensorflow `Saver` tutorials and changed the code. Now that I understand Tensorflow better, I might need to restructure my network code for clarity. I got stuck on an error about restoring saved variables, and three consecutive errors about variables of the same name already being in place. I'll need to debug the saving procedure next.  
-**12:30-14:00:** Finished Dataset-1 (4GB), which includes about 100 tracks for each Electro House, Progressive House, Chillhop and Trap. Only Electro House includes subgenres (Complextro & Big Room). All Electro House tracks and Trap tracks have been screened, the other 2 collections were tagged by reliable sources.  
+**12:30-14:00:** Finished *Dataset-1* (4GB), which includes about 100 tracks for each Electro House, Progressive House, Chillhop and Trap. Only Electro House includes subgenres (Complextro & Big Room). All Electro House tracks and Trap tracks have been screened, the other 2 collections were tagged by reliable sources.  
 **14:00-15:00:** Looked into the saving problem. Mailed my supervisors for help.  
 **15:00-15:30:** Prepared 50 Future Bass tracks for the next dataset update.  
 **19:30-21:00:** Wrote the paragraph on dubstep.  
 
 __**Su 11-06-2017**__  
+**10:00-12:00:** Fixed the saver by calling `restore` using the returned filename. Tried to fix the lost variables by naming the accuracy, x and y tensors individually using the optional `name` argument, and referencing them by their name rather than calling `get_tensor_by_name` (which probably creates a new tensor). I removed the weights and biases from the saver constructor to solve the uninitialized tensor errors. **The network now runs without errors!!!🎉🎊🎈** (but returns extremely poor results, of course). I'll run it on *Dataset-1* during lunch.  
+**12:30-:** 
