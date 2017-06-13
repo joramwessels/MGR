@@ -285,7 +285,7 @@ __**We 07-06-2017**__
 
 
 ## Week 9 - 🌡️ Results
-### *(total: 19.75 hrs)*
+### *(total: 24.75 hrs)*
 __**Th 08-06-2017**__  
 **9:30-11:30** Experimented with placeholders to try and solve the dimension bug.  
 **13:00-14:15** Eighth meeting. There appears to be something wrong with our interpretation of Choi's k2c2 network. If the layers indeed do have (20, 41, 41, 62, 83) filters each, the output would be more than 173 million variables. Reijn will review the paper tomorrow, and in the meantime I will implement a simpler network of 3 conv layers and a softmax layer. The deadlines for next week:  
@@ -311,4 +311,4 @@ __**Mo 12-06-2017**__
 **18:30-20:00** Restructured the code, and continued on the argparse functions.  
 
 __**Tu 13-06-2017**__  
-**13:30-:** Looked into the accuracy results. Fixed some bugs with the Dataset class. Fixed the JSONDecodeError. Improved the logging format. Finished the argparse functions.
+**13:30-18:30:** Looked into the accuracy results. Fixed some bugs with the Dataset class. Fixed the JSONDecodeError. Improved the logging format. Finished the argparse functions (but they don't completely work according to plan yet).  
