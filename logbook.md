@@ -285,7 +285,7 @@ __**We 07-06-2017**__
 
 
 ## Week 9 - 🌡️ Results
-### *(total: 12.75 hrs)*
+### *(total: 19.75 hrs)*
 __**Th 08-06-2017**__  
 **9:30-11:30** Experimented with placeholders to try and solve the dimension bug.  
 **13:00-14:15** Eighth meeting. There appears to be something wrong with our interpretation of Choi's k2c2 network. If the layers indeed do have (20, 41, 41, 62, 83) filters each, the output would be more than 173 million variables. Reijn will review the paper tomorrow, and in the meantime I will implement a simpler network of 3 conv layers and a softmax layer. The deadlines for next week:  
@@ -305,3 +305,10 @@ __**Sa 10-06-2017**__
 __**Su 11-06-2017**__  
 **10:00-12:00:** Fixed the saver by calling `restore` using the returned filename. Tried to fix the lost variables by naming the accuracy, x and y tensors individually using the optional `name` argument, and referencing them by their name rather than calling `get_tensor_by_name` (which probably creates a new tensor). I removed the weights and biases from the saver constructor to solve the uninitialized tensor errors. **The network now runs without errors!!!🎉🎊🎈** (but returns extremely poor results, of course). I'll run it on *Dataset-1* during lunch.  
 **12:30-14:15:** Preprocessing 400 files only took 11 minutes, and training using 5-fold cross validation less than 2 minutes. Accuracy results are nonzero, but terrible nonetheless. A few files errored due to encoding issues, but these were handled appropriately. There is an issue with the average accuracy calculation I'll need to solve. I've added the `monitor` log option and started writing an argparse main function for easy access during evaluation.  
+
+__**Mo 12-06-2017**__  
+**15:30-17:30** Continued working on the argparse functions.  
+**18:30-20:00** Restructured the code, and continued on the argparse functions.  
+
+__**Tu 13-06-2017**__  
+**13:30-:** Looked into the accuracy results. Fixed some bugs with the Dataset class. Fixed the JSONDecodeError. Improved the logging format. Finished the argparse functions.
