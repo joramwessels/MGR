@@ -7,8 +7,8 @@
 # public functions:	prepare_data
 # description:		Prepares the raw data for the training
 
-import sys, os
-import numpy as np
+import sys, os, argparse
+from numpy import max
 from json import dumps
 from librosa import load
 from librosa.core.spectrum import power_to_db
@@ -25,7 +25,14 @@ duration = 29
 sample_rate = 12000
 
 def main(argv):
-	prepare_data(argv[1], argv[2], 1280)
+	p = parser.parse_args(argv)
+	if (p.msg):
+		log.info(51*'=')
+		log.info(p.msg)
+	log.info(51*'=')
+	prepare_data(p.data_folder, p.output_file, p.max_dim,
+				 n_fft=p.n_fft, stride=p.stride, n_mels=p.n_mels)
+	log.info(51*'=' + '\n')
 
 # n_fft=2048, stride=512, n_mels=128
 @trackExceptions
@@ -67,10 +74,11 @@ def prepare_data(folder, destination, dim, n_fft=2048, stride=256, n_mels=96):
 			err += 1
 			log_exception(e)
 		count = count+1
-		if (count % 500 == 0): log.info(count, "files processed...")
+		if (count % 50 == 0): log.info(count, "files processed...")
 	out.close()
 	log.info("Preprocessing complete. " + str(count) + " files processed." \
 			 + str(err) + " errors caught and logged.")
+	return
 
 def to_spectrogram(filename, ofs, dur, n_fft, stride, n_mels):
 	"""Computes the Mel Spectrogram for the first minute of a given mp3 file
@@ -88,8 +96,59 @@ def to_spectrogram(filename, ofs, dur, n_fft, stride, n_mels):
 	"""
 	y, sr = load(filename, sr=sample_rate, offset=ofs, duration=dur)
 	S = melspectrogram(y, sr=sr, n_fft=n_fft, hop_length=stride, n_mels=n_mels)
-	mel_spectrogram = power_to_db(S, ref=np.max)
+	mel_spectrogram = power_to_db(S, ref=max)
 	return mel_spectrogram
+
+parser = argparse.ArgumentParser(prog="preprocessing.py",
+		description="Preprocesses a dataset file hierarchy into a txt file.")
+parser.add_argument('-d','--dataset',
+					type=str,
+					required=True,
+					metavar='D',
+					dest='data_folder',
+					help="The root directory of the dataset file hierarchy")
+parser.add_argument('-o','--output',
+					type=str,
+					required=True,
+					metavar='O',
+					dest='output_file',
+					help="The output file created by the preprocessing")
+parser.add_argument('-x','--xdim',
+					type=int,
+					required=False,
+					default=1280,
+					metavar='X',
+					dest='max_dim',
+					help="The maximum frame length in the time dimension")
+parser.add_argument('-w','--window',
+					type=int,
+					required=False,
+					default=2048,
+					metavar='W',
+					dest='n_fft',
+					help="The window size of the fast Fourier transform")
+parser.add_argument('-s','--stride',
+					type=int,
+					required=False,
+					default=256,
+					metavar='S',
+					dest='stride',
+					help="The hop size of the fast Fourier transform")
+parser.add_argument('-b','--melbins',
+					type=int,
+					required=False,
+					default=96,
+					metavar='M',
+					dest='n_mels',
+					help="The amount of Mel bins of the fast Fourier transform")
+parser.add_argument('-m', '--message',
+					type=str,
+					required=False,
+					metavar='M',
+					default=None,
+					dest='msg',
+					help="A message describing the purpose of this run, \
+						  which will be logged before the program execution")
 
 if __name__ == "__main__":
 	main(sys.argv)

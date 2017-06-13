@@ -2,25 +2,40 @@
 # filename:			mgr_utils.py
 # author:			Joram Wessels
 # date:				29-05-2017
-# python versoin:	2.7
+# python versoin:	3.5
 # dependencies:		None
 # public functions:	None
 # description:		Provides logging, exceptions and decorators
 
 import sys, traceback, logging
 
-mode = 'run'
+log_mode = 'monitor'
+"""There are 3 log modes:
 
-# Creates a logger
-if (mode == 'debug'):
+	debug:	  Presents exceptions as they are raised and prints info to stdout
+	run:	  Logs info and exceptions without halting the execution
+	monitor:  Logs the same way 'run' does, but also prints everyting to stdout
+"""
+
+err_total=0
+
+if (log_mode == 'debug'):
 	logging.basicConfig(stream=sys.stdout, level=logging.DEBUG,
 		format="%(asctime)s.%(msecs)03d: %(levelname)s: %(module)s."
 		+ "%(funcName)s: %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
-elif (mode == 'run'):
+elif (log_mode == 'run'):
 	logging.basicConfig(filename='../logs/main.log', level=logging.DEBUG,
 		format="%(asctime)s.%(msecs)03d: %(levelname)s: %(module)s."
 		+ "%(funcName)s: %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
+elif (log_mode == 'monitor'):
+	logging.basicConfig(filename='../logs/main.log', level=logging.DEBUG,
+		format="%(asctime)s.%(msecs)03d: %(levelname)s: %(module)s."
+		+ "%(funcName)s: %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
+else:
+	print('\n\n\t\t- Invalid log mode: ' + str(log_mode) + '\n\n')
+	sys.exit(1)
 log = logging.getLogger()
+if (log_mode == 'monitor'): log.addHandler(logging.StreamHandler(sys.stdout))
 
 class MGRException(Exception):
 	"""The universal exception for any problems with the MGR package
@@ -29,10 +44,12 @@ class MGRException(Exception):
 	The __str__ function allows it to be logged after being casted to a string.
 	
 	Args:
-		ex:		An exception to wrap in a new MGRException
-		msg:	An error message for a new MGRException
+		ex:			An exception to wrap in a new MGRException
+		msg:		An error message for a new MGRException
+		mgr_utils:	A flag indicating whether ex was caught by trackExceptions
+					If set to true, the first stack frame is removed
 	Attributes:
-		
+		traceback:	The stack traceback list of the error
 	
 	"""
 	def __init__(self, ex=None, msg=None, mgr_utils=False):
@@ -80,15 +97,27 @@ class trackExceptions(object):
 		try:
 			res = self.f(*args, **kwargs)
 		except Exception as e:
-			if (mode == 'debug'): raise e
+			if (log_mode == 'debug'): raise e
 			global_ns['err'] += 1
-			log.error(str(MGRException(ex=e, mgr_utils=True)))
-		if (global_ns['err']): print(str(global_ns['err']) + \
-			" exception(s) caught and logged while in " + self.f.__module__ + \
-				'.' + self.f.__name__)
+			log_exception(e, mgr_utils=True)
+		if (global_ns['err'] and log_mode == 'run'):
+			print(str(global_ns['err']) + " exception(s) caught and logged " +\
+					"while in " + self.f.__module__ + '.' + self.f.__name__)
 		return res
 
-def log_exception(e):
-	if (mode == 'debug'): raise e
-	log.error(str(MGRException(ex=e)))
-	if (mode == 'debug'): sys.exit(1)
+def log_exception(e, mgr_utils=False):
+	"""Logs the exception and 
+	
+	Args:
+		e:			The exception to log
+		mgr_utils:	A flag indicating whether ex was caught by trackExceptions
+					If set to true, the error won't be added to the err count
+	
+	"""
+	if (log_mode == 'debug'): raise e
+	if (not mgr_utils):
+		global err
+		err += 1
+	global err_total
+	err_total += 1
+	log.error(str(MGRException(ex=e, mgr_utils=mgr_utils)))
