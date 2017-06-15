@@ -312,3 +312,7 @@ __**Mo 12-06-2017**__
 
 __**Tu 13-06-2017**__  
 **13:30-18:30:** Looked into the accuracy results. Fixed some bugs with the Dataset class. Fixed the JSONDecodeError. Improved the logging format. Finished the argparse functions (but they don't completely work according to plan yet).  
+
+## Week 10 - 
+### *(total: 0 hrs)*
+**09:30-12:00** Copied an RNN implementation from a tutorial and adapted it into my system. It doesn't run yet due to a dimensionality problem.  
