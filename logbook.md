@@ -313,7 +313,7 @@ __**Mo 12-06-2017**__
 __**Tu 13-06-2017**__  
 **13:30-18:30:** Looked into the accuracy results. Fixed some bugs with the Dataset class. Fixed the JSONDecodeError. Improved the logging format. Finished the argparse functions (but they don't completely work according to plan yet).  
 
-## Week 10 - 
+## Week 10 - 🔗 Loose Ends
 ### *(total: 7.5 hrs)*
 __**Th 15-06-2017**__  
 **09:30-12:00** Copied an RNN implementation from a tutorial and adapted it into my system. It doesn't run yet due to a dimensionality problem.  
@@ -337,4 +337,4 @@ correct_pred = tf.equal(tf.argmax(pred, 1), tf.argmax(correct_conf, 1))
 ```  
 **19:00-20:00** Elaborated and updated the paragraph on preprocessing, but I got confused about the Mel spectrogram computation.  
 
-__**Fr 16-06-207**__  
+__**Fr 16-06-2017**__  
