@@ -314,7 +314,8 @@ __**Tu 13-06-2017**__
 **13:30-18:30:** Looked into the accuracy results. Fixed some bugs with the Dataset class. Fixed the JSONDecodeError. Improved the logging format. Finished the argparse functions (but they don't completely work according to plan yet).  
 
 ## Week 10 - 
-### *(total: 0 hrs)*
+### *(total: 7.5 hrs)*
+__**Th 15-06-2017**__  
 **09:30-12:00** Copied an RNN implementation from a tutorial and adapted it into my system. It doesn't run yet due to a dimensionality problem.  
 **13:00-14:30** Ninth meeting. My misunderstanding of the Tensorflow dimensions has been alleviated. CNNs aren't trees, but networks (as the name suggests). We looked into the code and compared it to Rein's experience with Tensorflow. He argued the biases should be initialized as small positive floats when used in combination with ReLu activation. The final implementation will be a CNN. Next week thursday I will need to have written most of the paper, and have a network that's able to learn genres. When the CNN works, I can tweak the parameters to improve results, and when there is time I can try to replace the fully connected layer with an RNN. My backlog for coming week:  
 * Find out why the accuracy values are invalid
@@ -333,4 +334,7 @@ __**Tu 13-06-2017**__
 ```
 correct_conf = tf.where(tf.cast(y, tf.bool), pred, tf.zeros(tf.shape(y)))
 correct_pred = tf.equal(tf.argmax(pred, 1), tf.argmax(correct_conf, 1))
-```
+```  
+**19:00-20:00** Elaborated and updated the paragraph on preprocessing, but I got confused about the Mel spectrogram computation.  
+
+__**Fr 16-06-207**__  
