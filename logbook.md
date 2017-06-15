@@ -288,9 +288,9 @@ __**We 07-06-2017**__
 ### *(total: 24.75 hrs)*
 __**Th 08-06-2017**__  
 **9:30-11:30** Experimented with placeholders to try and solve the dimension bug.  
-**13:00-14:15** Eighth meeting. There appears to be something wrong with our interpretation of Choi's k2c2 network. If the layers indeed do have (20, 41, 41, 62, 83) filters each, the output would be more than 173 million variables. Reijn will review the paper tomorrow, and in the meantime I will implement a simpler network of 3 conv layers and a softmax layer. The deadlines for next week:  
-* Finish dataset (Monday)
-* CNN evaluation (Tuesday)
+**13:00-14:15** Eighth meeting. There appears to be something wrong with our interpretation of Choi's k2c2 network. If the layers indeed do have (20, 41, 41, 62, 83) filters each, the output would be more than 173 million variables. Rein will review the paper tomorrow, and in the meantime I will implement a simpler network of 3 conv layers and a softmax layer. The deadlines for next week:  
+* ✔ Finish dataset (Monday)
+* ✔ CNN evaluation (Tuesday)
 
 __**Fr 09-06-2017**__  
 **12:30-15:00:** Implemented the 3-layer CNN. It runs, but reports only 0.0 accuarcies. The model saving procedure still errors, so I will need to check the Tensorflow manual to learn how it works.  
@@ -316,3 +316,21 @@ __**Tu 13-06-2017**__
 ## Week 10 - 
 ### *(total: 0 hrs)*
 **09:30-12:00** Copied an RNN implementation from a tutorial and adapted it into my system. It doesn't run yet due to a dimensionality problem.  
+**13:00-14:30** Ninth meeting. My misunderstanding of the Tensorflow dimensions has been alleviated. CNNs aren't trees, but networks (as the name suggests). We looked into the code and compared it to Rein's experience with Tensorflow. He argued the biases should be initialized as small positive floats when used in combination with ReLu activation. The final implementation will be a CNN. Next week thursday I will need to have written most of the paper, and have a network that's able to learn genres. When the CNN works, I can tweak the parameters to improve results, and when there is time I can try to replace the fully connected layer with an RNN. My backlog for coming week:  
+* Find out why the accuracy values are invalid
+	* Loss function (Softmax)?
+	* ✔ `correct_pred` adapted to multi-label targets
+	* Implement `prediction.py` to aid debugging
+* Minor problems that can't be the cause
+	* Replacing dropout
+	* Bias initalization (0.1)
+* Writing
+	* Explain tanh in LSTM paragraph
+	* Write more on Tensorflow
+	* Add RNN formuulas
+  
+**16:00-18:30** Rein informed me that `tf.nn.softmax_cross_entropy_with_logits` only works with one-hot (uni-label) targets. Sigmoid does work with multi-label-, but not with multi-class targets. I've changed the `correct_pred` computation to  
+```
+correct_conf = tf.where(tf.cast(y, tf.bool), pred, tf.zeros(tf.shape(y)))
+correct_pred = tf.equal(tf.argmax(pred, 1), tf.argmax(correct_conf, 1))
+```
