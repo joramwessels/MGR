@@ -115,9 +115,6 @@ def log_exception(e, mgr_utils=False):
 	
 	"""
 	if (log_mode == 'debug'): raise e
-	if (not mgr_utils):
-		global err
-		err += 1
 	global err_total
 	err_total += 1
 	log.error(str(MGRException(ex=e, mgr_utils=mgr_utils)))

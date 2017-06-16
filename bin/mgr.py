@@ -16,10 +16,11 @@ def main(argv):
 	#actions = [f.split(' ') for f in ' '.join(argv).split('-a')][1:]
 	p = parser.parse_args(sys.argv[1:])
 	for i in range(len(p.a)):
-		param = (p.p[i] if len(p.p) > i else '')
+		print(p.p[i])
+		param = (p.p[i].split(' ') if len(p.p) > i else '')
 		actions[p.a[i]].parser.parse_args(param)
 	for i in range(len(p.a)):
-		param = (p.p[i] if len(p.p) > i else '')
+		param = (p.p[i].split(' ') if len(p.p) > i else '')
 		actions[p.a[i]].main(param)
 
 parser = argparse.ArgumentParser(prog="Music Genre Recognizer",

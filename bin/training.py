@@ -10,14 +10,16 @@
 import sys, os, argparse
 import numpy as np
 from dataset import Dataset
+import mgr_utils
 from mgr_utils import log
 from mgr_utils import log_exception
 from mgr_utils import trackExceptions
 import testing
 import k2c2		# The (Choi, 2016) K2C2 implementation
 import cnn		# The 3-layer CNN implementation
+import rnn		# The single layer LSTM RNN implementation
 
-network_types = {'cnn':cnn, 'k2c2':k2c2}
+network_types = {'cnn':cnn, 'k2c2':k2c2, 'rnn':rnn}
 
 def main(argv):
 	p = parser.parse_args(argv[1:])
@@ -43,7 +45,6 @@ def train(network, dataset, batch_size=1, k=1, id=None, savedir="./models/", see
 		seed:		A cross validation seed to replicate the results
 	
 	"""
-	#global err
 	log.info('Started training on dataset: "' + dataset + '", ' + \
 			'network=%s, batch_size=%i, k=%i, savedir="%s"' \
 			%(network.__name__, batch_size, k, savedir))
@@ -59,6 +60,8 @@ def train(network, dataset, batch_size=1, k=1, id=None, savedir="./models/", see
 			acc[fold] = testing.test(log, savefile, data)
 			data.next_fold()
 		except Exception as e:
+			global err
+			err += 1
 			log_exception(e)
 	log.info(51*'=')
 	log.info(17*'=' + "Training Complete" + 17*'=')
@@ -121,6 +124,7 @@ parser.add_argument('-s', '--seed',
 					help="A cross validation seed to replicate results")
 parser.add_argument('-m', '--message',
 					type=str,
+					nargs='?',
 					required=False,
 					metavar='M',
 					dest='msg',

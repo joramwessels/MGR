@@ -8,6 +8,7 @@
 
 import os, json
 import numpy as np
+from mgr_utils import log
 from mgr_utils import log_exception
 from mgr_utils import MGRException
 from mgr_utils import trackExceptions
@@ -37,6 +38,7 @@ class Dataset:
 	
 	"""
 	def __init__(self, filename, batch_size, k, seed=None):
+		log.info('Preparing dataset: "' + str(filename) + '" ...')
 		if (not(os.path.isfile(filename))):
 			raise MGRException(msg="File does not exist: " + str(filename))
 		if (not(type(batch_size) is int) or batch_size < 1):
@@ -138,7 +140,7 @@ class Dataset:
 						batch = residue
 				n = dst-rng[0]
 				ids = [s[0] for s in batch]
-				labels = [[(1 if i in l else 0) for i in range(self.dec_iter)] \
+				labels = [[(1.0 if i in l else 0.0) for i in range(self.dec_iter)] \
 												for l in [s[1] for s in batch]]
 				yield (ids, labels, [np.reshape(s[2], -1) for s in batch])
 		self.batch_gen = gen()
@@ -176,10 +178,10 @@ class Dataset:
 			The original class label string represented by the code
 		
 		"""
-		if not(str(code) in self.decoder):
+		if not(str(int(code)) in self.decoder):
 			raise MGRException(msg="Unknown label code: " + str(code))
 		else:
-			return self.decoder[str(code)]
+			return self.decoder[str(int(code))]
 	
 	def get_n_classes(self):
 		return self.dec_iter
@@ -200,7 +202,7 @@ class Dataset:
 		# (n_classes) and adds a one to those indices that occur in the target
 		# array, such that the output for target [1,4] is [0,1,0,0,1,0,...,0].
 		p = self.folds[self.fold][0]
-		return [[(1 if i in l else 0) for i in range(self.dec_iter)] \
+		return [[(1.0 if i in l else 0.0) for i in range(self.dec_iter)] \
 						for l in [s[1] for (b,e) in p for s in self.data[b:e]]]
 	
 	def get_train_x(self):
@@ -218,7 +220,7 @@ class Dataset:
 		# and adds a one to those indices that occur in the target array, such
 		# that the output for target [1,4] is [0,1,0,0,1,0,...,0].
 		(b, e) = self.folds[self.fold][1][0]
-		return [[(1 if i in l else 0) for i in range(self.dec_iter)] \
+		return [[(1.0 if i in l else 0.0) for i in range(self.dec_iter)] \
 									  for l in [l[1] for l in self.data[b:e]]]
 	
 	def get_test_x(self):
@@ -246,5 +248,7 @@ def read_from_file(dataset):
 				targets = [dataset.encode_label(c) for c in l[1].split('/')]
 				data.append([l[0], targets, json.loads(l[2])])
 			except Exception as e:
+				global err
+				err += 1
 				log_exception(e)
 	return data

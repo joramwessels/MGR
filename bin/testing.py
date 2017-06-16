@@ -57,7 +57,7 @@ def test(log, model, data):
 	
 	"""
 	log.info(51*'=')
-	log.info('Testing network:  "' + model + '" ...')
+	log.info('Testing network:  "' + str(model) + '" ...')
 	sess = tf.Session()
 	tf.reset_default_graph()
 	saver = tf.train.import_meta_graph(model + '.meta')
