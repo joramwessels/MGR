@@ -314,7 +314,7 @@ __**Tu 13-06-2017**__
 **13:30-18:30:** Looked into the accuracy results. Fixed some bugs with the Dataset class. Fixed the JSONDecodeError. Improved the logging format. Finished the argparse functions (but they don't completely work according to plan yet).  
 
 ## Week 10 - 🔗 Loose Ends
-### *(total: 15 hrs)*
+### *(total: 22 hrs)*
 __**Th 15-06-2017**__  
 **09:30-12:00** Copied an RNN implementation from a tutorial and adapted it into my system. It doesn't run yet due to a dimensionality problem.  
 **13:00-14:30** Ninth meeting. My misunderstanding of the Tensorflow dimensions has been alleviated. CNNs aren't trees, but networks (as the name suggests). We looked into the code and compared it to Rein's experience with Tensorflow. He argued the biases should be initialized as small positive floats when used in combination with ReLu activation. The final implementation will be a CNN. Next week thursday I will need to have written most of the paper, and have a network that's able to learn genres. When the CNN works, I can tweak the parameters to improve results, and when there is time I can try to replace the fully connected layer with an RNN. My backlog for coming week:  
@@ -348,3 +348,4 @@ __**Su 18-06-2017**__
 **09:00-11:30** I restructured the code in `cnn.py` to fit my current understanding of Tensorflow and to solve the training issue. It caused a new error, `InvalidArgumentError: You must feed a value for placeholder tensor 'x_1' with dtype float`, while training the _second_ CV fold. I added a call to `tf.reset.default.graph()` which fixed the error, but accuracy results for train- and test set are now identical for every fold. The test function already included a graph reset.  
 **13:00-14:00** Looked into Tensorflow RNN implementations.  
 **14:00-16:00** Wrote most of the paragraph on drum & bass.  
+**19:45-21:15** Finished the drum & bass part and wrote the intro to house
