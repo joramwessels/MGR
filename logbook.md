@@ -348,4 +348,7 @@ __**Su 18-06-2017**__
 **09:00-11:30** I restructured the code in `cnn.py` to fit my current understanding of Tensorflow and to solve the training issue. It caused a new error, `InvalidArgumentError: You must feed a value for placeholder tensor 'x_1' with dtype float`, while training the _second_ CV fold. I added a call to `tf.reset.default.graph()` which fixed the error, but accuracy results for train- and test set are now identical for every fold. The test function already included a graph reset.  
 **13:00-14:00** Looked into Tensorflow RNN implementations.  
 **14:00-16:00** Wrote most of the paragraph on drum & bass.  
-**19:45-21:15** Finished the drum & bass part and wrote the intro to house
+**19:45-21:15** Finished the drum & bass part and wrote the intro to house  
+
+__**Mo 19-06-2017**__  
+**09:30-11:00** Separated the functions for accuracy, optimization and saving so that the testing procedure can now build a new model instead of loading one from storage. I have confirmed that the weights are successfully being restored.  
