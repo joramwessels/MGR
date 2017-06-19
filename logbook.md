@@ -351,4 +351,6 @@ __**Su 18-06-2017**__
 **19:45-21:15** Finished the drum & bass part and wrote the intro to house  
 
 __**Mo 19-06-2017**__  
-**09:30-12:00** Separated the functions for accuracy, optimization and saving so that the testing procedure can now build a new model instead of loading one from storage. I have confirmed that the weights are successfully being restored. Yet, the new accuracy function freezes when called individually, and returns `None` when used in `training.py`. When training using the old testing function, it returns surprisingly acceptable accuracy scores (~50%).
+**09:30-12:30** Separated the functions for accuracy, optimization and saving so that the testing procedure can now build a new model instead of loading one from storage. I have confirmed that the weights are successfully being restored. Yet, the new accuracy function freezes when called individually, and returns `None` when used in `training.py`. When training using the old testing function, it returns surprisingly acceptable accuracy scores (~50%).  
+**14:30-17:00** The saver problems are solved. It was a combination of a lot of things relating to the dataset fold, test/train sets, and Tensor reference. The accuracy is always between 40 and 50 percent.  
+
