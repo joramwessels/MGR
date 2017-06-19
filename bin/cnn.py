@@ -29,7 +29,7 @@ def maxpool2d(x, k1=2, k2=2):
     return tf.nn.max_pool(x, ksize=[1, k1, k2, 1], strides=[1, k1, k2, 1],
                           padding='SAME')
 
-def conv_net(x, weights, biases):
+def conv_net(x, weights, biases, dropout):
 	x = tf.reshape(x, shape=[-1, 96, 1280, 1])
 	
 	conv1 = conv2d(x, weights['wc1'], biases['bc1'])
@@ -44,11 +44,12 @@ def conv_net(x, weights, biases):
 	fc1 = tf.reshape(conv3, [-1, weights['wd1'].get_shape().as_list()[0]])
 	fc1 = tf.add(tf.matmul(fc1, weights['wd1']), biases['bd1'])
 	fc1 = tf.nn.relu(fc1)
+	fc1 = tf.nn.dropout(fc1, dropout)
 	
 	out = tf.add(tf.matmul(fc1, weights['wout']), biases['bout'], name="pred")
 	return out
 
-def construct_model(x, y, n_classes, lr):
+def construct_model(x, y, n_classes, keep_prob, lr):
 	weights = {
 		# 3x3 conv, 1 input, 20 outputs (i.e. 20 filters)
 		'wc1': tf.Variable(tf.random_normal([3, 3, 1, 20]), name='wc1'),
@@ -65,7 +66,7 @@ def construct_model(x, y, n_classes, lr):
 		'bd1': tf.Variable(tf.random_normal([1024]), name='bd1'),
 		'bout': tf.Variable(tf.random_normal([n_classes]), name='bout')
 	}
-	pred = conv_net(x, weights, biases)
+	pred = conv_net(x, weights, biases, keep_prob)
 	cost = tf.reduce_mean(\
 			tf.nn.sigmoid_cross_entropy_with_logits(logits=pred, labels=y))
 	optimizer = tf.train.AdamOptimizer(learning_rate=lr).minimize(cost)
@@ -77,7 +78,7 @@ def construct_model(x, y, n_classes, lr):
 	return pred, cost, optimizer, accuracy, saver
 
 @trackExceptions
-def train(log, data, dir=None, id=None, md=None, lr=.001, ti=200000, ds=25):
+def train(log, data, dir=None, id=None, md=None, lr=.001, ti=200000, ds=25, do=1.0):
 	"""Trains a 3-layer ConvNet ending in a single Softmax layer.
 	
 	Args:
@@ -89,6 +90,7 @@ def train(log, data, dir=None, id=None, md=None, lr=.001, ti=200000, ds=25):
 		lr:		Learning rate. Defaults to 0.001
 		ti:		Training iterations. Defaults to 200,000
 		ds:		Display step. The interval at which to log the progress
+		do:		The dropout rate. Must be a float between 0 and 1. Default=1.0
 	Returns:
 		The path to the save file, if dir and id were given, None otherwise
 	
@@ -100,14 +102,16 @@ def train(log, data, dir=None, id=None, md=None, lr=.001, ti=200000, ds=25):
 	# Preparing parameters
 	if (md): data_size = md
 	else: data_size = data.get_size()
+	tf.reset_default_graph()
 	n_input = data.get_data_dim()[0] * data.get_data_dim()[1]
 	n_classes = data.get_n_classes()
 	x = tf.placeholder(tf.float32, [None, n_input], name='x')
 	y = tf.placeholder(tf.float32, [None, n_classes], name='y')
+	keep_prob = tf.placeholder(tf.float32, name='keep_prob')
 	b_s = data.batch_size
 	
 	# Constructing model
-	pred, cost, optimizer, accuracy, saver = construct_model(x, y, n_classes, lr)
+	prd, cst, opt, acc, sav = construct_model(x, y, n_classes, keep_prob, lr)
 	init = tf.global_variables_initializer()
 	
 	# Launch the graph
@@ -120,11 +124,11 @@ def train(log, data, dir=None, id=None, md=None, lr=.001, ti=200000, ds=25):
 		try:
 			ids, batch_y, batch_x = data.next_batch()
 			# Run optimization op (backprop)
-			sess.run(optimizer, feed_dict={x: batch_x, y: batch_y})
+			sess.run(opt, feed_dict={x: batch_x, y: batch_y, keep_prob:do})
 			if step % ds == 0:
 				# Calculate batch loss and accuracy
-				loss, acc = sess.run([cost, accuracy],
-						feed_dict={x: batch_x, y: batch_y})
+				loss, acc = sess.run([cst, acc],
+						feed_dict={x: batch_x, y: batch_y, keep_prob:1.0})
 				log.info("Iter " + str(step*b_s) + ", Minibatch " +\
 						 "Loss= {:.6f}".format(loss) + ", Training " +\
 						 "Accuracy= {:.5f}".format(acc))
@@ -142,12 +146,13 @@ def train(log, data, dir=None, id=None, md=None, lr=.001, ti=200000, ds=25):
 	
 	# Calculate accuracy for all test images
 	log.info("Testing accuracy on training set: ")
-	acc = sess.run(accuracy, feed_dict={x: data.get_test_x()[:data_size],
-										y: data.get_test_y()[:data_size]})
-	log.info("Acc on TRAIN set: " + str(acc))
+	accuracy = sess.run(acc, feed_dict={x: data.get_test_x()[:data_size],
+										y: data.get_test_y()[:data_size],
+										keep_prob: 1.0})
+	log.info("Acc on TRAIN set: " + str(accuracy))
 	# Save the variables to storage
 	if dir and id:
-		save_path = saver.save(sess, dir + str(id))
+		save_path = sav.save(sess, dir + str(id))
 		log.info("Model saved in file: %s" % save_path)
 		return save_path
 	sess.close()

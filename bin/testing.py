@@ -12,6 +12,7 @@ import tensorflow as tf
 from dataset import Dataset
 from mgr_utils import log
 from mgr_utils import trackExceptions
+import cnntest
 
 def main(argv):
 	p = parser.parse_args(argv[1:])
@@ -39,7 +40,7 @@ def test_on_file(model, dataset):
 	"""
 	log.info('Testing on seperate dataset: "' + dataset +'".')
 	data = Dataset(dataset, 1, 1)
-	acc = test(log, model, data)
+	acc = cnntest.test(log, model, data)
 	return acc
 
 def test(log, model, data):
@@ -56,14 +57,14 @@ def test(log, model, data):
 		The accuracy of the cross validated test
 	
 	"""
-	log.info(51*'=')
 	log.info('Testing network:  "' + str(model) + '" ...')
-	sess = tf.Session()
 	tf.reset_default_graph()
+	sess = tf.Session()
 	saver = tf.train.import_meta_graph(model + '.meta')
 	saver.restore(sess, model)
 	acc = sess.run("accuracy:0", feed_dict={"x:0": data.get_test_x(),
-										"y:0": data.get_test_y()})
+											"y:0": data.get_test_y(),
+											"keep_prob:0": 1.0})
 	sess.close()
 	log.info('Finished testing: "' + model + '".')
 	log.info("Acc on TEST set:  " + str(acc))

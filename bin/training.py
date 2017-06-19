@@ -17,9 +17,10 @@ from mgr_utils import trackExceptions
 import testing
 import k2c2		# The (Choi, 2016) K2C2 implementation
 import cnn		# The 3-layer CNN implementation
+import cnntest
 import rnn		# The single layer LSTM RNN implementation
 
-network_types = {'cnn':cnn, 'k2c2':k2c2, 'rnn':rnn}
+network_types = {'cnn':cnntest, 'k2c2':k2c2, 'rnn':rnn}
 
 def main(argv):
 	p = parser.parse_args(argv[1:])
@@ -56,8 +57,10 @@ def train(network, dataset, batch_size=1, k=1, id=None, savedir="./models/", see
 	for fold in range(k):
 		try:
 			data.new_batch_generator('train')
-			savefile = network.train(log, data, dir=dir, id=(id %fold))
-			acc[fold] = testing.test(log, savefile, data)
+			log.info(51*'=')
+			savefile = network.train(log, data, dir=dir, id=(id %fold), do=0.75)
+			log.info(51*'=')
+			acc[fold] = network.test(log, savefile, data)
 			data.next_fold()
 		except Exception as e:
 			global err
@@ -98,7 +101,7 @@ parser.add_argument('-id', '--id',
 parser.add_argument('-o','--output',
 					type=str,
 					required=False,
-					default='./models/',
+					default='.' + os.path.sep + 'models' + os.path.sep,
 					metavar='O',
 					dest='output',
 					help="The output folder for the model files")

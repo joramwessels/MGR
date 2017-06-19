@@ -23,7 +23,8 @@ def RNN(x, weights, biases, n_hidden, n_steps):
 	outputs, states = rnn.static_rnn(lstm_cell, x, dtype=tf.float32)
 	return tf.matmul(outputs[-1], weights['out']) + biases['out']
 
-def construct_model(x, y, n_classes, n_hidden, n_steps, lr):
+def construct_model(x, y, n_classes, n_hidden, n_input, n_steps, lr):
+	x = tf.reshape(x, shape=[-1, n_input, n_steps])
 	weights = {
 		'out': tf.Variable(tf.random_normal([n_hidden, n_classes]))
 	}
@@ -40,7 +41,7 @@ def construct_model(x, y, n_classes, n_hidden, n_steps, lr):
 	return pred, cost, optimizer, accuracy, saver
 
 @trackExceptions
-def train(log, data, dir=None, id=None, md=None, lr=.001, ti=2*10^5, ds=25):
+def train(log, data, dir=None, id=None, md=None, lr=.001, ti=200000, ds=25, do=None):
 	"""Trains a 1-layer LSTM RNN
 	
 	Args:
@@ -59,6 +60,7 @@ def train(log, data, dir=None, id=None, md=None, lr=.001, ti=2*10^5, ds=25):
 	log.info(51*'=')
 	log.info('Training network: "' + dir + str(id) + '" ...')
 	log.info("Preparing parameters and network...")
+	tf.reset_default_graph()
 	
 	# Preparing parameters
 	if (md): data_size = md
@@ -68,12 +70,12 @@ def train(log, data, dir=None, id=None, md=None, lr=.001, ti=2*10^5, ds=25):
 	n_classes = data.get_n_classes()
 	n_hidden  = 1 # was 128
 	
-	x = tf.placeholder(tf.float32, [None, n_steps, n_input], name='x')
+	x = tf.placeholder(tf.float32, [None, n_input * n_steps], name='x')
 	y = tf.placeholder(tf.float32, [None, n_classes], name='y')
 	
 	# Constructing model
 	pred, cost, optimizer, accuracy, saver = construct_model(x, y, n_classes, \
-														n_hidden, n_steps, lr)
+														n_hidden, n_input, n_steps, lr)
 	init = tf.global_variables_initializer()
 	
 	log.info("Running session...")
