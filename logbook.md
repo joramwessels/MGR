@@ -304,7 +304,7 @@ __**Sa 10-06-2017**__
 
 __**Su 11-06-2017**__  
 **10:00-12:00:** Fixed the saver by calling `restore` using the returned filename. Tried to fix the lost variables by naming the accuracy, x and y tensors individually using the optional `name` argument, and referencing them by their name rather than calling `get_tensor_by_name` (which probably creates a new tensor). I removed the weights and biases from the saver constructor to solve the uninitialized tensor errors. **The network now runs without errors!!!🎉🎊🎈** (but returns extremely poor results, of course). I'll run it on *Dataset-1* during lunch.  
-**12:30-14:15:** Preprocessing 400 files only took 11 minutes, and training using 5-fold cross validation less than 2 minutes. Accuracy results are nonzero, but terrible nonetheless. A few files errored due to encoding issues, but these were handled appropriately. There is an issue with the average accuracy calculation I'll need to solve. I've added the `monitor` log option and started writing an argparse main function for easy access during evaluation.  
+**12:30-14:15:** Preprocessing ~400 files only took 11 minutes, and training using 5-fold cross validation less than 2 minutes. Accuracy results are nonzero, but terrible nonetheless. A few files errored due to encoding issues, but these were handled appropriately. There is an issue with the average accuracy calculation I'll need to solve. I've added the `monitor` log option and started writing an argparse main function for easy access during evaluation.  
 
 __**Mo 12-06-2017**__  
 **15:30-17:30** Continued working on the argparse functions.  
@@ -314,7 +314,7 @@ __**Tu 13-06-2017**__
 **13:30-18:30:** Looked into the accuracy results. Fixed some bugs with the Dataset class. Fixed the JSONDecodeError. Improved the logging format. Finished the argparse functions (but they don't completely work according to plan yet).  
 
 ## Week 10 - 🔗 Loose Ends
-### *(total: 7.5 hrs)*
+### *(total: 22 hrs)*
 __**Th 15-06-2017**__  
 **09:30-12:00** Copied an RNN implementation from a tutorial and adapted it into my system. It doesn't run yet due to a dimensionality problem.  
 **13:00-14:30** Ninth meeting. My misunderstanding of the Tensorflow dimensions has been alleviated. CNNs aren't trees, but networks (as the name suggests). We looked into the code and compared it to Rein's experience with Tensorflow. He argued the biases should be initialized as small positive floats when used in combination with ReLu activation. The final implementation will be a CNN. Next week thursday I will need to have written most of the paper, and have a network that's able to learn genres. When the CNN works, I can tweak the parameters to improve results, and when there is time I can try to replace the fully connected layer with an RNN. My backlog for coming week:  
@@ -338,5 +338,14 @@ correct_pred = tf.equal(tf.argmax(pred, 1), tf.argmax(correct_conf, 1))
 **19:00-20:00** Elaborated and updated the paragraph on preprocessing, but I got confused about the Mel spectrogram computation.  
 
 __**Fr 16-06-2017**__  
-**09:30-12:00** Looked into solutions to the multi-label problem. Apparently sigmoid can handle multi-class as well, so I adopted `tf.nn.sigmoid_cross_entropy_with_logits` as the new loss function. I fixed some simple bugs that jeopardized the entire execution. The model now classiifies with an accuracy of 35.19%, whereas the random prediction is 37.50% accuracy. The execution details can be found in [logs/FirstCNNResults.log](https://github.com/joramwessels/MGR/blob/master/logs/FirstCNNResults.log). I reinstated the dropout (0.75) and improved the accuracy with 7.24% (acc=42.43%). This trumps the random baseline by a slim margin, but still lacks expertise. The execution can be found in [logs/CNNWith75Dropout.log](https://github.com/joramwessels/MGR/blob/master/logs/CNNWith75Dropout.log). The logs of two other tests with dropout rates of 0.50 and 0.85 can be found in the same folder, but neither one improved on the first.  
-**12:30-:** 
+**09:30-12:00** Looked into solutions to the multi-label problem. Apparently sigmoid can handle multi-class as well, so I adopted `tf.nn.sigmoid_cross_entropy_with_logits` as the new loss function. I fixed some simple bugs that jeopardized the entire execution. The model now classiifies with an accuracy of 35.19%, whereas the random prediction is 37.50% accuracy. The execution details can be found in [logs/FirstCNNResults.log](https://github.com/joramwessels/MGR/blob/master/logs/FirstCNNResults.log). I reinstated the dropout and improved the accuracy with 7.24% with dropout=0.75 (acc=42.43%). This trumps the random baseline by a slim margin, but still lacks expertise. The executions can be found in [logs/DropoutCnn.log](https://github.com/joramwessels/MGR/blob/master/logs/DropoutCnn.log).  
+
+__**Sa 17-06-2017**__  
+**09:30-10:30** Futher dropout benchmarking varies in results. The testing algorithm doesn't work when calling it explicitly. This might mean that during training the testing procedure uses the last model instead of the assigned .meta file. Yesterday's baseline evaluation was wrong; 88% of the tracks only have 2 labels. That makes the baseline 12.5 * 2.22 = 27.75%. However, the proportions of the dataset matter in computing the random baseline. 211/394 tracks are labelled as house, which would therefore always be his best guess. The zero rule baseline accuracy of dataset-1 is 53.55%, above any of our results so far.  
+**13:30-17:30** Started writing the paragraph on the CNN implementation. Created a visual for the CNN explanation. Wrote the paragraph on the dataset assembly.  
+
+__**Su 18-06-2017**__  
+**09:00-11:30** I restructured the code in `cnn.py` to fit my current understanding of Tensorflow and to solve the training issue. It caused a new error, `InvalidArgumentError: You must feed a value for placeholder tensor 'x_1' with dtype float`, while training the _second_ CV fold. I added a call to `tf.reset.default.graph()` which fixed the error, but accuracy results for train- and test set are now identical for every fold. The test function already included a graph reset.  
+**13:00-14:00** Looked into Tensorflow RNN implementations.  
+**14:00-16:00** Wrote most of the paragraph on drum & bass.  
+**19:45-21:15** Finished the drum & bass part and wrote the intro to house
