@@ -314,7 +314,7 @@ __**Tu 13-06-2017**__
 **13:30-18:30:** Looked into the accuracy results. Fixed some bugs with the Dataset class. Fixed the JSONDecodeError. Improved the logging format. Finished the argparse functions (but they don't completely work according to plan yet).  
 
 ## Week 10 - 🔗 Loose Ends
-### *(total: 22 hrs)*
+### *(total: 27.5 hrs)*
 __**Th 15-06-2017**__  
 **09:30-12:00** Copied an RNN implementation from a tutorial and adapted it into my system. It doesn't run yet due to a dimensionality problem.  
 **13:00-14:30** Ninth meeting. My misunderstanding of the Tensorflow dimensions has been alleviated. CNNs aren't trees, but networks (as the name suggests). We looked into the code and compared it to Rein's experience with Tensorflow. He argued the biases should be initialized as small positive floats when used in combination with ReLu activation. The final implementation will be a CNN. Next week thursday I will need to have written most of the paper, and have a network that's able to learn genres. When the CNN works, I can tweak the parameters to improve results, and when there is time I can try to replace the fully connected layer with an RNN. My backlog for coming week:  
@@ -356,4 +356,4 @@ __**Mo 19-06-2017**__
 
 __**Tu 20-06-2017**__  
 **10:45-12:30** I wrote- and unit tested a function that determines the abstraction of labels used. On just the highest abstraction (distinguishing house from hip hop), it scored an accuracy of 81.37%! The random baseline for this task is 50% and the zero rule (0R) is equal to last tests: 53.55%. On one fold it even scored a perfect 100%. The execution can be found in [logs/AbsCNN.log](https://github.com/joramwessels/MGR/blob/master/logs/AbsCNN.log). I am now certain that this exact network will be used for the project, which means I will start explaining it thoroughly in the report, testing it with different parameters, and write about the results as well.  
-**13:00-** 
+**13:00-15:15** Tested with other abstraction levels. Also implemented a function that enables you to train on one abstraction and evaluate using another. This way, the influence of training on subgenres can be determined by abstracting to higher taxonomical levels during evaluation.  
