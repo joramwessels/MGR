@@ -189,3 +189,30 @@ Changes
 	Warhead - Monstercat 023 -> Drumstep
 	Chardonnay - Monstercat Uncaged -> House
 	Spectrum - Monstercat Uncaged -> Drumstep
+
+Hip Hop (0)
+	Chillhop (100+)
+	Trap (48) (15) 
+		Future Bass (53)
+Dubstep (47) (120)
+	Chillstep (17)
+	Brostep (65)
+
+House (79)
+	Progressive House (11)
+	Electro House (71)
+		Big Room House (9)
+		Complextro (50)
+	Deep House (0)
+		Future House (17)
+		Tropical House (5)
+Drum & Bass (32) (143)
+	Liquid Funk (15)
+	Neurofunk (6)
+Hard Dance
+	Hardstyle (7)
+	(Happy) Hardcore (13)
+Trance (0)
+	-
+Techno (0)
+	-
