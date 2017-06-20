@@ -216,3 +216,10 @@ Trance (0)
 	-
 Techno (0)
 	-
+
+Tensorflow input dimensions
+https://agray3.github.io/2016/11/29/Demystifying-Data-Input-to-TensorFlow-for-Deep-Learning.html
+
+Convinced me to use tf.nn.sigmoid_cross_entropy_with_logits
+https://medium.com/towards-data-science/multi-label-image-classification-with-inception-net-cbb2ee538e30
+	Spectrum - Monstercat Uncaged -> Drumstep

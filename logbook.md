@@ -200,7 +200,7 @@ __**We 24-05-2017**__
 
 **17:45-19:00:** I fixed the readline problem by channeling the install through `conda-forge`. Sent supervisors a ShareLaTeX invite. Increased the line spacing. I installed Tensorflow, which is apparently only available for Python 3.5 on Windows, so I hope it won't result in too many problems when porting to the DAS.
 
-## Week 7 - ⚗️ Prototype
+## Week 7 - 🐛 Debugging
 ### *(total: 23.5 hrs)*
 __**Th 25-05-2017**__  
 **9:45-11:30:** My local Anaconda installation has stopped responding after installing Tensorflow. Since I fixed `readline`, I continued on the DAS. I was unable to git push, supposedly because I cloned using https, so I switched it to SSH. I was then also unable to pull because I haven't set up my SSH keys. I'll stick to HTTPS, write my code locally, and manually copy changes I make while debugging.  
@@ -246,10 +246,10 @@ __**Mo 29-05-2017**__
 
 __**Tu 30-05-2017**__  
 **10:00-10:30** Seventh meeting. Things have turned around, and if I keep this tempo up everything will work out fine. My writing thus far was in accordance with Taco's standards. Tomorrow and the day after are reserved for writing the presentation and studying for my other exam. On Friday I will give the presentation and do the exam, which leaves little time left to do some actual work until this weekend. Nonethelss, before the end of next week I intend to
-* Finalize the assembly of the dataset (deadline: Saturday)
-* Get the CNN up and running (deadline: Tuesday)
-* Test the CNN on the dataset (deadline: Wednesday)
-* Start on the RNN implementation (deadline: Thursday)
+* ✖ Finalize the assembly of the dataset (✖ deadline: Saturday)
+* ✖ Get the CNN up and running (✖ deadline: Tuesday)
+* ✖ Test the CNN on the dataset (✖ deadline: Wednesday)
+* ✖ Start on the RNN implementation (✖ deadline: Thursday)
 
 **16:00-18:00** Finished the Electronic Music paragraph.
 
@@ -258,12 +258,105 @@ __**We 31-06-2017**__
 **10:30-12:30:** Labeled Monstercat albums.  
 **13:00-15:00:** Dennis urged me not to leave the GPU idle when reserved. Seeing as I am preoccupied with other tasks until Saturday I've terminated my reservation. This means that I won't be able to debug Tensorflow code until then. I've started preparing the presentation.  
 
-## Week 8 - 🌡️ Results
-### *(total: 2 hrs)*
+## Week 8 - ⚗️ Prototype
+### *(total: 21.5 hrs)*
 __**Fr 02-06-2017**__  
 **9:30-11:00:** Preparing- and performing presentation.  
 **16:00-16:30:** Wrote- and handed in Academic English assignment 2
 
 __**Sa 03-06-2017**__  
 **10:00-11:30:** I tried to uncover Choi's exact preprocessing parameters, which can't be the exact numbers he reported. I fetched a small testing set from the actual dataset. I won't be able to develop and debug the network on the DAS-4 anymore, so I'll have to fix my local Anaconda after all.  
-**12:30-:** Reinstalling Anaconda and enriching the dataset in the mean time.
+**12:30-14:30:** Reinstalling Anaconda and enriching the dataset in the mean time. After manually adding the python executable to the windows path I can run the interpreter in powershell (not in mingw bash). Still, `conda`, `anaconda`, and `pip` are not recognized as commands. The installer usually takes care of these things itself.  
+**14:30-16:00:** Wrote a paragraph on deep house, and half a paragraph on hip hop. Found enough sources to finish the dataset and started assembling them. I check each track by hand to see if it is labeled correctly and if it is a typical (i.e. non-ambiguous) example of the genre.
+
+__**Su 04-06-2017**__  
+**12:30-14:30:** Finished the paragraph on hip hop. Prepared paragraphs on house and dubstep.  
+
+__**Tu 06-06-2017**__  
+**10:00-10:45:** Anaconda works in the special Anaconda prompt. I installed `librosa`, `ffmpeg`, and `mutagen` using `conda install -c conda-forge`, then created a python 3.5 environment for Tensorflow, installed Tensorflow, and reinstalled the aforementioned packages in the environment. Everything finally works, but Tensorflow urges me to [activate SSE instructions](https://stackoverflow.com/questions/43134753/tensorflow-wasnt-compiled-to-use-sse-etc-instructions-but-these-are-availab), which I might do later.  
+**10:45-12:00:** Solved small bugs in `mgr_utils.py` and `preprocessing.py`, and fixed the dimension problem in the network.  
+**12:45-16:45:** Debugged the system. Ended with a json error saying that a list "is not JSON serializable".  
+
+__**We 07-06-2017**__  
+**09:45-11:45** Debugged the system. Since a bug forced me to rewrite the memory allocation code, I also started rewriting the way the allocation works to make it more resource efficient.  
+**12:30-14:30** Finished rewriting the memory allocation.  
+**19:00-20:00** Debugged the CNN up untill the last 2 lines of the network. The last bug was `Cannot feed value of shape (6,) for Tensor 'Placeholder_1:0', which has shape '(?, 10)'`. Tomorrow I will also test the `Dataset` object extensively, as it is presumably still very buggy.  
+**20:30-22:00** Checked the trap entries of the dataset while writing a paragraph on future bass.
+
+
+## Week 9 - 🌡️ Results
+### *(total: 24.75 hrs)*
+__**Th 08-06-2017**__  
+**9:30-11:30** Experimented with placeholders to try and solve the dimension bug.  
+**13:00-14:15** Eighth meeting. There appears to be something wrong with our interpretation of Choi's k2c2 network. If the layers indeed do have (20, 41, 41, 62, 83) filters each, the output would be more than 173 million variables. Rein will review the paper tomorrow, and in the meantime I will implement a simpler network of 3 conv layers and a softmax layer. The deadlines for next week:  
+* ✔ Finish dataset (Monday)
+* ✔ CNN evaluation (Tuesday)
+
+__**Fr 09-06-2017**__  
+**12:30-15:00:** Implemented the 3-layer CNN. It runs, but reports only 0.0 accuarcies. The model saving procedure still errors, so I will need to check the Tensorflow manual to learn how it works.  
+
+__**Sa 10-06-2017**__  
+**09:30-12:00:** Read some Tensorflow `Saver` tutorials and changed the code. Now that I understand Tensorflow better, I might need to restructure my network code for clarity. I got stuck on an error about restoring saved variables, and three consecutive errors about variables of the same name already being in place. I'll need to debug the saving procedure next.  
+**12:30-14:00:** Finished *Dataset-1* (4GB), which includes about 100 tracks for each Electro House, Progressive House, Chillhop and Trap. Only Electro House includes subgenres (Complextro & Big Room). All Electro House tracks and Trap tracks have been screened, the other 2 collections were tagged by reliable sources.  
+**14:00-15:00:** Looked into the saving problem. Mailed my supervisors for help.  
+**15:00-15:30:** Prepared 50 Future Bass tracks for the next dataset update.  
+**19:30-21:00:** Wrote the paragraph on dubstep.  
+
+__**Su 11-06-2017**__  
+**10:00-12:00:** Fixed the saver by calling `restore` using the returned filename. Tried to fix the lost variables by naming the accuracy, x and y tensors individually using the optional `name` argument, and referencing them by their name rather than calling `get_tensor_by_name` (which probably creates a new tensor). I removed the weights and biases from the saver constructor to solve the uninitialized tensor errors. **The network now runs without errors!!!🎉🎊🎈** (but returns extremely poor results, of course). I'll run it on *Dataset-1* during lunch.  
+**12:30-14:15:** Preprocessing ~400 files only took 11 minutes, and training using 5-fold cross validation less than 2 minutes. Accuracy results are nonzero, but terrible nonetheless. A few files errored due to encoding issues, but these were handled appropriately. There is an issue with the average accuracy calculation I'll need to solve. I've added the `monitor` log option and started writing an argparse main function for easy access during evaluation.  
+
+__**Mo 12-06-2017**__  
+**15:30-17:30** Continued working on the argparse functions.  
+**18:30-20:00** Restructured the code, and continued on the argparse functions.  
+
+__**Tu 13-06-2017**__  
+**13:30-18:30:** Looked into the accuracy results. Fixed some bugs with the Dataset class. Fixed the JSONDecodeError. Improved the logging format. Finished the argparse functions (but they don't completely work according to plan yet).  
+
+## Week 10 - 🔗 Loose Ends
+### *(total: 33 hrs)*
+__**Th 15-06-2017**__  
+**09:30-12:00** Copied an RNN implementation from a tutorial and adapted it into my system. It doesn't run yet due to a dimensionality problem.  
+**13:00-14:30** Ninth meeting. My misunderstanding of the Tensorflow dimensions has been alleviated. CNNs aren't trees, but networks (as the name suggests). We looked into the code and compared it to Rein's experience with Tensorflow. He argued the biases should be initialized as small positive floats when used in combination with ReLu activation. The final implementation will be a CNN. Next week thursday I will need to have written most of the paper, and have a network that's able to learn genres. When the CNN works, I can tweak the parameters to improve results, and when there is time I can try to replace the fully connected layer with an RNN. My backlog for coming week:  
+* Find out why the accuracy values are invalid
+	* Loss function (Softmax)?
+	* ✔ `correct_pred` adapted to multi-label targets
+	* Implement `prediction.py` to aid debugging
+* Minor problems that can't be the cause
+	* Replacing dropout
+	* Bias initalization (0.1)
+* Writing
+	* Explain tanh in LSTM paragraph
+	* Write more on Tensorflow
+	* Add RNN formuulas
+  
+**16:00-18:30** Rein informed me that `tf.nn.softmax_cross_entropy_with_logits` only works with one-hot (uni-label) targets. Sigmoid does work with multi-label-, but not with multi-class targets. I've changed the `correct_pred` computation to  
+```
+correct_conf = tf.where(tf.cast(y, tf.bool), pred, tf.zeros(tf.shape(y)))
+correct_pred = tf.equal(tf.argmax(pred, 1), tf.argmax(correct_conf, 1))
+```  
+**19:00-20:00** Elaborated and updated the paragraph on preprocessing, but I got confused about the Mel spectrogram computation.  
+
+__**Fr 16-06-2017**__  
+**09:30-12:00** Looked into solutions to the multi-label problem. Apparently sigmoid can handle multi-class as well, so I adopted `tf.nn.sigmoid_cross_entropy_with_logits` as the new loss function. I fixed some simple bugs that jeopardized the entire execution. The model now classiifies with an accuracy of 35.19%, whereas the random prediction is 37.50% accuracy. The execution details can be found in [logs/FirstCNNResults.log](https://github.com/joramwessels/MGR/blob/master/logs/FirstCNNResults.log). I reinstated the dropout and improved the accuracy with 7.24% with dropout=0.75 (acc=42.43%). This trumps the random baseline by a slim margin, but still lacks expertise. The executions can be found in [logs/DropoutCnn.log](https://github.com/joramwessels/MGR/blob/master/logs/DropoutCnn.log).  
+
+__**Sa 17-06-2017**__  
+**09:30-10:30** Futher dropout benchmarking varies in results. The testing algorithm doesn't work when calling it explicitly. This might mean that during training the testing procedure uses the last model instead of the assigned .meta file. Yesterday's baseline evaluation was wrong; 88% of the tracks only have 2 labels. That makes the baseline 12.5 * 2.22 = 27.75%. However, the proportions of the dataset matter in computing the random baseline. 211/394 tracks are labelled as house, which would therefore always be his best guess. The zero rule baseline accuracy of dataset-1 is 53.55%, above any of our results so far.  
+**13:30-17:30** Started writing the paragraph on the CNN implementation. Created a visual for the CNN explanation. Wrote the paragraph on the dataset assembly.  
+
+__**Su 18-06-2017**__  
+**09:00-11:30** I restructured the code in `cnn.py` to fit my current understanding of Tensorflow and to solve the training issue. It caused a new error, `InvalidArgumentError: You must feed a value for placeholder tensor 'x_1' with dtype float`, while training the _second_ CV fold. I added a call to `tf.reset.default.graph()` which fixed the error, but accuracy results for train- and test set are now identical for every fold. The test function already included a graph reset.  
+**13:00-14:00** Looked into Tensorflow RNN implementations.  
+**14:00-16:00** Wrote most of the paragraph on drum & bass.  
+**19:45-21:15** Finished the drum & bass part and wrote the intro to house  
+
+__**Mo 19-06-2017**__  
+**09:30-12:30** Separated the functions for accuracy, optimization and saving so that the testing procedure can now build a new model instead of loading one from storage. I have confirmed that the weights are successfully being restored. Yet, the new accuracy function freezes when called individually, and returns `None` when used in `training.py`. When training using the old testing function, it returns surprisingly acceptable accuracy scores (~50%).  
+**14:30-17:00** The saver problems are solved. It was a combination of a lot of things relating to the dataset fold, test/train sets, and Tensor reference. The accuracy is always between 40 and 50 percent.  
+
+__**Tu 20-06-2017**__  
+**10:45-12:30** I wrote- and unit tested a function that determines the abstraction of labels used. On just the highest abstraction (distinguishing house from hip hop), it scored an accuracy of 81.37%! The random baseline for this task is 50% and the zero rule (0R) is equal to last tests: 53.55%. On one fold it even scored a perfect 100%. The execution can be found in [logs/AbsCNN.log](https://github.com/joramwessels/MGR/blob/master/logs/AbsCNN.log). I am now certain that this exact network will be used for the project, which means I will start explaining it thoroughly in the report, testing it with different parameters, and write about the results as well.  
+**13:00-15:15** Tested with other abstraction levels. Also implemented a function that enables you to train on one abstraction and evaluate using another. This way, the influence of training on subgenres can be determined by abstracting to higher taxonomical levels during evaluation.  
+**18:30-20:00** Wrote about preprocessing and models. I haven't implemented all three, but I intend to and so they are relevant to the project.  
+
+__**We 21-06-2017**__  

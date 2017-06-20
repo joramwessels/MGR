@@ -2,188 +2,144 @@
 # filename:			training.py
 # author:			Joram Wessels
 # date:				11-05-2017
-# python versoin:	2.7
+# python versoin:	3.5
 # dependencies:		tensorflow
 # public functions:	train
 # description:		Reads the prepared data from a file and trains the network
 
-import sys, json, logging
+import sys, os, argparse
 import numpy as np
-import tensorflow as tf
+from dataset import Dataset
+import mgr_utils
 from mgr_utils import log
-from mgr_utils import MGRException
+from mgr_utils import log_exception
 from mgr_utils import trackExceptions
-import Choi2016		# The K2C2 Tensorflow implementation
+import testing
+import k2c2		# The (Choi, 2016) K2C2 implementation
+import cnn		# The 3-layer CNN implementation
+import rnn		# The single layer LSTM RNN implementation
+
+network_types = {'cnn':cnn, 'k2c2':k2c2, 'rnn':rnn}
 
 def main(argv):
-	train_Choi2016(argv[1], batch_size=argv[2], k=argv[3])
+	p = parser.parse_args(argv[1:])
+	if (p.msg):
+		log.info(51*'=')
+		log.info(p.msg)
+	log.info(51*'=')
+	network = network_types[p.network]
+	train(network, p.data, batch_size=p.bs, k=p.k, id=p.id, savedir=p.output, abs=p.abs, seed=p.seed)
+	log.info(51*'=' + '\n')
 
 @trackExceptions
-def train_Choi2016(filename, batch_size=50, k=1, savedir="./models/"):
-	global err
-	log.info("Started training of dataset: " + filename)
-	dataset = Dataset(filename, batch_size, k)
-	acc = k*[0.0]
-	for fold in range(1,k):
-		try:
-			dataset.new_batch_generator('train')
-			savefile = Choi2016.train(log, dataset, dir=savedir, id=1)
-			dataset.new_batch_generator('test')
-			acc[k-1] = Choi2016.test(log, dataset, savefile)
-		except Exception as e:
-			err += 1
-			log.error(str(MGRException(ex=e)))
-	log.info("=========================================")
-	log.info("=========================================")
-	log.info("Training complete. K2C2 Choi2016 network trained on the " + \
-			 filename + " dataset(" + str(len(data)) + " samples), using " + \
-			 str(k) + "-fold cross validation. " + str(err) + " error(s) " + \
-			 "were caught and logged. The average cross validated accuracy " + \
-			 "is " + np.mean(acc))
-	log.info("=========================================")
-	log.info("=========================================")
-
-class Dataset:
-	"""Handles everything surrounding the dataset
+def train(network, dataset, batch_size=1, k=1, id=None, savedir="./models/", abs='all', seed=None):
+	"""Trains a tensorflow network and tests it using k-fold cross validation
 	
 	Args:
-		filename:	The path to the preprocessed dataset
-		batch_size:	The size of each batch fed to the network
-		k:			The amount of cross validation partitions
-		seed:		If required, a random gen seed to replicate CV results
-	Attributes:
-		data:		The complete dataset as a numpy matrix
-		filename:	The path to the preprocessed dataset
-		batch_size:	The size of each batch fed to the network
-		k:			The amount of cross validation partitions
-		fold:		The current cross validation fold
-		folds:		The partitioned dataset
-		train:		The training partition of the current fold
-		test:		The testing partition of the current fold
-	Raises:
-		MGRException:	
+		network:	A module that trains a model and returns the save filename
+		dataset:	The path to the txt file containing the preprocessed dataset
+		batch_size:	The batch size used during training (defaults to stochastic)
+		k:			The amount of folds used in cross validation (defaults to 1)
+		id:			An optional name for the model to help find the files later
+		savedir:	The path to the directory in which to save all model files
+		abs:		The genre abstraction: '1', '2', '3', '<1', or 'leafs'
+		seed:		A cross validation seed to replicate the results
 	
 	"""
-	def __init__(self, filename, batch_size, k, seed=None):
-		if (not(sys.path.isfile(filename))):
-			raise MGRException(msg="File does not exist: " + str(filename))
-		if (not(type(batch_size) is int) or batch_size < 1):
-			raise MGRException(msg="Invalid batch size: " + str(batch_size))
-		if (k < 1 or not(type(k) is int)):
-			raise MGRException(msg="Invalid k value: " + str(k))
-		if (not(type(seed) is int or type(seed) is Nonetype) or seed < 1):
-			raise MGRException(msg="Invalid seed: " + str(seed))
-		self.filename = filename
-		self.batch_size = batch_size
-		self.k = k
-		self.data = self.read_from_file()
-		self.cross_validate()
-	
-	def cross_validate(self):
-		"""Divides the data into k partitions for k-fold cross validation
-		
-		If the data is not perfectly divisable by k, the last partition gets
-		the leftovers.
-		
-		Returns:
-			A closure that returns a (train, test) tuple for the given fold
-				Args:
-					fold:	The required fold (1-k)
-				Returns:
-					A tuple of train and test sets
-				Raises:
-					MGRException:	If 'fold' is invalid
-		Raises:
-			MGRException:	If 'k' is invalid
-		
-		"""
-		if (self.k > 1):
-			if (self.seed): np.random.seed(seed=seed)
-			np.random.shuffle(self.data)
-			if (len(self.data) < self.k): raise MGRException(msg="Length of data < k")
-			l = len(self.data)/self.k
-			self.folds = [(self.data[l*i-l:l*i] if i<self.k else \
-							self.data[l*i:]) for i in range(1,k+1)]
-			self.fold = 0
-			self.next_fold()
-		else:
-			self.fold = 1
-			self.train = self.data
-			self.test = self.data
-	
-	def next_fold(self):
-		"""Sets the internal data representation to the next CV fold
-		
-		Raises:
-			MGRException: If there are no more folds left
-		
-		"""
-		if (self.fold >= k): raise MGRException(msg="There is no next fold")
-		self.fold += 1
-		self.train = [e for f in (self.folds[:self.fold-1] + \
-						self.folds[self.fold:]) for e in f]
-		self.test = self.folds[self.fold-1]
-	
-	def new_batch_generator(self, mode):
-		"""Resets the batch generator using the given node
-		
-		The resulting generator in self.next_batch yields
-		(labels_batch, images_batch) tuples ready for training/testing.
-		
-		Args:
-			mode:	Either 'train' or 'test'
-		Raises:
-			MGRException: If mode is invalid
-		
-		"""
-		if (not(mode == 'train' or mode == 'test')):
-			raise MGRException(msg="Invalid data mode: " + mode)
-		def gen():
-			if (mode == 'train'): data = self.train
-			elif (mode == 'test'): data = self.test
-			for batch_id in range(0, len(data), self.batch_size):
-				labels_batch = data[batch_id : batch_id + self.batch_size][:,1]
-				images_batch = data[batch_id : batch_id + self.batch_size][:,2]
-				yield (labels_batch, images_batch.astype("float32"))
-		self.next_batch = gen
-	
-	@trackExceptions
-	def read_from_file(self):
-		"""Reads out the dataset from storage
-		
-		Returns:
-			A list of tuples with a target (str) and a spectrogram (numpy.array)
-		
-		"""
-		global err
-		file = open(self.filename, 'r')
-		data = []
-		for line in file:
-			try:
-				l = line.split(';')
-				data.append([l[0], np.array(json.loads(l[1]))])
-			except Exception as e:
-				err += 1
-				log.error(str(MGRException(ex=e)))
-		return data
-	
-	def get_train_ids(self):
-		return self.train[:,0]
-	
-	def get_train_y(self):
-		return self.train[:,1]
-	
-	def get_train_x(self):
-		return self.train[:,2]
-	
-	def get_test_ids(self):
-		return self.test[:,0]
-	
-	def get_test_y(self):
-		return self.test[:,1]
-	
-	def get_test_x(self):
-		return self.test[:,2]
+	log.info('Started training on dataset: "' + dataset + '", ' + \
+			'network=%s, batch_size=%i, k=%i, savedir="%s"' \
+			%(network.__name__, batch_size, k, savedir))
+	dir = os.path.dirname(savedir) + os.path.sep
+	if (not os.path.exists(dir)): os.mkdir(dir)
+	id = (str(id) + '-' + network.__name__ if id else network.__name__) + '-%i'
+	data = Dataset(dataset, batch_size, k, abs=abs, seed=seed)
+	acc = k*[0.0]
+	for fold in range(k):
+		try:
+			data.new_batch_generator('train')
+			log.info(51*'=')
+			savefile = network.train(log, data, dir=dir, id=(id %fold), do=0.75)
+			log.info(51*'=')
+			acc[fold] = testing.test(log, savefile, data)
+			data.next_fold()
+		except Exception as e:
+			global err
+			err += 1
+			log_exception(e)
+	log.info(51*'=')
+	log.info(17*'=' + "Training Complete" + 17*'=')
+	log.info("Network:     " + network.__name__)
+	log.info("Dataset:     " + dataset)
+	log.info("Samples:     " + str(data.get_size()))
+	log.info("Validation:  " + str(k) + "-fold cross validation")
+	log.info("Accuracy:    " + str(acc))
+	log.info("Average:     " + str(np.mean(acc)))
+	log.info(str(mgr_utils.err_total) + " error(s) caught during runtime")
+	log.info(51*'=')
+
+parser = argparse.ArgumentParser(prog="training.py",
+		description="Trains a model given a preprocessed dataset file.")
+parser.add_argument('-d','--data',
+					type=str,
+					required=True,
+					metavar='D',
+					dest='data',
+					help="The path to the preprocessed dataset txt file")
+parser.add_argument('-n','--network',
+					type=str,
+					required=True,
+					metavar='N',
+					choices=network_types,
+					dest='network',
+					help="The type of network to train")
+parser.add_argument('-id', '--id',
+					type=str,
+					required=False,
+					metavar='ID',
+					dest='id',
+					help="An identifier for the output files to help find them")
+parser.add_argument('-o','--output',
+					type=str,
+					required=False,
+					default='.' + os.path.sep + 'models' + os.path.sep,
+					metavar='O',
+					dest='output',
+					help="The output folder for the model files")
+parser.add_argument('-b','--batch-size',
+					type=int,
+					required=False,
+					default=1,
+					metavar='B',
+					dest='bs',
+					help="The standard size of each batch")
+parser.add_argument('-f','--folds',
+					type=int,
+					required=False,
+					default=1,
+					metavar='F',
+					dest='k',
+					help="The amount of folds in the k-fold cross validation")
+parser.add_argument('-s', '--seed',
+					type=int,
+					required=False,
+					metavar='S',
+					dest='seed',
+					help="A cross validation seed to replicate results")
+parser.add_argument('-t', '--abstraction',
+					type=str,
+					required=False,
+					metavar='T',
+					dest='abs',
+					help="The taxonomical abstraction for the target labels")
+parser.add_argument('-m', '--message',
+					type=str,
+					nargs='?',
+					required=False,
+					metavar='M',
+					dest='msg',
+					default=None,
+					help="A message describing the purpose of this run, \
+						  which will be logged before the program execution")
 
 if __name__ == "__main__":
 	main(sys.argv)
