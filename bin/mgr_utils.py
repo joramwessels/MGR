@@ -53,17 +53,18 @@ class MGRException(Exception):
 	
 	"""
 	def __init__(self, ex=None, msg=None, mgr_utils=False):
-		if (msg):
+		if (not(ex) and msg):
 			super(Exception, self).__init__(msg)
 			self.traceback = traceback.extract_stack()[:-1]
 		elif (ex):
+			spec = (' -- specifics: ' + str(msg) if msg else '')
 			if (type(ex) is MGRException):
-				super(Exception, self).__init__(ex.args[0])
+				super(Exception, self).__init__(ex.args[0] + spec)
 				self.traceback = ex.traceback
 			else:
 				tb = traceback.extract_tb(sys.exc_info()[2])
 				if (mgr_utils): tb = tb[1:]
-				message = str(type(ex).__name__) + ': ' + str(ex)
+				message = str(type(ex).__name__) + ': ' + str(ex) + spec
 				super(Exception, self).__init__(message)
 				self.traceback = tb
 		else:
@@ -105,11 +106,12 @@ class trackExceptions(object):
 					"while in " + self.f.__module__ + '.' + self.f.__name__)
 		return res
 
-def log_exception(e, mgr_utils=False):
+def log_exception(e, msg=None, mgr_utils=False):
 	"""Logs the exception and 
 	
 	Args:
 		e:			The exception to log
+		msg:		Specifics of the exception to show after the stacktrace
 		mgr_utils:	A flag indicating whether ex was caught by trackExceptions
 					If set to true, the error won't be added to the err count
 	
@@ -117,4 +119,4 @@ def log_exception(e, mgr_utils=False):
 	if (log_mode == 'debug'): raise e
 	global err_total
 	err_total += 1
-	log.error(str(MGRException(ex=e, mgr_utils=mgr_utils)))
+	log.error(str(MGRException(ex=e, msg=msg, mgr_utils=mgr_utils)))

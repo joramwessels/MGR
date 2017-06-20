@@ -17,10 +17,9 @@ from mgr_utils import trackExceptions
 import testing
 import k2c2		# The (Choi, 2016) K2C2 implementation
 import cnn		# The 3-layer CNN implementation
-import cnntest
 import rnn		# The single layer LSTM RNN implementation
 
-network_types = {'cnn':cnntest, 'k2c2':k2c2, 'rnn':rnn}
+network_types = {'cnn':cnn, 'k2c2':k2c2, 'rnn':rnn}
 
 def main(argv):
 	p = parser.parse_args(argv[1:])
@@ -29,11 +28,11 @@ def main(argv):
 		log.info(p.msg)
 	log.info(51*'=')
 	network = network_types[p.network]
-	train(network, p.data, batch_size=p.bs, k=p.k, id=p.id, savedir=p.output, seed=p.seed)
+	train(network, p.data, batch_size=p.bs, k=p.k, id=p.id, savedir=p.output, abs=p.abs, seed=p.seed)
 	log.info(51*'=' + '\n')
 
 @trackExceptions
-def train(network, dataset, batch_size=1, k=1, id=None, savedir="./models/", seed=None):
+def train(network, dataset, batch_size=1, k=1, id=None, savedir="./models/", abs='all', seed=None):
 	"""Trains a tensorflow network and tests it using k-fold cross validation
 	
 	Args:
@@ -43,6 +42,7 @@ def train(network, dataset, batch_size=1, k=1, id=None, savedir="./models/", see
 		k:			The amount of folds used in cross validation (defaults to 1)
 		id:			An optional name for the model to help find the files later
 		savedir:	The path to the directory in which to save all model files
+		abs:		The genre abstraction: '1', '2', '3', '<1', or 'leafs'
 		seed:		A cross validation seed to replicate the results
 	
 	"""
@@ -52,7 +52,7 @@ def train(network, dataset, batch_size=1, k=1, id=None, savedir="./models/", see
 	dir = os.path.dirname(savedir) + os.path.sep
 	if (not os.path.exists(dir)): os.mkdir(dir)
 	id = (str(id) + '-' + network.__name__ if id else network.__name__) + '-%i'
-	data = Dataset(dataset, batch_size, k, seed=seed)
+	data = Dataset(dataset, batch_size, k, abs=abs, seed=seed)
 	acc = k*[0.0]
 	for fold in range(k):
 		try:
@@ -60,7 +60,7 @@ def train(network, dataset, batch_size=1, k=1, id=None, savedir="./models/", see
 			log.info(51*'=')
 			savefile = network.train(log, data, dir=dir, id=(id %fold), do=0.75)
 			log.info(51*'=')
-			acc[fold] = network.test(log, savefile, data)
+			acc[fold] = testing.test(log, savefile, data)
 			data.next_fold()
 		except Exception as e:
 			global err
@@ -125,6 +125,12 @@ parser.add_argument('-s', '--seed',
 					metavar='S',
 					dest='seed',
 					help="A cross validation seed to replicate results")
+parser.add_argument('-t', '--abstraction',
+					type=str,
+					required=False,
+					metavar='T',
+					dest='abs',
+					help="The taxonomical abstraction for the target labels")
 parser.add_argument('-m', '--message',
 					type=str,
 					nargs='?',

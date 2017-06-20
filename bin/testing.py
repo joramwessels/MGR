@@ -12,7 +12,6 @@ import tensorflow as tf
 from dataset import Dataset
 from mgr_utils import log
 from mgr_utils import trackExceptions
-import cnntest
 
 def main(argv):
 	p = parser.parse_args(argv[1:])
@@ -20,11 +19,11 @@ def main(argv):
 		log.info(51*'=')
 		log.info(p.msg)
 	log.info(51*'=')
-	test_on_file(p.model, p.dataset)
+	test_on_file(p.model, p.dataset, abs=p.abs, seed=p.seed)
 	log.info(51*'=' + '\n')
 
 @trackExceptions
-def test_on_file(model, dataset):
+def test_on_file(model, dataset, abs='all', seed=None):
 	"""Loads the preprocessed dataset and tests the model on it
 	
 	This function assumes that the dataset was not involved in training. It also
@@ -39,8 +38,8 @@ def test_on_file(model, dataset):
 	
 	"""
 	log.info('Testing on seperate dataset: "' + dataset +'".')
-	data = Dataset(dataset, 1, 1)
-	acc = cnntest.test(log, model, data)
+	data = Dataset(dataset, 1, 2, abs=abs, seed=seed)
+	acc = test(log, model, data)
 	return acc
 
 def test(log, model, data):
@@ -64,7 +63,8 @@ def test(log, model, data):
 	saver.restore(sess, model)
 	acc = sess.run("accuracy:0", feed_dict={"x:0": data.get_test_x(),
 											"y:0": data.get_test_y(),
-											"keep_prob:0": 1.0})
+											"keep_prob:0": 1.0,
+											"learn_r:0":1.0})
 	sess.close()
 	log.info('Finished testing: "' + model + '".')
 	log.info("Acc on TEST set:  " + str(acc))
@@ -84,6 +84,18 @@ parser.add_argument('-d','--dataset',
 					metavar='D',
 					dest='dataset',
 					help="The path to the preprocessed dataset txt file")
+parser.add_argument('-s', '--seed',
+					type=int,
+					required=False,
+					metavar='S',
+					dest='seed',
+					help="A cross validation seed to replicate results")
+parser.add_argument('-t', '--abstraction',
+					type=str,
+					required=False,
+					metavar='T',
+					dest='abs',
+					help="The taxonomical abstraction for the target labels")
 parser.add_argument('-m', '--message',
 					type=str,
 					required=False,

@@ -9,8 +9,7 @@
 #
 # This network contains of 3 convolutional layers with respectively 20, 41 and
 # 41 3x3 filters. Each convolution is followed by a 2x4 maxpool. It uses zero-
-# -padding and ReLu activation. The net is followed by a single softmax layer.
-# No dropout
+# -padding and ReLu activation. The net is followed by a single sigmoid layer.
 
 import sys
 import numpy as np
@@ -19,7 +18,11 @@ from mgr_utils import log
 from mgr_utils import log_exception
 from mgr_utils import MGRException
 from mgr_utils import trackExceptions
-
+"""
+def lstm(x):
+	x, states = tf.nn.rnn_cell.LSTMCell(x, reuse=True)
+	return tf.nn.relu(x)
+"""
 def conv2d(x, F, bias, strides=1):
     x = tf.nn.conv2d(x, F, strides=[1, strides, strides, 1], padding='SAME')
     x = tf.nn.bias_add(x, bias)
@@ -29,34 +32,34 @@ def maxpool2d(x, k1=2, k2=2):
     return tf.nn.max_pool(x, ksize=[1, k1, k2, 1], strides=[1, k1, k2, 1],
                           padding='SAME')
 
-def conv_net(x, weights, biases, dropout):
+def conv_net(x, weights, biases, dropout, name='pred'):
 	x = tf.reshape(x, shape=[-1, 96, 1280, 1])
-	
+	# three 3x3 convnet layers, each followed by 2x4 maxpool layers
 	conv1 = conv2d(x, weights['wc1'], biases['bc1'])
 	conv1 = maxpool2d(conv1, k1=2, k2=4)
-	
 	conv2 = conv2d(conv1, weights['wc2'], biases['bc2'])
 	conv2 = maxpool2d(conv2, k1=2, k2=4)
-	
 	conv3 = conv2d(conv2, weights['wc3'], biases['bc3'])
 	conv3 = maxpool2d(conv3, k1=2, k2=4)
-	
+	# flattening layer
 	fc1 = tf.reshape(conv3, [-1, weights['wd1'].get_shape().as_list()[0]])
-	fc1 = tf.add(tf.matmul(fc1, weights['wd1']), biases['bd1'])
-	fc1 = tf.nn.relu(fc1)
+	# fully connected layer with relu activation
+	fc1 = tf.nn.relu(tf.add(tf.matmul(fc1, weights['wd1']), biases['bd1']))
+	# dropout temporarily disables nodes to prevent overfitting
 	fc1 = tf.nn.dropout(fc1, dropout)
-	
-	out = tf.add(tf.matmul(fc1, weights['wout']), biases['bout'], name="pred")
+	# output layer
+	out = tf.add(tf.matmul(fc1, weights['wout']), biases['bout'], name=name)
 	return out
 
-def construct_model(x, y, n_classes, keep_prob, lr):
+def prepare_variables(n_classes):
 	weights = {
-		# 3x3 conv, 1 input, 20 outputs (i.e. 20 filters)
+		# 3x3 conv, 1 input, 20 outputs
 		'wc1': tf.Variable(tf.random_normal([3, 3, 1, 20]), name='wc1'),
 		'wc2': tf.Variable(tf.random_normal([3, 3, 20, 41]), name='wc2'),
 		'wc3': tf.Variable(tf.random_normal([3, 3, 41, 41]), name='wc3'),
-		# 12x20 is the output frame dimension, 41 is the last layer's output
+		# 12x20x41 output dimension
 		'wd1': tf.Variable(tf.random_normal([12*20*41, 1024]), name='wd1'),
+		# 1024 hidden nodes
 		'wout': tf.Variable(tf.random_normal([1024, n_classes]), name='wout')
 	}
 	biases = {
@@ -66,19 +69,34 @@ def construct_model(x, y, n_classes, keep_prob, lr):
 		'bd1': tf.Variable(tf.random_normal([1024]), name='bd1'),
 		'bout': tf.Variable(tf.random_normal([n_classes]), name='bout')
 	}
-	pred = conv_net(x, weights, biases, keep_prob)
-	cost = tf.reduce_mean(\
-			tf.nn.sigmoid_cross_entropy_with_logits(logits=pred, labels=y))
-	optimizer = tf.train.AdamOptimizer(learning_rate=lr).minimize(cost)
-	#correct_pred = tf.equal(tf.argmax(pred, 1), tf.argmax(y, 1))
-	correct_conf = tf.where(tf.cast(y, tf.bool), pred, tf.zeros(tf.shape(y)))
-	correct_pred = tf.equal(tf.argmax(pred, 1), tf.argmax(correct_conf, 1))
-	accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32), name="accuracy")
-	saver = tf.train.Saver(keep_checkpoint_every_n_hours=1)
-	return pred, cost, optimizer, accuracy, saver
+	return weights, biases
+
+def construct_model(n_input, n_classes):
+	x = tf.placeholder(tf.float32, [None, n_input], name='x')
+	y = tf.placeholder(tf.float32, [None, n_classes], name='y')
+	keep_prob = tf.placeholder(tf.float32, name='keep_prob')
+	learn_r = tf.placeholder(tf.float32, name='learn_r')
+	# defining the model
+	weights, biases = prepare_variables(n_classes)
+	pred = conv_net(x, weights, biases, keep_prob, name='pred')
+	# the cost function reduces the sigmoid cross entropy error
+	cost = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=pred,
+																  labels=y),
+																  name='cost')
+	# using an Adam optimizer to minimize the cost function
+	optimizer = tf.train.AdamOptimizer(learning_rate=learn_r).minimize(cost)
+	# selecting the probabilities that ought to be highest
+	correct_prob = tf.where(tf.cast(y, tf.bool), pred, tf.zeros(tf.shape(y)))
+	# testing if the max value of this selection is equal to the original
+	corr_pred = tf.equal(tf.argmax(pred, 1), tf.argmax(correct_prob, 1))
+	# taking the mean of the resulting binary array
+	accuracy = tf.reduce_mean(tf.cast(corr_pred, tf.float32), name="accuracy")
+	vars = {v.name:v for v in (list(weights.values()) + list(biases.values()))}
+	saver = tf.train.Saver(vars)#, keep_checkpoint_every_n_hours=1)
+	return optimizer, saver, tf.get_default_graph()
 
 @trackExceptions
-def train(log, data, dir=None, id=None, md=None, lr=.001, ti=200000, ds=25, do=1.0):
+def train(log, data, dir=None, id=None, a=.001, ti=200000, ds=25, do=1.0):
 	"""Trains a 3-layer ConvNet ending in a single Softmax layer.
 	
 	Args:
@@ -86,8 +104,7 @@ def train(log, data, dir=None, id=None, md=None, lr=.001, ti=200000, ds=25, do=1
 		data:	A Dataset object handling the data
 		dir:	The directory to save the model in, if required
 		id:		The name of the model to be trained
-		md:		The maximum dataset size to test on, or inf if not given
-		lr:		Learning rate. Defaults to 0.001
+		a:		Learning rate. Defaults to 0.001
 		ti:		Training iterations. Defaults to 200,000
 		ds:		Display step. The interval at which to log the progress
 		do:		The dropout rate. Must be a float between 0 and 1. Default=1.0
@@ -95,105 +112,93 @@ def train(log, data, dir=None, id=None, md=None, lr=.001, ti=200000, ds=25, do=1
 		The path to the save file, if dir and id were given, None otherwise
 	
 	"""
-	log.info(51*'=')
 	log.info('Training network: "' + dir + str(id) + '" ...')
 	log.info("Preparing parameters and model...")
 	
 	# Preparing parameters
-	if (md): data_size = md
-	else: data_size = data.get_size()
 	tf.reset_default_graph()
 	n_input = data.get_data_dim()[0] * data.get_data_dim()[1]
 	n_classes = data.get_n_classes()
-	x = tf.placeholder(tf.float32, [None, n_input], name='x')
-	y = tf.placeholder(tf.float32, [None, n_classes], name='y')
-	keep_prob = tf.placeholder(tf.float32, name='keep_prob')
 	b_s = data.batch_size
 	
 	# Constructing model
-	prd, cst, opt, acc, sav = construct_model(x, y, n_classes, keep_prob, lr)
+	opt, sav, graph = construct_model(n_input, n_classes)
 	init = tf.global_variables_initializer()
 	
 	# Launch the graph
 	log.info("Running session...")
 	sess = tf.Session()
 	sess.run(init)
-	step = 1
-	# Keep training until reach max iterations
-	while (step * b_s < ti):
-		try:
-			ids, batch_y, batch_x = data.next_batch()
-			# Run optimization op (backprop)
-			sess.run(opt, feed_dict={x: batch_x, y: batch_y, keep_prob:do})
-			if step % ds == 0:
-				# Calculate batch loss and accuracy
-				loss, acc = sess.run([cst, acc],
-						feed_dict={x: batch_x, y: batch_y, keep_prob:1.0})
-				log.info("Iter " + str(step*b_s) + ", Minibatch " +\
-						 "Loss= {:.6f}".format(loss) + ", Training " +\
-						 "Accuracy= {:.5f}".format(acc))
-			step += 1
-		except StopIteration as si:
-			log.info("All " + str(step) + " batches were used for training.")
-			break
-		except Exception as e:
-			global err
-			err += 1
-			log_exception(e)
-			log_exception(MGRException(msg="previous exception happened " +\
-				"during training of these files: " + ' --- '.join(ids)))
+	optimize(sess, data, graph, opt, b_s, a, ti, ds, do)
 	log.info("Optimization Finished.")
 	
 	# Calculate accuracy for all test images
 	log.info("Testing accuracy on training set: ")
-	accuracy = sess.run(acc, feed_dict={x: data.get_test_x()[:data_size],
-										y: data.get_test_y()[:data_size],
-										keep_prob: 1.0})
-	log.info("Acc on TRAIN set: " + str(accuracy))
+	score = accuracy(sess, graph, data.get_train_x(), data.get_train_y())
+	log.info("Acc on TRAIN set: " + str(score))
+	
 	# Save the variables to storage
-	if dir and id:
-		save_path = sav.save(sess, dir + str(id))
-		log.info("Model saved in file: %s" % save_path)
-		return save_path
+	if dir and id: return save(sess, sav, dir + str(id))
 	sess.close()
 	return
-'''
-def test(log, data, filename):
-	"""Loads and tests a model on the given cross validated dataset.
-	
-	Args:
-		log:		A logger object to track the progress
-		filename:	The path to the file with the model
-		data:		The Dataset object with the test set test on
-	Returns:
-		The accuracy of the cross validated test
-	
-	"""
-	log.info('Testing CNN "' + filename + '" ...')
-	sess = tf.Session()
+
+def optimize(sess, data, graph, opt, b_s, a, ti, ds, do):
+	x = graph.get_tensor_by_name('x:0')
+	y = graph.get_tensor_by_name('y:0')
+	kp = graph.get_tensor_by_name('keep_prob:0')
+	lr = graph.get_tensor_by_name('learn_r:0')
+	step = 1
+	data_left = True
+	# Keep training until reach max iterations
+	while (step * b_s < ti and data_left):
+		try:
+			ids, batch_y, batch_x = data.next_batch()
+			sess.run(opt, feed_dict={x: batch_x, y: batch_y, kp: do, lr: a})
+			if step % ds == 0:
+				score = accuracy(sess, graph, data.get_test_x(), data.get_test_y())
+				log.info("Iter %i: TRAIN acc = %.5f" %((step*b_s), score))
+			step += 1
+		except StopIteration:
+			log.info("All " + str(step) + " batches were used for training.")
+			data_left = False
+		except Exception as e:
+			global err
+			err += 1
+			try:
+				log_exception(e, msg="previous exception happened " +\
+				"during training of these files: " + ' --- '.join(ids))
+			except:
+				log_exception(e)
+	return
+
+def accuracy(sess, graph, xfeed, yfeed):
+	x = graph.get_tensor_by_name('x:0')
+	y = graph.get_tensor_by_name('y:0')
+	kp = graph.get_tensor_by_name('keep_prob:0')
+	lr = graph.get_tensor_by_name('learn_r:0')
+	acc = graph.get_tensor_by_name('accuracy:0')
+	feed_dict = {x: xfeed, y: yfeed, kp: 1.0, lr: 1.0}
+	score = sess.run(acc, feed_dict=feed_dict)
+	return score
+
+def save(sess, sav, filename):
+	savefile = sav.save(sess, filename)
+	log.info("Model saved in file: %s" % savefile)
+	return savefile
+
+"""
+def test(log, savefile, data):
+	log.info('Testing network:  "' + str(savefile) + '" ...')
 	tf.reset_default_graph()
-	saver = tf.train.import_meta_graph(filename + '.meta')
-	saver.restore(sess, filename)#tf.train.latest_checkpoint('./'))
-	graph = tf.get_default_graph()
-	#print([t.name for t in graph.as_graph_def().node])
-	"""weights = {
-		'wc1': graph.get_tensor_by_name("wc1:0"),
-		'wc2': graph.get_tensor_by_name("wc2:0"),
-		'wc3': graph.get_tensor_by_name("wc3:0"),
-		'wd1': graph.get_tensor_by_name("wd1:0"),
-		'wout': graph.get_tensor_by_name("wout:0"),
-	}
-	biases = {
-		'bc1': graph.get_tensor_by_name("bc1:0"),
-		'bc2': graph.get_tensor_by_name("bc2:0"),
-		'bc3': graph.get_tensor_by_name("bc3:0"),
-		'bd1': graph.get_tensor_by_name("bd1:0"),
-		'bout': graph.get_tensor_by_name("bout:0"),
-	}"""
-	#x = graph.get_tensor_by_name("x:0")
-	#y = graph.get_tensor_by_name("y:0")
-	#accuracy = graph.get_tensor_by_name("accuracy:0")
-	acc = sess.run("accuracy:0", feed_dict={"x:0": data.get_test_x(),
-										"y:0": data.get_test_y()})
-	log.info("The accuracy of " + filename + " on the TEST set: " + str(acc))
-	return acc'''
+	#n_input = data.get_data_dim()[0] * data.get_data_dim()[1]
+	#n_classes = data.get_n_classes()
+	#opt, sav, graph = construct_model(n_input, n_classes)
+	with tf.Session() as sess:
+		sav = tf.train.import_meta_graph(savefile + '.meta')
+		sav.restore(sess, savefile)
+		graph = tf.get_default_graph()
+		score = accuracy(sess, graph, data.get_test_x(), data.get_test_y())
+	log.info('Finished testing: "' + savefile + '".')
+	log.info("Acc on TEST set:  " + str(score))
+	return score
+"""

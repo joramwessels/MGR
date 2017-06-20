@@ -20,6 +20,7 @@ class Dataset:
 		filename:	The path to the preprocessed dataset
 		batch_size:	The size of each batch fed to the network
 		k:			The amount of cross validation partitions
+		abs:		The genre abstraction: '1', '2', '3', '<1', or 'leafs'
 		seed:		If required, a random gen seed to replicate CV results
 	Attributes:
 		data:		The complete dataset as a list of (label, np.matrix) tuples
@@ -37,7 +38,7 @@ class Dataset:
 		MGRException:	
 	
 	"""
-	def __init__(self, filename, batch_size, k, seed=None):
+	def __init__(self, filename, batch_size, k, abs='all', seed=None):
 		log.info('Preparing dataset: "' + str(filename) + '" ...')
 		if (not(os.path.isfile(filename))):
 			raise MGRException(msg="File does not exist: " + str(filename))
@@ -52,7 +53,7 @@ class Dataset:
 		self.decoder = {}
 		self.dec_iter = 0
 		self.k = k
-		self.data = read_from_file(self)
+		self.data = read_from_file(self, abs=abs)
 		if (seed): np.random.seed(seed=seed)
 		np.random.shuffle(self.data)
 		self.cross_validate()
@@ -229,26 +230,89 @@ class Dataset:
 							dtype=np.float32)
 
 @trackExceptions
-def read_from_file(dataset):
+def read_from_file(dataset, abs='all'):
 	"""Reads out the dataset from storage
 	
 	Args:
 		dataset:	The Dataset object that will manage the data
+		abs:		The taxonomical abstraction of genres used. default='all'
 	Returns:
 		A list of tuples with a target (str) and a spectrogram (numpy.array)
 	
 	"""
-	#global err
 	file = open(dataset.filename, 'r')
 	data = []
 	for line in file:
 		l = line.strip().split(';')
 		if (len(l) == 3):
 			try:
-				targets = [dataset.encode_label(c) for c in l[1].split('/')]
+				targets = resolve_targets(dataset, l[1].split('/')[0], abs)
 				data.append([l[0], targets, json.loads(l[2])])
 			except Exception as e:
 				global err
 				err += 1
-				log_exception(e)
+				try:
+					log_exception(e, msg='File=' + l[0])
+				except:
+					log_exception(e)
 	return data
+
+def resolve_targets(dataset, tags, abs):
+	"""Prepares the right level of taxonomical abstraction for the target(s)
+	
+	Args:
+		dataset:	The Dataset object that will manage the data
+		tags:		The genre found in the ID3 'TCON' frame
+		abs:		The taxonomical abstraction of genres used. This can by any
+					of: '1', '2', '3', '<1', or 'leafs'. default='all'
+	
+	Returns:
+		A list of encoded target variables
+	"""
+	targets_used = []
+	t = tags
+	if (abs == 'all'):
+		while (not t == None):
+			targets_used.append(t)
+			t = parent_of[t]
+	elif (abs == '1'):
+		targets_used = [t]
+		while (not t == None):
+			targets_used[0] = t
+			t = parent_of[t]
+	elif (abs == '2'):
+		targets_used = [t, t]
+		if (parent_of[t] == None):
+			raise MGRException(msg="Abstraction of target higher than %s" %abs)
+		while (not t == None):
+			targets_used[0] = targets_used[1]
+			targets_used[1] = t
+			t = parent_of[t]
+		targets_used.pop()
+	elif (abs == '3'):
+		targets_used = [t, t, t]
+		if (parent_of[t] == None or parent_of[parent_of[t]] == None):
+			raise MGRException(msg="Abstraction of target higher than %s" %abs)
+		while (not t == None):
+			targets_used[0] = targets_used[1]
+			targets_used[1] = targets_used[2]
+			targets_used[2] = t
+			t = parent_of[t]
+		targets_used.pop()
+		targets_used.pop()
+	elif (abs == 'leafs'):
+		targets_used = [t]
+	elif (abs == '<1'):
+		if (parent_of[t] == None):
+			raise MGRException(msg="Abstraction of target higher than %s" %abs)
+		while (not t == None):
+			targets_used.append(t)
+			t = parent_of[t]
+		targets_used.pop()
+	return [dataset.encode_label(t) for t in targets_used]
+
+parent_of = {'Future Bass':'Trap', 'Trap':'Hip Hop', 'Chillhop':'Hip Hop',
+			 'Complextro':'Electro House', 'Big Room House':'Electro House',
+			 'Electro House':'House', 'Progressive House':'House',
+			 'Tropical House':'Deep House', 'Future House':'Deep House',
+			 'Deep House':'House', 'Hip Hop':None, 'House':None}
