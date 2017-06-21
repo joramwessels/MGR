@@ -314,7 +314,7 @@ __**Tu 13-06-2017**__
 **13:30-18:30:** Looked into the accuracy results. Fixed some bugs with the Dataset class. Fixed the JSONDecodeError. Improved the logging format. Finished the argparse functions (but they don't completely work according to plan yet).  
 
 ## Week 10 - 🔗 Loose Ends
-### *(total: 33 hrs)*
+### *(total: 38.5 hrs)*
 __**Th 15-06-2017**__  
 **09:30-12:00** Copied an RNN implementation from a tutorial and adapted it into my system. It doesn't run yet due to a dimensionality problem.  
 **13:00-14:30** Ninth meeting. My misunderstanding of the Tensorflow dimensions has been alleviated. CNNs aren't trees, but networks (as the name suggests). We looked into the code and compared it to Rein's experience with Tensorflow. He argued the biases should be initialized as small positive floats when used in combination with ReLu activation. The final implementation will be a CNN. Next week thursday I will need to have written most of the paper, and have a network that's able to learn genres. When the CNN works, I can tweak the parameters to improve results, and when there is time I can try to replace the fully connected layer with an RNN. My backlog for coming week:  
@@ -362,4 +362,9 @@ __**Tu 20-06-2017**__
 __**We 21-06-2017**__  
 **10:30-12:00** Debugged the evaluation abstraction function.  
 **12:30-14:30** Finished `Dataset-2` (1351 tracks, 12.4 GB) contiaining 100 Chillhop, 70 D&B, 100 Dubstep, 109 Electro House, 122 Future Bass, 129 Future House, 226 Happy Hardcore, 120 Hardstyle, 100 Liquid Funk, 100 Neurofunk, 100 Progressive House, and 75 Trap tracks.  
+**17:30-19:30** Added dataset-1 to the appendix, and started implementing the k2c2 network.  
 
+## Week 11 - 📥 Handing In
+### *(total: 0 hrs)*
+__**Th 22-06-2017**__  
+**13:00-** Tenth meeting
