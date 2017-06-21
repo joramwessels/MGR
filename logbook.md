@@ -361,4 +361,5 @@ __**Tu 20-06-2017**__
 
 __**We 21-06-2017**__  
 **10:30-12:00** Debugged the evaluation abstraction function.  
-**12:30-14:30** 
+**12:30-14:30** Finished `Dataset-2` (1351 tracks, 12.4 GB) contiaining 100 Chillhop, 70 D&B, 100 Dubstep, 109 Electro House, 122 Future Bass, 129 Future House, 226 Happy Hardcore, 120 Hardstyle, 100 Liquid Funk, 100 Neurofunk, 100 Progressive House, and 75 Trap tracks.  
+
