@@ -10,8 +10,7 @@
 	* influence of training on subgenres (train on abs=2 or abs=3, test on abs=1), requires more genres
 
 ## writing
-	* rationale for chillhop
-	* house
+	* finish paragraph on house
 	* elaborate RNN background
 		* tanh
 		* formulas
