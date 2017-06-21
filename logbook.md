@@ -360,3 +360,5 @@ __**Tu 20-06-2017**__
 **18:30-20:00** Wrote about preprocessing and models. I haven't implemented all three, but I intend to and so they are relevant to the project.  
 
 __**We 21-06-2017**__  
+**10:30-12:00** Debugged the evaluation abstraction function.  
+**12:30-14:30** 
