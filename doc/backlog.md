@@ -44,18 +44,3 @@
 		* answer research question and hypothesis
 	* write future work
 		* learning separately on music aspects (rhythm, chord progression, melody)
-
-## dataset
-	* 100 tropical house tracks
-	* split drum & bass tracks into liquid and neuro
-	* 48+ future bass tracks
-	* 48+ complextro
-	
-	dataset-2 (600-800 files in addition to 400 of dataset-1, 1000+ total (goal))  
-		+ 3 - future bass (42, 48 more needed)  
-		+ 2 - hardstyle (120) - not checked  
-		+ 2 - happy hardcore (240) - not checked  
-		+ 1 - dubstep (94) <- just dubstep  
-		+ 1 - drum & bass (195, 174 to split into liquid or neuro)  
-		+ 3 - future house (29) (100) - not checked  
-		+ 3 - tropical house (0, 100 more needed)  
