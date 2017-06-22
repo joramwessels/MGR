@@ -1,5 +1,6 @@
 2017-06-20 12:17:08.285: INFO: training.main: ===================================================
 2017-06-20 12:17:08.286: INFO: training.main: Training on highest abstraction - House vs Hip Hop
+2017-06-20 12:17:08.286: INFO: training.main: Random baseline = 50%, 0R = 53.55%
 2017-06-20 12:17:08.287: INFO: training.main: ===================================================
 2017-06-20 12:17:08.288: INFO: training.train: Started training on dataset: "dataset-1.txt", network=cnn, batch_size=40, k=5, savedir=".\models\"
 2017-06-20 12:17:08.288: INFO: dataset.__init__: Preparing dataset: "dataset-1.txt" ...
@@ -84,3 +85,268 @@
 2017-06-20 12:20:31.944: INFO: training.train: 0 error(s) caught during runtime
 2017-06-20 12:20:31.945: INFO: training.train: ===================================================
 2017-06-20 12:20:32.406: INFO: training.main: ===================================================
+
+2017-06-20 13:02:43.855: INFO: training.main: ===================================================
+2017-06-20 13:02:43.856: INFO: training.main: Training on second abstraction - electro house, progressive house, chillhop and trap
+2017-06-20 13:02:43.856: INFO: training.main: Random baseline = 25%, 0R = 27.66%
+2017-06-20 13:02:43.857: INFO: training.main: ===================================================
+2017-06-20 13:02:43.858: INFO: training.train: Started training on dataset: "dataset-1.txt", network=cnn, batch_size=40, k=5, savedir=".\models\"
+2017-06-20 13:02:43.859: INFO: dataset.__init__: Preparing dataset: "dataset-1.txt" ...
+2017-06-20 13:03:18.429: INFO: training.train: ===================================================
+2017-06-20 13:03:18.429: INFO: cnn.train: Training network: ".\models\cnn-0" ...
+2017-06-20 13:03:18.430: INFO: cnn.train: Preparing parameters and model...
+2017-06-20 13:03:19.530: INFO: cnn.train: Running session...
+2017-06-20 13:03:38.611: INFO: cnn.optimize: All 9 batches were used for training.
+2017-06-20 13:03:38.617: INFO: cnn.train: Optimization Finished.
+2017-06-20 13:03:38.617: INFO: cnn.train: Testing accuracy on training set: 
+2017-06-20 13:04:26.339: INFO: cnn.train: Acc on TRAIN set: 0.183333
+2017-06-20 13:04:38.703: INFO: cnn.save: Model saved in file: .\models\cnn-0
+2017-06-20 13:04:38.855: INFO: training.train: ===================================================
+2017-06-20 13:04:38.872: INFO: testing.test: Testing network:  ".\models\cnn-0" ...
+2017-06-20 13:04:41.631: INFO: saver.restore: Restoring parameters from .\models\cnn-0
+2017-06-20 13:04:49.094: INFO: testing.test: Finished testing: ".\models\cnn-0".
+2017-06-20 13:04:49.095: INFO: testing.test: Acc on TEST set:  0.135135
+2017-06-20 13:04:49.167: INFO: training.train: ===================================================
+2017-06-20 13:04:49.168: INFO: cnn.train: Training network: ".\models\cnn-1" ...
+2017-06-20 13:04:49.169: INFO: cnn.train: Preparing parameters and model...
+2017-06-20 13:04:50.056: INFO: cnn.train: Running session...
+2017-06-20 13:05:09.087: INFO: cnn.optimize: All 9 batches were used for training.
+2017-06-20 13:05:09.091: INFO: cnn.train: Optimization Finished.
+2017-06-20 13:05:09.092: INFO: cnn.train: Testing accuracy on training set: 
+2017-06-20 13:05:16.988: INFO: cnn.train: Acc on TRAIN set: 0.943333
+2017-06-20 13:05:19.593: INFO: cnn.save: Model saved in file: .\models\cnn-1
+2017-06-20 13:05:19.628: INFO: training.train: ===================================================
+2017-06-20 13:05:19.628: INFO: testing.test: Testing network:  ".\models\cnn-1" ...
+2017-06-20 13:05:20.862: INFO: saver.restore: Restoring parameters from .\models\cnn-1
+2017-06-20 13:05:23.341: INFO: testing.test: Finished testing: ".\models\cnn-1".
+2017-06-20 13:05:23.341: INFO: testing.test: Acc on TEST set:  0.932432
+2017-06-20 13:05:23.347: INFO: training.train: ===================================================
+2017-06-20 13:05:23.348: INFO: cnn.train: Training network: ".\models\cnn-2" ...
+2017-06-20 13:05:23.348: INFO: cnn.train: Preparing parameters and model...
+2017-06-20 13:05:24.344: INFO: cnn.train: Running session...
+2017-06-20 13:05:43.004: INFO: cnn.optimize: All 9 batches were used for training.
+2017-06-20 13:05:43.008: INFO: cnn.train: Optimization Finished.
+2017-06-20 13:05:43.008: INFO: cnn.train: Testing accuracy on training set: 
+2017-06-20 13:05:51.343: INFO: cnn.train: Acc on TRAIN set: 0.31
+2017-06-20 13:05:55.814: INFO: cnn.save: Model saved in file: .\models\cnn-2
+2017-06-20 13:05:55.843: INFO: training.train: ===================================================
+2017-06-20 13:05:55.843: INFO: testing.test: Testing network:  ".\models\cnn-2" ...
+2017-06-20 13:05:56.701: INFO: saver.restore: Restoring parameters from .\models\cnn-2
+2017-06-20 13:05:59.147: INFO: testing.test: Finished testing: ".\models\cnn-2".
+2017-06-20 13:05:59.148: INFO: testing.test: Acc on TEST set:  0.27027
+2017-06-20 13:05:59.154: INFO: training.train: ===================================================
+2017-06-20 13:05:59.154: INFO: cnn.train: Training network: ".\models\cnn-3" ...
+2017-06-20 13:05:59.154: INFO: cnn.train: Preparing parameters and model...
+2017-06-20 13:05:59.774: INFO: cnn.train: Running session...
+2017-06-20 13:06:18.154: INFO: cnn.optimize: All 9 batches were used for training.
+2017-06-20 13:06:18.182: INFO: cnn.train: Optimization Finished.
+2017-06-20 13:06:18.182: INFO: cnn.train: Testing accuracy on training set: 
+2017-06-20 13:06:26.190: INFO: cnn.train: Acc on TRAIN set: 0.763333
+2017-06-20 13:06:27.991: INFO: cnn.save: Model saved in file: .\models\cnn-3
+2017-06-20 13:06:28.030: INFO: training.train: ===================================================
+2017-06-20 13:06:28.030: INFO: testing.test: Testing network:  ".\models\cnn-3" ...
+2017-06-20 13:06:29.268: INFO: saver.restore: Restoring parameters from .\models\cnn-3
+2017-06-20 13:06:31.407: INFO: testing.test: Finished testing: ".\models\cnn-3".
+2017-06-20 13:06:31.407: INFO: testing.test: Acc on TEST set:  0.716216
+2017-06-20 13:06:31.414: INFO: training.train: ===================================================
+2017-06-20 13:06:31.414: INFO: cnn.train: Training network: ".\models\cnn-4" ...
+2017-06-20 13:06:31.414: INFO: cnn.train: Preparing parameters and model...
+2017-06-20 13:06:32.040: INFO: cnn.train: Running session...
+2017-06-20 13:06:51.287: INFO: cnn.optimize: All 9 batches were used for training.
+2017-06-20 13:06:51.290: INFO: cnn.train: Optimization Finished.
+2017-06-20 13:06:51.291: INFO: cnn.train: Testing accuracy on training set: 
+2017-06-20 13:06:59.352: INFO: cnn.train: Acc on TRAIN set: 0.581081
+2017-06-20 13:07:00.751: INFO: cnn.save: Model saved in file: .\models\cnn-4
+2017-06-20 13:07:00.821: INFO: training.train: ===================================================
+2017-06-20 13:07:00.821: INFO: testing.test: Testing network:  ".\models\cnn-4" ...
+2017-06-20 13:07:02.140: INFO: saver.restore: Restoring parameters from .\models\cnn-4
+2017-06-20 13:07:04.459: INFO: testing.test: Finished testing: ".\models\cnn-4".
+2017-06-20 13:07:04.459: INFO: testing.test: Acc on TEST set:  0.435897
+2017-06-20 13:07:04.465: INFO: training.train: ===================================================
+2017-06-20 13:07:04.465: INFO: training.train: =================Training Complete=================
+2017-06-20 13:07:04.465: INFO: training.train: Network:     cnn
+2017-06-20 13:07:04.466: INFO: training.train: Dataset:     dataset-1.txt
+2017-06-20 13:07:04.466: INFO: training.train: Samples:     374
+2017-06-20 13:07:04.466: INFO: training.train: Validation:  5-fold cross validation
+2017-06-20 13:07:04.510: INFO: training.train: Accuracy:    [0.13513513, 0.93243241, 0.27027026, 0.71621621, 0.43589744]
+2017-06-20 13:07:04.577: INFO: training.train: Average:     0.49799
+2017-06-20 13:07:04.578: INFO: training.train: 0 error(s) caught during runtime
+2017-06-20 13:07:04.579: INFO: training.train: ===================================================
+2017-06-20 13:07:05.084: INFO: training.main: ===================================================
+
+2017-06-20 13:13:01.416: INFO: training.main: ===================================================
+2017-06-20 13:13:01.417: INFO: training.main: Training only on leafs - trap, chillhop, electro house, complextro, big room house, progressive house
+2017-06-20 13:13:01.417: INFO: training.main: Random baseline = 16.66%, 0R = 26.40%
+2017-06-20 13:13:01.417: INFO: training.main: ===================================================
+2017-06-20 13:13:01.418: INFO: training.train: Started training on dataset: "dataset-1.txt", network=cnn, batch_size=40, k=5, savedir=".\models\"
+2017-06-20 13:13:01.418: INFO: dataset.__init__: Preparing dataset: "dataset-1.txt" ...
+2017-06-20 13:13:36.867: INFO: training.train: ===================================================
+2017-06-20 13:13:36.867: INFO: cnn.train: Training network: ".\models\cnn-0" ...
+2017-06-20 13:13:36.869: INFO: cnn.train: Preparing parameters and model...
+2017-06-20 13:13:37.922: INFO: cnn.train: Running session...
+2017-06-20 13:13:56.942: INFO: cnn.optimize: All 9 batches were used for training.
+2017-06-20 13:13:56.995: INFO: cnn.train: Optimization Finished.
+2017-06-20 13:13:56.996: INFO: cnn.train: Testing accuracy on training set: 
+2017-06-20 13:14:05.738: INFO: cnn.train: Acc on TRAIN set: 0.616667
+2017-06-20 13:14:08.199: INFO: cnn.save: Model saved in file: .\models\cnn-0
+2017-06-20 13:14:08.265: INFO: training.train: ===================================================
+2017-06-20 13:14:08.265: INFO: testing.test: Testing network:  ".\models\cnn-0" ...
+2017-06-20 13:14:09.485: INFO: saver.restore: Restoring parameters from .\models\cnn-0
+2017-06-20 13:14:11.791: INFO: testing.test: Finished testing: ".\models\cnn-0".
+2017-06-20 13:14:11.792: INFO: testing.test: Acc on TEST set:  0.513514
+2017-06-20 13:14:11.801: INFO: training.train: ===================================================
+2017-06-20 13:14:11.801: INFO: cnn.train: Training network: ".\models\cnn-1" ...
+2017-06-20 13:14:11.801: INFO: cnn.train: Preparing parameters and model...
+2017-06-20 13:14:12.397: INFO: cnn.train: Running session...
+2017-06-20 13:14:30.663: INFO: cnn.optimize: All 9 batches were used for training.
+2017-06-20 13:14:30.666: INFO: cnn.train: Optimization Finished.
+2017-06-20 13:14:30.667: INFO: cnn.train: Testing accuracy on training set: 
+2017-06-20 13:14:39.161: INFO: cnn.train: Acc on TRAIN set: 0.283333
+2017-06-20 13:14:40.774: INFO: cnn.save: Model saved in file: .\models\cnn-1
+2017-06-20 13:14:40.800: INFO: training.train: ===================================================
+2017-06-20 13:14:40.800: INFO: testing.test: Testing network:  ".\models\cnn-1" ...
+2017-06-20 13:14:42.038: INFO: saver.restore: Restoring parameters from .\models\cnn-1
+2017-06-20 13:14:44.126: INFO: testing.test: Finished testing: ".\models\cnn-1".
+2017-06-20 13:14:44.127: INFO: testing.test: Acc on TEST set:  0.310811
+2017-06-20 13:14:44.134: INFO: training.train: ===================================================
+2017-06-20 13:14:44.134: INFO: cnn.train: Training network: ".\models\cnn-2" ...
+2017-06-20 13:14:44.146: INFO: cnn.train: Preparing parameters and model...
+2017-06-20 13:14:45.145: INFO: cnn.train: Running session...
+2017-06-20 13:15:04.242: INFO: cnn.optimize: All 9 batches were used for training.
+2017-06-20 13:15:04.246: INFO: cnn.train: Optimization Finished.
+2017-06-20 13:15:04.246: INFO: cnn.train: Testing accuracy on training set: 
+2017-06-20 13:15:12.900: INFO: cnn.train: Acc on TRAIN set: 0.116667
+2017-06-20 13:15:15.057: INFO: cnn.save: Model saved in file: .\models\cnn-2
+2017-06-20 13:15:15.075: INFO: training.train: ===================================================
+2017-06-20 13:15:15.075: INFO: testing.test: Testing network:  ".\models\cnn-2" ...
+2017-06-20 13:15:15.918: INFO: saver.restore: Restoring parameters from .\models\cnn-2
+2017-06-20 13:15:18.421: INFO: testing.test: Finished testing: ".\models\cnn-2".
+2017-06-20 13:15:18.421: INFO: testing.test: Acc on TEST set:  0.0810811
+2017-06-20 13:15:18.428: INFO: training.train: ===================================================
+2017-06-20 13:15:18.428: INFO: cnn.train: Training network: ".\models\cnn-3" ...
+2017-06-20 13:15:18.428: INFO: cnn.train: Preparing parameters and model...
+2017-06-20 13:15:19.038: INFO: cnn.train: Running session...
+2017-06-20 13:15:38.420: INFO: cnn.optimize: All 9 batches were used for training.
+2017-06-20 13:15:38.422: INFO: cnn.train: Optimization Finished.
+2017-06-20 13:15:38.422: INFO: cnn.train: Testing accuracy on training set: 
+2017-06-20 13:15:46.970: INFO: cnn.train: Acc on TRAIN set: 0.433333
+2017-06-20 13:15:49.271: INFO: cnn.save: Model saved in file: .\models\cnn-3
+2017-06-20 13:15:49.305: INFO: training.train: ===================================================
+2017-06-20 13:15:49.306: INFO: testing.test: Testing network:  ".\models\cnn-3" ...
+2017-06-20 13:15:50.560: INFO: saver.restore: Restoring parameters from .\models\cnn-3
+2017-06-20 13:15:52.765: INFO: testing.test: Finished testing: ".\models\cnn-3".
+2017-06-20 13:15:52.765: INFO: testing.test: Acc on TEST set:  0.540541
+2017-06-20 13:15:52.772: INFO: training.train: ===================================================
+2017-06-20 13:15:52.788: INFO: cnn.train: Training network: ".\models\cnn-4" ...
+2017-06-20 13:15:52.789: INFO: cnn.train: Preparing parameters and model...
+2017-06-20 13:15:53.386: INFO: cnn.train: Running session...
+2017-06-20 13:16:13.081: INFO: cnn.optimize: All 9 batches were used for training.
+2017-06-20 13:16:13.085: INFO: cnn.train: Optimization Finished.
+2017-06-20 13:16:13.105: INFO: cnn.train: Testing accuracy on training set: 
+2017-06-20 13:16:22.073: INFO: cnn.train: Acc on TRAIN set: 0.138514
+2017-06-20 13:16:24.624: INFO: cnn.save: Model saved in file: .\models\cnn-4
+2017-06-20 13:16:24.645: INFO: training.train: ===================================================
+2017-06-20 13:16:24.646: INFO: testing.test: Testing network:  ".\models\cnn-4" ...
+2017-06-20 13:16:25.977: INFO: saver.restore: Restoring parameters from .\models\cnn-4
+2017-06-20 13:16:28.235: INFO: testing.test: Finished testing: ".\models\cnn-4".
+2017-06-20 13:16:28.235: INFO: testing.test: Acc on TEST set:  0.166667
+2017-06-20 13:16:28.242: INFO: training.train: ===================================================
+2017-06-20 13:16:28.243: INFO: training.train: =================Training Complete=================
+2017-06-20 13:16:28.243: INFO: training.train: Network:     cnn
+2017-06-20 13:16:28.243: INFO: training.train: Dataset:     dataset-1.txt
+2017-06-20 13:16:28.243: INFO: training.train: Samples:     374
+2017-06-20 13:16:28.243: INFO: training.train: Validation:  5-fold cross validation
+2017-06-20 13:16:28.267: INFO: training.train: Accuracy:    [0.51351351, 0.3108108, 0.081081077, 0.54054052, 0.16666667]
+2017-06-20 13:16:28.306: INFO: training.train: Average:     0.322523
+2017-06-20 13:16:28.306: INFO: training.train: 0 error(s) caught during runtime
+2017-06-20 13:16:28.307: INFO: training.train: ===================================================
+2017-06-20 13:16:28.797: INFO: training.main: ===================================================
+
+2017-06-20 13:27:05.757: INFO: training.main: ===================================================
+2017-06-20 13:27:05.758: INFO: training.main: Training on both the 2nd and 3rd abstraction
+2017-06-20 13:27:05.758: INFO: training.main: Random baseline = 1.22 * 16.66% = 20.33%, 0R = 27.66
+2017-06-20 13:27:05.758: INFO: training.main: ===================================================
+2017-06-20 13:27:05.759: INFO: training.train: Started training on dataset: "dataset-1.txt", network=cnn, batch_size=40, k=5, savedir=".\models\"
+2017-06-20 13:27:05.759: INFO: dataset.__init__: Preparing dataset: "dataset-1.txt" ...
+2017-06-20 13:27:40.518: INFO: training.train: ===================================================
+2017-06-20 13:27:40.518: INFO: cnn.train: Training network: ".\models\cnn-0" ...
+2017-06-20 13:27:40.519: INFO: cnn.train: Preparing parameters and model...
+2017-06-20 13:27:41.604: INFO: cnn.train: Running session...
+2017-06-20 13:28:00.266: INFO: cnn.optimize: All 9 batches were used for training.
+2017-06-20 13:28:00.268: INFO: cnn.train: Optimization Finished.
+2017-06-20 13:28:00.269: INFO: cnn.train: Testing accuracy on training set: 
+2017-06-20 13:28:08.737: INFO: cnn.train: Acc on TRAIN set: 0.0233333
+2017-06-20 13:28:12.232: INFO: cnn.save: Model saved in file: .\models\cnn-0
+2017-06-20 13:28:12.345: INFO: training.train: ===================================================
+2017-06-20 13:28:12.346: INFO: testing.test: Testing network:  ".\models\cnn-0" ...
+2017-06-20 13:28:13.850: INFO: saver.restore: Restoring parameters from .\models\cnn-0
+2017-06-20 13:28:16.802: INFO: testing.test: Finished testing: ".\models\cnn-0".
+2017-06-20 13:28:16.802: INFO: testing.test: Acc on TEST set:  0.027027
+2017-06-20 13:28:16.828: INFO: training.train: ===================================================
+2017-06-20 13:28:16.828: INFO: cnn.train: Training network: ".\models\cnn-1" ...
+2017-06-20 13:28:16.829: INFO: cnn.train: Preparing parameters and model...
+2017-06-20 13:28:17.511: INFO: cnn.train: Running session...
+2017-06-20 13:28:35.925: INFO: cnn.optimize: All 9 batches were used for training.
+2017-06-20 13:28:35.929: INFO: cnn.train: Optimization Finished.
+2017-06-20 13:28:35.930: INFO: cnn.train: Testing accuracy on training set: 
+2017-06-20 13:28:44.485: INFO: cnn.train: Acc on TRAIN set: 0.04
+2017-06-20 13:28:46.245: INFO: cnn.save: Model saved in file: .\models\cnn-1
+2017-06-20 13:28:46.274: INFO: training.train: ===================================================
+2017-06-20 13:28:46.274: INFO: testing.test: Testing network:  ".\models\cnn-1" ...
+2017-06-20 13:28:47.517: INFO: saver.restore: Restoring parameters from .\models\cnn-1
+2017-06-20 13:28:49.669: INFO: testing.test: Finished testing: ".\models\cnn-1".
+2017-06-20 13:28:49.670: INFO: testing.test: Acc on TEST set:  0.027027
+2017-06-20 13:28:49.676: INFO: training.train: ===================================================
+2017-06-20 13:28:49.676: INFO: cnn.train: Training network: ".\models\cnn-2" ...
+2017-06-20 13:28:49.676: INFO: cnn.train: Preparing parameters and model...
+2017-06-20 13:28:50.687: INFO: cnn.train: Running session...
+2017-06-20 13:29:09.344: INFO: cnn.optimize: All 9 batches were used for training.
+2017-06-20 13:29:09.346: INFO: cnn.train: Optimization Finished.
+2017-06-20 13:29:09.346: INFO: cnn.train: Testing accuracy on training set: 
+2017-06-20 13:29:17.679: INFO: cnn.train: Acc on TRAIN set: 0.46
+2017-06-20 13:29:19.506: INFO: cnn.save: Model saved in file: .\models\cnn-2
+2017-06-20 13:29:19.527: INFO: training.train: ===================================================
+2017-06-20 13:29:19.527: INFO: testing.test: Testing network:  ".\models\cnn-2" ...
+2017-06-20 13:29:20.391: INFO: saver.restore: Restoring parameters from .\models\cnn-2
+2017-06-20 13:29:22.922: INFO: testing.test: Finished testing: ".\models\cnn-2".
+2017-06-20 13:29:22.923: INFO: testing.test: Acc on TEST set:  0.405405
+2017-06-20 13:29:22.929: INFO: training.train: ===================================================
+2017-06-20 13:29:22.930: INFO: cnn.train: Training network: ".\models\cnn-3" ...
+2017-06-20 13:29:22.955: INFO: cnn.train: Preparing parameters and model...
+2017-06-20 13:29:23.568: INFO: cnn.train: Running session...
+2017-06-20 13:29:42.887: INFO: cnn.optimize: All 9 batches were used for training.
+2017-06-20 13:29:42.890: INFO: cnn.train: Optimization Finished.
+2017-06-20 13:29:42.891: INFO: cnn.train: Testing accuracy on training set: 
+2017-06-20 13:29:51.855: INFO: cnn.train: Acc on TRAIN set: 0.0566667
+2017-06-20 13:29:53.782: INFO: cnn.save: Model saved in file: .\models\cnn-3
+2017-06-20 13:29:53.812: INFO: training.train: ===================================================
+2017-06-20 13:29:53.812: INFO: testing.test: Testing network:  ".\models\cnn-3" ...
+2017-06-20 13:29:55.073: INFO: saver.restore: Restoring parameters from .\models\cnn-3
+2017-06-20 13:29:57.265: INFO: testing.test: Finished testing: ".\models\cnn-3".
+2017-06-20 13:29:57.265: INFO: testing.test: Acc on TEST set:  0.0810811
+2017-06-20 13:29:57.271: INFO: training.train: ===================================================
+2017-06-20 13:29:57.272: INFO: cnn.train: Training network: ".\models\cnn-4" ...
+2017-06-20 13:29:57.310: INFO: cnn.train: Preparing parameters and model...
+2017-06-20 13:29:57.918: INFO: cnn.train: Running session...
+2017-06-20 13:30:17.728: INFO: cnn.optimize: All 9 batches were used for training.
+2017-06-20 13:30:17.732: INFO: cnn.train: Optimization Finished.
+2017-06-20 13:30:17.732: INFO: cnn.train: Testing accuracy on training set: 
+2017-06-20 13:30:26.462: INFO: cnn.train: Acc on TRAIN set: 0.175676
+2017-06-20 13:30:27.871: INFO: cnn.save: Model saved in file: .\models\cnn-4
+2017-06-20 13:30:27.908: INFO: training.train: ===================================================
+2017-06-20 13:30:27.909: INFO: testing.test: Testing network:  ".\models\cnn-4" ...
+2017-06-20 13:30:29.254: INFO: saver.restore: Restoring parameters from .\models\cnn-4
+2017-06-20 13:30:31.696: INFO: testing.test: Finished testing: ".\models\cnn-4".
+2017-06-20 13:30:31.697: INFO: testing.test: Acc on TEST set:  0.0897436
+2017-06-20 13:30:31.703: INFO: training.train: ===================================================
+2017-06-20 13:30:31.703: INFO: training.train: =================Training Complete=================
+2017-06-20 13:30:31.704: INFO: training.train: Network:     cnn
+2017-06-20 13:30:31.704: INFO: training.train: Dataset:     dataset-1.txt
+2017-06-20 13:30:31.704: INFO: training.train: Samples:     374
+2017-06-20 13:30:31.704: INFO: training.train: Validation:  5-fold cross validation
+2017-06-20 13:30:31.704: INFO: training.train: Accuracy:    [0.027027028, 0.027027028, 0.4054054, 0.081081077, 0.089743592]
+2017-06-20 13:30:31.725: INFO: training.train: Average:     0.126057
+2017-06-20 13:30:31.725: INFO: training.train: 0 error(s) caught during runtime
+2017-06-20 13:30:31.726: INFO: training.train: ===================================================
+2017-06-20 13:30:32.207: INFO: training.main: ===================================================
+

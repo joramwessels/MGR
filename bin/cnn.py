@@ -79,6 +79,7 @@ def construct_model(n_input, n_classes):
 	# defining the model
 	weights, biases = prepare_variables(n_classes)
 	pred = conv_net(x, weights, biases, keep_prob, name='pred')
+	#z_pred = tf.reduce_sum(y, 0)
 	# the cost function reduces the sigmoid cross entropy error
 	cost = tf.reduce_mean(tf.nn.sigmoid_cross_entropy_with_logits(logits=pred,
 																  labels=y),

@@ -33,16 +33,18 @@ def test_on_file(model, dataset, abs='all', seed=None):
 	Args:
 		model:	The base name of the save files (without extension)
 		dataset:	The preprocessed dataset as a txt file
+		abs:	The evaluation abstraction: '1', '2', '3', '<1', or 'leafs'
+		seed:		If required, a random gen seed to replicate CV results
 	Returns:
 		The accuracy on the total dataset
 	
 	"""
 	log.info('Testing on seperate dataset: "' + dataset +'".')
-	data = Dataset(dataset, 1, 2, abs=abs, seed=seed)
-	acc = test(log, model, data)
+	data = Dataset(dataset, 1, 2, seed=seed)
+	acc = test(log, model, data, abs=abs)
 	return acc
 
-def test(log, model, data):
+def test(log, model, data, abs='all'):
 	"""Tests a model on the given cross validated dataset.
 	
 	It requires the training procedure to have named the accuracy, x and y
@@ -52,23 +54,25 @@ def test(log, model, data):
 		log:	A logger object to track the progress
 		model:	The base name of the save files (without extension)
 		data:	The Dataset object with the test set test on
+		abs:	The evaluation abstraction: '1', '2', '3', '<1', or 'leafs'
 	Returns:
 		The accuracy of the cross validated test
 	
 	"""
-	log.info('Testing network:  "' + str(model) + '" ...')
+	log.info('Testing network:  "' + str(model) + '" with abs=%s ...' %abs)
 	tf.reset_default_graph()
 	sess = tf.Session()
 	saver = tf.train.import_meta_graph(model + '.meta')
 	saver.restore(sess, model)
-	acc = sess.run("accuracy:0", feed_dict={"x:0": data.get_test_x(),
-											"y:0": data.get_test_y(),
-											"keep_prob:0": 1.0,
-											"learn_r:0":1.0})
+	A = sess.run('accuracy:0', feed_dict={"x:0": data.get_test_x(),
+										  "y:0": data.get_eval_y(abs),
+										  "keep_prob:0": 1.0,
+										  "learn_r:0":1.0})
 	sess.close()
 	log.info('Finished testing: "' + model + '".')
-	log.info("Acc on TEST set:  " + str(acc))
-	return acc
+	log.info("Acc on TEST set:  " + str(A))
+	#log.info("Zero rule:        " + str(Z))
+	return A
 
 parser = argparse.ArgumentParser(prog="testing.py",
 		description="Tests a model given a preprocessed dataset file.")

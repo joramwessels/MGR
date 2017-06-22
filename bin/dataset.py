@@ -55,7 +55,6 @@ class Dataset:
 		self.k = k
 		self.data = read_from_file(self, abs=abs)
 		if (seed): np.random.seed(seed=seed)
-		np.random.shuffle(self.data)
 		self.cross_validate()
 	
 	def cross_validate(self):
@@ -70,6 +69,7 @@ class Dataset:
 			MGRException:	If 'k' is invalid
 		
 		"""
+		np.random.shuffle(self.data)
 		if (self.k > 1):
 			if (len(self.data) < self.k):
 				raise MGRException(msg="Length of data < k")
@@ -199,17 +199,14 @@ class Dataset:
 	
 	def get_train_y(self):
 		# Retrieves the begin and end of all train partitions, loops through all
-		# their targets (index 1), creates an array of length dec_iter\
-		# (n_classes) and adds a one to those indices that occur in the target
-		# array, such that the output for target [1,4] is [0,1,0,0,1,0,...,0].
+		# their targets (index 1) and returns them in k-hot encoding.
 		p = self.folds[self.fold][0]
-		return [[(1.0 if i in l else 0.0) for i in range(self.dec_iter)] \
-						for l in [s[1] for (b,e) in p for s in self.data[b:e]]]
+		return [k_hot(self, s[1]) for (b,e) in p for s in self.data[b:e]]
 	
 	def get_train_x(self):
 		p = self.folds[self.fold][0]
-		return np.asarray([np.reshape(l[2], -1) for (b,e) in p for l in self.data[b:e]], \
-							dtype=np.float32)
+		return np.asarray([np.reshape(l[2], -1) for (b,e) in p \
+									for l in self.data[b:e]], dtype=np.float32)
 	
 	def get_test_ids(self):
 		(b, e) = self.folds[self.fold][1][0]
@@ -217,12 +214,27 @@ class Dataset:
 	
 	def get_test_y(self):
 		# Retrieves the begin and end of the test partition, loops through all
-		# its targets (index 1), creates an array of length dec_iter (n_classes)
-		# and adds a one to those indices that occur in the target array, such
-		# that the output for target [1,4] is [0,1,0,0,1,0,...,0].
+		# its targets (index 1) and returns them in k-hot encoding.
 		(b, e) = self.folds[self.fold][1][0]
-		return [[(1.0 if i in l else 0.0) for i in range(self.dec_iter)] \
-									  for l in [l[1] for l in self.data[b:e]]]
+		return [k_hot(self, l[1]) for l in self.data[b:e]]
+	
+	def get_eval_y(self, abs='all'):
+		"""Returns the correct y labels for evaluation.
+		
+		In addition to get_test_y() this function also resolves the correct
+		level of genre abstraction. This way, you can train on e.g. leaf nodes
+		and evaluate using the highest abstraction.
+		
+		Args:
+			abs:	The abstraction flag. default='all'
+		
+		Returns:
+			The test labels in 'k-hot' format to evaluate the model with
+		
+		"""
+		(b, e) = self.folds[self.fold][1][0]
+		return [k_hot(self, resolve_targets(self, self.decode_label(l[1][0]), abs))
+				for l in self.data[b:e]]
 	
 	def get_test_x(self):
 		(b, e) = self.folds[self.fold][1][0]
@@ -246,8 +258,8 @@ def read_from_file(dataset, abs='all'):
 		l = line.strip().split(';')
 		if (len(l) == 3):
 			try:
-				targets = resolve_targets(dataset, l[1].split('/')[0], abs)
-				data.append([l[0], targets, json.loads(l[2])])
+				tgts = resolve_targets(dataset, l[1].split('/')[0], abs)
+				data.append([l[0], tgts, json.loads(l[2])])
 			except Exception as e:
 				global err
 				err += 1
@@ -257,20 +269,33 @@ def read_from_file(dataset, abs='all'):
 					log_exception(e)
 	return data
 
-def resolve_targets(dataset, tags, abs):
+def k_hot(data, labels):
+	"""Converts a list of class labels to k-hot encoding
+	
+	Args:
+		data:	The dataset object issueing the labels
+		labels:	A list of integer encoded labels
+	Returns
+		A list of floats, the k-hot encoded target array
+	
+	"""
+	return [(1.0 if i in labels else 0.0) for i in range(data.get_n_classes())]
+
+def resolve_targets(dataset, tag, abs):
 	"""Prepares the right level of taxonomical abstraction for the target(s)
 	
 	Args:
-		dataset:	The Dataset object that will manage the data
-		tags:		The genre found in the ID3 'TCON' frame
+		dataset:	The Dataset object that manages the encoding
+		tag:		The genre found in the ID3 'TCON' frame
 		abs:		The taxonomical abstraction of genres used. This can by any
 					of: '1', '2', '3', '<1', or 'leafs'. default='all'
 	
 	Returns:
 		A list of encoded target variables
+	
 	"""
 	targets_used = []
-	t = tags
+	t = tag
 	if (abs == 'all'):
 		while (not t == None):
 			targets_used.append(t)
@@ -309,10 +334,45 @@ def resolve_targets(dataset, tags, abs):
 			targets_used.append(t)
 			t = parent_of[t]
 		targets_used.pop()
+	elif (abs == 'ev1'):
+		pr = t
+		while (not t == None):
+			pr = t
+			t = parent_of[t]
+		targets_used = [pr] + children[pr]
+		for l in children[pr]:
+			for c in children_of(l):
+				targets_used += c
+		targets_used = [l for l in targets_used if l in dataset.decoder]
+	else:
+		return resolve_targets(dataset, tag, 'all')
 	return [dataset.encode_label(t) for t in targets_used]
 
-parent_of = {'Future Bass':'Trap', 'Trap':'Hip Hop', 'Chillhop':'Hip Hop',
+"""The genre taxonomy, used to determine the training targets in the dataset
+   initalization, and to compute the accuracy in the network module.
+"""
+parent_of = {'Trap':'Hip Hop', 'Chillhop':'Hip Hop','Future Bass':'Trap',
 			 'Complextro':'Electro House', 'Big Room House':'Electro House',
 			 'Electro House':'House', 'Progressive House':'House',
-			 'Tropical House':'Deep House', 'Future House':'Deep House',
-			 'Deep House':'House', 'Hip Hop':None, 'House':None}
+			 'Deep House':'House','Future House':'Deep House',
+			 'Happy Hardcore':'Hardcore',
+			 'Hardcore':'Hard Dance','Hardstyle':'Hard Dance',
+			 'Liquid Funk':'Drum & Bass','Neurofunk':'Drum & Bass',
+			 'Hip Hop':None, 'House':None, 'Hard Dance':None,
+			 'Dubstep':'Bass','Drum & Bass':'Bass','Bass':None}
+
+children = {'Hip Hop':['Trap','Chillhop'],'Trap':['Future Bass'],
+			'House':['Electro House','Progressive House','Deep House'],
+			'Electro House':['Complextro','Big Room House'],
+			'Deep House':['Future House'],
+			'Hard Dance':['Hardcore','Hardstyle'],'Hardcore':['Happy Hardcore'],
+			'Bass':['Drum & Bass','Dubstep'],
+			'Drum & Bass':['Liquid Funk','Neurofunk']}
+
+def children_of(label):
+	if (label not in children): return []
+	ch = children[label]
+	for l in children[label]:
+		for c in children_of(l):
+			ch += c
+	return children[label] + [c for l in children[label] for c in children_of(l)]

@@ -24,11 +24,11 @@ if (log_mode == 'debug'):
 		format="%(asctime)s.%(msecs)03d: %(levelname)s: %(module)s."
 		+ "%(funcName)s: %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
 elif (log_mode == 'run'):
-	logging.basicConfig(filename='../logs/main.log', level=logging.DEBUG,
+	logging.basicConfig(filename='../logs/run.log', level=logging.DEBUG,
 		format="%(asctime)s.%(msecs)03d: %(levelname)s: %(module)s."
 		+ "%(funcName)s: %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
 elif (log_mode == 'monitor'):
-	logging.basicConfig(filename='../logs/main.log', level=logging.DEBUG,
+	logging.basicConfig(filename='../logs/monitor.log', level=logging.DEBUG,
 		format="%(asctime)s.%(msecs)03d: %(levelname)s: %(module)s."
 		+ "%(funcName)s: %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
 else:

@@ -25,7 +25,7 @@ duration = 29
 sample_rate = 12000
 
 def main(argv):
-	p = parser.parse_args(argv)
+	p = parser.parse_args(argv[1:])
 	if (p.msg):
 		log.info(51*'=')
 		log.info(p.msg)
@@ -74,7 +74,7 @@ def prepare_data(folder, destination, dim, n_fft=2048, stride=256, n_mels=96):
 			err += 1
 			log_exception(e)
 		count = count+1
-		if (count % 50 == 0): log.info(count, "files processed...")
+		if (count % 50 == 0): log.info(str(count) + "files processed...")
 	out.close()
 	log.info("Preprocessing complete. " + str(count) + " files processed." \
 			 + str(err) + " errors caught and logged.")

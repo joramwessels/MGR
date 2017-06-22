@@ -55,14 +55,25 @@ def predict_file(model, data_file, output='stdout'):
 	log.info(51*'=')
 	log.info('predicting the labels to: "' + data_file +'".')
 	data = Dataset(data_file, 1, 1)
-	sess = tf.Session()
 	tf.reset_default_graph()
+	sess = tf.Session()
 	saver = tf.train.import_meta_graph(model + '.meta')
 	saver.restore(sess, model)
-	p = sess.run("pred:0", feed_dict={"x:0": data.get_test_x()}) # does dis work?
-	if (output == 'stdout'): print(p)
-	sess.close()
+	p = sess.run('pred:0', feed_dict={'x:0': data.get_test_x(),
+									  'y:0': data.get_test_y(),
+									  'keep_prob':1.0, 'learn_r':1.0})
 	log.info('Finished predicting: "' + model + '".')
+	labels = [data.decode(l) for l in range(data.get_n_classes())]
+	for i in range(len(p)):
+		s = p[i]
+		try:
+			results = [labels[i] + ': ' + str(s[i]) for i in range(len(labels))]
+			if (output == 'stdout'): print(', '.join(results))
+			log.info(', '.join(results))
+		except Exception as e:
+			global err
+			err += 1
+			log_exception(e, msg='file=entry%i of "%s"' %(i, data_file))
 	return p
 
 parser = argparse.ArgumentParser(prog="predicting.py",

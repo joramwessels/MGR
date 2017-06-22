@@ -23,16 +23,28 @@ network_types = {'cnn':cnn, 'k2c2':k2c2, 'rnn':rnn}
 
 def main(argv):
 	p = parser.parse_args(argv[1:])
+	log.info('\n')
 	if (p.msg):
 		log.info(51*'=')
 		log.info(p.msg)
 	log.info(51*'=')
 	network = network_types[p.network]
-	train(network, p.data, batch_size=p.bs, k=p.k, id=p.id, savedir=p.output, abs=p.abs, seed=p.seed)
+	train(network, p.data, batch_size=p.bs, k=p.k, id=p.id, savedir=p.output, tr_abs=p.tra, ev_abs=p.eva, seed=p.seed)
 	log.info(51*'=' + '\n')
 
 @trackExceptions
-def train(network, dataset, batch_size=1, k=1, id=None, savedir="./models/", abs='all', seed=None):
+def train(network,
+		  dataset,
+		  batch_size=1,
+		  k=1,
+		  id=None,
+		  savedir="./models/",
+		  tr_abs='all',
+		  ev_abs='all',
+		  lr=.001,
+		  do=0.75,
+		  seed=None,
+		  data=None):
 	"""Trains a tensorflow network and tests it using k-fold cross validation
 	
 	Args:
@@ -42,25 +54,27 @@ def train(network, dataset, batch_size=1, k=1, id=None, savedir="./models/", abs
 		k:			The amount of folds used in cross validation (defaults to 1)
 		id:			An optional name for the model to help find the files later
 		savedir:	The path to the directory in which to save all model files
-		abs:		The genre abstraction: '1', '2', '3', '<1', or 'leafs'
+		tr_abs:		The training abstraction: '1', '2', '3', '<1', or 'leafs'
+		ev_abs:		The evaluation abstraction: '1', '2', '3', '<1', or 'leafs'
 		seed:		A cross validation seed to replicate the results
 	
 	"""
-	log.info('Started training on dataset: "' + dataset + '", ' + \
-			'network=%s, batch_size=%i, k=%i, savedir="%s"' \
-			%(network.__name__, batch_size, k, savedir))
+	log.info('Started training on dataset: "%s", ' %dataset \
+			+ 'network=%s, batch_size=%i, ' %(network.__name__, batch_size) \
+			+ 'k=%i, id=%s, savedir="%s", ' %(k, str(id), savedir) \
+			+ 'tr_abs=%s, ev_abs=%s, seed=%s' %(tr_abs, ev_abs, str(seed)))
 	dir = os.path.dirname(savedir) + os.path.sep
 	if (not os.path.exists(dir)): os.mkdir(dir)
 	id = (str(id) + '-' + network.__name__ if id else network.__name__) + '-%i'
-	data = Dataset(dataset, batch_size, k, abs=abs, seed=seed)
+	if (not data): data = Dataset(dataset, batch_size, k, abs=tr_abs, seed=seed)
 	acc = k*[0.0]
 	for fold in range(k):
 		try:
 			data.new_batch_generator('train')
 			log.info(51*'=')
-			savefile = network.train(log, data, dir=dir, id=(id %fold), do=0.75)
+			savefile = network.train(log, data, dir=dir, id=(id %fold), a=lr, do=do)
 			log.info(51*'=')
-			acc[fold] = testing.test(log, savefile, data)
+			acc[fold] = testing.test(log, savefile, data, abs=ev_abs)
 			data.next_fold()
 		except Exception as e:
 			global err
@@ -76,6 +90,7 @@ def train(network, dataset, batch_size=1, k=1, id=None, savedir="./models/", abs
 	log.info("Average:     " + str(np.mean(acc)))
 	log.info(str(mgr_utils.err_total) + " error(s) caught during runtime")
 	log.info(51*'=')
+	return np.mean(acc), np.var(acc)
 
 parser = argparse.ArgumentParser(prog="training.py",
 		description="Trains a model given a preprocessed dataset file.")
@@ -125,12 +140,18 @@ parser.add_argument('-s', '--seed',
 					metavar='S',
 					dest='seed',
 					help="A cross validation seed to replicate results")
-parser.add_argument('-t', '--abstraction',
+parser.add_argument('-tra', '--train_abstraction',
 					type=str,
 					required=False,
-					metavar='T',
-					dest='abs',
-					help="The taxonomical abstraction for the target labels")
+					metavar='trA',
+					dest='tra',
+					help="The train abstraction for the target labels")
+parser.add_argument('-eva', '--eval_abstraction',
+					type=str,
+					required=False,
+					metavar='evA',
+					dest='eva',
+					help="The evaluation abstraction for the target labels")
 parser.add_argument('-m', '--message',
 					type=str,
 					nargs='?',
