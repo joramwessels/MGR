@@ -318,17 +318,17 @@ __**Tu 13-06-2017**__
 __**Th 15-06-2017**__  
 **09:30-12:00** Copied an RNN implementation from a tutorial and adapted it into my system. It doesn't run yet due to a dimensionality problem.  
 **13:00-14:30** Ninth meeting. My misunderstanding of the Tensorflow dimensions has been alleviated. CNNs aren't trees, but networks (as the name suggests). We looked into the code and compared it to Rein's experience with Tensorflow. He argued the biases should be initialized as small positive floats when used in combination with ReLu activation. The final implementation will be a CNN. Next week thursday I will need to have written most of the paper, and have a network that's able to learn genres. When the CNN works, I can tweak the parameters to improve results, and when there is time I can try to replace the fully connected layer with an RNN. My backlog for coming week:  
-* Find out why the accuracy values are invalid
-	* Loss function (Softmax)?
+* ✔ Find out why the accuracy values are invalid
+	* ✔ Loss function (Softmax)?
 	* ✔ `correct_pred` adapted to multi-label targets
-	* Implement `prediction.py` to aid debugging
-* Minor problems that can't be the cause
-	* Replacing dropout
-	* Bias initalization (0.1)
-* Writing
-	* Explain tanh in LSTM paragraph
-	* Write more on Tensorflow
-	* Add RNN formuulas
+	* ~~Implement `prediction.py` to aid debugging~~
+* ✔ Minor problems that can't be the cause
+	* ✔ Replacing dropout
+	* ~~Bias initalization (0.1)~~
+* ✖ Writing
+	* ✖ Explain tanh in LSTM paragraph
+	* ✖ Write more on Tensorflow
+	* ✖ Add RNN formuulas
   
 **16:00-18:30** Rein informed me that `tf.nn.softmax_cross_entropy_with_logits` only works with one-hot (uni-label) targets. Sigmoid does work with multi-label-, but not with multi-class targets. I've changed the `correct_pred` computation to  
 ```
