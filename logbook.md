@@ -369,4 +369,5 @@ __**We 21-06-2017**__
 __**Th 22-06-2017**__  
 **10:30-12:00** k2c2 works (so far).  
 **13:00-14:00** Tenth meeting. There is a very acceptable and very feasible to this project. We will drop the CNN-RNN hybrids part and focus on training a CNN on electronic subgenres. That means that all programming is finished and that I will now start evaluating my two networks and two datasets for hierarchical targeting, learning rate, and dropout. The report draft is due on Monday. Today and tomorrow are reserved for evaluation, and the weekend for writing. On Monday we will go over the draft with the three of us. Until then I will report daily on my progress.  
-**15:00-17:00** Wrote an evaluation function that loops over all parameters (model, dataset, training abstraction, learning rate & dropout) so I can evaluate overnight.  
+**15:00-17:00** Wrote an evaluation module that loops over all parameters (model, dataset, training abstraction, learning rate & dropout) so I can evaluate overnight.  
+**18:30-20:00** Ran some tests, debugged the evaluation module. `Dataset-2` is clearly a lot bigger than the first. My laptop doesn't have the juice to run something like this overnight. I will try to run it on the DAS, and otherwise on the CPU of my game pc.  
