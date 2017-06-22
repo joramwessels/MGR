@@ -1,5 +1,4 @@
 ## programming
-	* k2c2
 	* CRNN
 	* bias initialization
 	* prediction
@@ -7,7 +6,7 @@
 ## evaluation
 	* optimize a
 	* optimize dropout
-	* influence of training on subgenres (train on abs=2 or abs=3, test on abs=1), requires more genres
+	* influence of training on subgenres (train on abs=2 or abs=3, test on abs=1)
 
 ## writing
 	* finish paragraph on house
