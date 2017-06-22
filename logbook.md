@@ -368,4 +368,5 @@ __**We 21-06-2017**__
 ### *(total: 0 hrs)*
 __**Th 22-06-2017**__  
 **10:30-12:00** k2c2 works (so far).  
-**13:00-** Tenth meeting.
+**13:00-14:00** Tenth meeting. There is a very acceptable and very feasible to this project. We will drop the CNN-RNN hybrids part and focus on training a CNN on electronic subgenres. That means that all programming is finished and that I will now start evaluating my two networks and two datasets for hierarchical targeting, learning rate, and dropout. The report draft is due on Monday. Today and tomorrow are reserved for evaluation, and the weekend for writing. On Monday we will go over the draft with the three of us. Until then I will report daily on my progress.  
+**15:00-17:00** Wrote an evaluation function that loops over all parameters (model, dataset, training abstraction, learning rate & dropout) so I can evaluate overnight.  
