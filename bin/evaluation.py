@@ -35,9 +35,10 @@ model_save_dir = ".\\eval_models\\"
 n_tests = 5
 
 def main(argv):
-	(m, v) = test_model_on(cnn, 1, 0.001, 0.75)
+	(m, v) = test_model_on(cnn, 1, 0.001)
+	(m2, v2) = test_model_on(k2c2, 1, 0.001)
 
-def test_model_on(mod, n_dat, a, d):
+def test_model_on(mod, n_dat, a):
 	id = str(n_dat)
 	dat = datasets[n_dat-1]
 	info = "%s on dataset '%s' using a=%.4f and dropout=%.2f" %(mod.__name__, dat, a, d)
@@ -56,14 +57,14 @@ def test_model_on(mod, n_dat, a, d):
 	return (m,v)
 
 @trackExceptions
-def test_abstractions(id, mod, dat, a, d, values):
+def test_abstractions(id, mod, dat, a, values):
 	acc = []
 	for v in values:
 		data = Dataset(dat, batch_size, k, abs=v, seed=seed)
 		try:
-			results.info("abstraction: %s\n" % v)
+			results.info("abstraction: %s\n" %v)
 			idi = ('v1' if v == '<1' else v) + '_' + id
-			(m,v) = train_n_times(idi, mod, dat, v, a, d, n_tests, data)
+			(m,v) = test_dropout(idi, mod, dat, v, a, dropouts, data)
 			acc.append(m)
 			results.info("m = %.4f -- v = %.4f" %(m, v))
 		except Exception as e:
@@ -76,6 +77,22 @@ def test_abstractions(id, mod, dat, a, d, values):
 	log.info(51*'=' + '\n\n\n')
 	log.info("m = %.4f -- v = %.4f" %(m, v))
 	log.info('\n\n\n')
+	log.info(51*'=')
+	return (m, v)
+
+def test_dropout(id, mod, dat, abs, alp, values, data):
+	acc = []
+	for v in values:
+		result.info("dropout: %.3f\n" %v)
+		idi = str(v)[:-2] + '_' + id
+		(m,v) = train_n_times(idi, mod, dat, abs, alp, v, n_tests, data)
+		acc.append(m)
+		result.info("m = %.4f -- v = %.4f" %(m, v))
+	m = np.mean(acc)
+	v = np.var(acc)
+	results.info("m = %.4f -- v = %.4f" %(m, v))
+	log.info(51*'=' + '\n')
+	log.info("m = %.4f -- v = %.4f" %(m, v))
 	log.info(51*'=')
 	return (m, v)
 
