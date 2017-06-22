@@ -367,4 +367,5 @@ __**We 21-06-2017**__
 ## Week 11 - 📥 Handing In
 ### *(total: 0 hrs)*
 __**Th 22-06-2017**__  
-**13:00-** Tenth meeting
+**10:30-12:00** k2c2 works (so far).  
+**13:00-** Tenth meeting.
