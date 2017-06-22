@@ -1,8 +1,3 @@
-## programming
-	* CRNN
-	* bias initialization
-	* prediction
-
 ## evaluation
 	* optimize a
 	* optimize dropout
@@ -15,13 +10,11 @@
 		* formulas
 	* more on tensorflow
 	* go through Taco's notations
-	* CNN-RNN hybrids background (abort?)
 	* finish house (prog and electro (and complextro?))
 	* write hard dance (hardstyle and happy hardcore)
-	* finish CRNN approach
-	* write evaluation approach
-	* code walkthrough in algorithm
-	* write (raw) results of
+	* -> write evaluation approach
+	* code walkthrough in algorithm (Tensorflow high level implementation)
+	* write (raw) results of (small discussion about them)
 		* networks
 		* subgenre targeting
 			* train on abs=1 vs train on abs=2 and eval on abs=1
@@ -31,6 +24,7 @@
 		* dataset size
 			* dataset-1 vs dataset-2
 	* write conclusion
+		* Is CNN justified for this task?
 		* best model
 			* k2c2 better than small cnn?
 			* crnn better than k2c2?
@@ -42,3 +36,4 @@
 		* answer research question and hypothesis
 	* write future work
 		* learning separately on music aspects (rhythm, chord progression, melody)
+		* Hybrid
