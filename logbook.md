@@ -365,7 +365,7 @@ __**We 21-06-2017**__
 **17:30-19:30** Added dataset-1 to the appendix, and started implementing the k2c2 network.  
 
 ## Week 11 - 📥 Handing In
-### *(total: 7.5 hrs)*
+### *(total: 18.5 hrs)*
 __**Th 22-06-2017**__  
 **10:30-12:00** k2c2 works (so far).  
 **13:00-14:00** Tenth meeting. There is a very acceptable and very feasible to this project. We will drop the CNN-RNN hybrids part and focus on training a CNN on electronic subgenres. That means that all programming is finished and that I will now start evaluating my two networks and two datasets for hierarchical targeting, learning rate, and dropout. The report draft is due on Monday. Today and tomorrow are reserved for evaluation, and the weekend for writing. On Monday we will go over the draft with the three of us. Until then I will report daily on my progress.  
@@ -377,4 +377,7 @@ __**Fr 23-06-2017**__
 **08:30-12:00** Got a GPU, the Tensorflow installation works, compatibility issues were surprisingly few (just `__next__()` and a path separator). The evaluation runs and MY GOD it's fast. I've added a results logger for convenience. The abstractions all work, the networks work, but `Dataset-2` ran into a `Resource exhausted: OOM when allocating tensor` error. I've applied batching for the test set to resolve it. The amount of results created by 2 models * 2 datasets * 5 abstractions * 3 learning rates * 3 dropouts is a little overwhelming (180). I wanted to write a function that stores them in a matrix so I can load it and evaluate per dimension, but that might be too much of a tangent (the json module already posed a problem, so I'd better not waste my time on that right now).  
 **12:30-15:30** The evaluation still ran smoothly. I started writing the evaluation paragraphs in the report, and when I came back the same resource exhausted error blocked the training. The resource in question was storage. I cleared the models folder and added a part to the script that deletes models after testing.  
 **15:30-18:30** Tested k2c2 on dataset-1 while writing down the results of the small CNN and the k2c2. When starting the tests on dataset-2 another resource exhaustion occured, this time specifying it was memory. The second dataset is 3.1GB (theres 4GB RAM on DAS-4), and both the train- and test data are being fed in batches of 40 samples a time. Unless python/anaconda/Tensorflow needs more than half a GB I wouldn't know how to solve this. On my own pc it runs fine, but slow (RAM usage indeed peaks at 13GB). I will therefore do a different type of evaluation on the second dataset. The first dataset fascilitated subgenre targeting, whereas the second dataset can be used to optimize- and compare the two models.  
-**20:30-** 
+**20:30-22:00** Completely finished the theoretical background by adding the paragraph on hard dance, finishing the one on house, and elaborating a little bit more about Tensorflow.  
+
+__**Sa 24-06-2017**__
+
