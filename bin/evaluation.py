@@ -83,11 +83,11 @@ def test_abstractions(id, mod, dat, a, values):
 def test_dropout(id, mod, dat, abs, alp, values, data):
 	acc = []
 	for v in values:
-		result.info("dropout: %.3f\n" %v)
+		results.info("dropout: %.3f\n" %v)
 		idi = str(v)[:-2] + '_' + id
 		(m,v) = train_n_times(idi, mod, dat, abs, alp, v, n_tests, data)
 		acc.append(m)
-		result.info("m = %.4f -- v = %.4f" %(m, v))
+		results.info("m = %.4f -- v = %.4f" %(m, v))
 	m = np.mean(acc)
 	v = np.var(acc)
 	results.info("m = %.4f -- v = %.4f" %(m, v))
