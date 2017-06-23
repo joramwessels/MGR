@@ -41,14 +41,14 @@ def main(argv):
 def test_model_on(mod, n_dat, a):
 	id = str(n_dat)
 	dat = datasets[n_dat-1]
-	info = "%s on dataset '%s' using a=%.4f and dropout=%.2f" %(mod.__name__, dat, a, d)
+	info = "%s on dataset '%s' using a=%.4f" %(mod.__name__, dat, a)
 	log.info(51*'=')
 	log.info(51*'=')
 	log.info("Evaluating " + info)
 	log.info(51*'=')
 	log.info(51*'=')
 	results.info("Evaluating " + info)
-	(m, v) = test_abstractions(id, mod, dat, a, d, abstractions[1:])
+	(m, v) = test_abstractions(id, mod, dat, a, abstractions[1:])
 	results.info("\n\n Results: m = %.4f -- v = %.4f\n\n" %(m, v))
 	log.info(51*'=' + '\n\n\n\n')
 	log.info("Finished evaluating " + info)
