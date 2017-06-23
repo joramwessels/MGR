@@ -78,6 +78,8 @@ def test(log, model, data, abs=None):
 	log.info("Acc on TEST set:  " + str(np.mean(A)))
 	try:
 		tf.gfile.Remove(model + '.meta')
+		tf.gfile.Remove(model + '.data-00000-of-00001')
+		tf.gfile.Remove(model + '.index')
 	except:
 		pass
 	return np.mean(A)
