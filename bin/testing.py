@@ -77,9 +77,9 @@ def test(log, model, data, abs=None):
 	log.info('Finished testing: "' + model + '".')
 	log.info("Acc on TEST set:  " + str(np.mean(A)))
 	try:
-		tf.gfile.Remove(model)
-	except Exception as e:
-		log_exception(e)
+		tf.gfile.Remove(model + '.meta')
+	except:
+		pass
 	return np.mean(A)
 
 parser = argparse.ArgumentParser(prog="testing.py",
