@@ -153,7 +153,7 @@ class Dataset:
 			A (labels <list>, images <np.array>) tuple of size batch_size
 		
 		"""
-		return self.batch_gen.__next__()
+		return next(self.batch_gen)
 	
 	def encode_label(self, label):
 		"""Encodes a class label string to an int and adds the key to the dict
