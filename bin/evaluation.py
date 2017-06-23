@@ -36,6 +36,8 @@ ev_abs='ev1'
 model_save_dir = "." + os.path.sep + "eval_models" + os.path.sep
 n_tests = 5
 
+#all_results = np.zeros((len(models), len(dataset), len(abstractions), len(dropouts)),dtype=np.float32)
+
 def main(argv):
 	score = []
 	score.append(test_model_on(cnn, 1, 0.001))
