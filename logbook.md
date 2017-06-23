@@ -374,3 +374,4 @@ __**Th 22-06-2017**__
 **21:00-22:30** Applied for a GPU on the DAS-4. scp'ed my datasets to the server. Built a new environment on the DAS (CPU) node in a `screen` and installed Tensorflow and the other dependencies in an effort to run the evaluation regardless of the GPU reservation, but it can't find the Tensorflow runtime.  
 
 __**Fr 23-06-2017**__  
+**08:30-** Got a GPU, the Tensorflow installation works, now only compatibility bugs are left
