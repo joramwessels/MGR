@@ -8,6 +8,7 @@
 # description:		Reads the data from storage and tests the network
 
 import sys, argparse
+import numpy as np
 import tensorflow as tf
 from dataset import Dataset
 from mgr_utils import log
@@ -44,7 +45,7 @@ def test_on_file(model, dataset, abs='all', seed=None):
 	acc = test(log, model, data, abs=abs)
 	return acc
 
-def test(log, model, data, abs='all'):
+def test(log, model, data, abs=None):
 	"""Tests a model on the given cross validated dataset.
 	
 	It requires the training procedure to have named the accuracy, x and y
@@ -64,15 +65,18 @@ def test(log, model, data, abs='all'):
 	sess = tf.Session()
 	saver = tf.train.import_meta_graph(model + '.meta')
 	saver.restore(sess, model)
-	A = sess.run('accuracy:0', feed_dict={"x:0": data.get_test_x(),
-										  "y:0": data.get_eval_y(abs),
-										  "keep_prob:0": 1.0,
-										  "learn_r:0":1.0})
+	data.new_batch_generator('test', ev_abs=abs)
+	A = []
+	for i, y, x in data.batch_gen:
+		A.append(sess.run('accuracy:0', feed_dict={"x:0": x,
+												   "y:0": y,
+												   "keep_prob:0": 1.0,
+												   "learn_r:0":1.0}))
 	sess.close()
 	log.info('Finished testing: "' + model + '".')
-	log.info("Acc on TEST set:  " + str(A))
+	log.info("Acc on TEST set:  " + str(np.mean(A)))
 	#log.info("Zero rule:        " + str(Z))
-	return A
+	return np.mean(A)
 
 parser = argparse.ArgumentParser(prog="testing.py",
 		description="Tests a model given a preprocessed dataset file.")

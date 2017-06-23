@@ -135,8 +135,11 @@ def train(log, data, dir=None, id=None, a=.001, ti=200000, ds=25, do=1.0):
 	
 	# Calculate accuracy for all test images
 	log.info("Testing accuracy on training set: ")
-	score = accuracy(sess, graph, data.get_train_x(), data.get_train_y())
-	log.info("Acc on TRAIN set: " + str(score))
+	data.new_batch_generator('train')
+	A = []
+	for i, y, x in data.batch_gen:
+		A.append(accuracy(sess, graph, x, y))
+	log.info("Acc on TRAIN set: " + str(np.mean(A)))
 	
 	# Save the variables to storage
 	if dir and id: return save(sess, sav, dir + str(id))
@@ -156,8 +159,11 @@ def optimize(sess, data, graph, opt, b_s, a, ti, ds, do):
 			ids, batch_y, batch_x = data.next_batch()
 			sess.run(opt, feed_dict={x: batch_x, y: batch_y, kp: do, lr: a})
 			if step % ds == 0:
-				score = accuracy(sess, graph, data.get_test_x(), data.get_test_y())
-				log.info("Iter %i: TRAIN acc = %.5f" %((step*b_s), score))
+				try:
+					score = accuracy(sess, graph, data.get_test_x(), data.get_test_y())
+					log.info("Iter %i: TRAIN acc = %.5f" %((step*b_s), score))
+				except Exception as e:
+					log_exception(e)
 			step += 1
 		except StopIteration:
 			log.info("All " + str(step) + " batches were used for training.")

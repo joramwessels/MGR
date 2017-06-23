@@ -94,7 +94,7 @@ class Dataset:
 			raise MGRException(msg="There is no next cross validation fold")
 		self.fold += 1
 	
-	def new_batch_generator(self, mode):
+	def new_batch_generator(self, mode, ev_abs=None):
 		"""(Re)sets the batch generator using the given mode
 		
 		The resulting generator in self.batch_gen yields
@@ -141,8 +141,11 @@ class Dataset:
 						batch = residue
 				n = dst-rng[0]
 				ids = [s[0] for s in batch]
-				labels = [[(1.0 if i in l else 0.0) for i in range(self.dec_iter)] \
-												for l in [s[1] for s in batch]]
+				if (mode == 'test' and ev_abs):
+					labels = [k_hot(self, resolve_targets(self, \
+							self.decode_label(s[1][0]), ev_abs)) for s in batch]
+				else:
+					labels = [k_hot(self, l) for l in [s[1] for s in batch]]
 				yield (ids, labels, [np.reshape(s[2], -1) for s in batch])
 		self.batch_gen = gen()
 	
