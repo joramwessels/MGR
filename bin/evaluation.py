@@ -7,7 +7,7 @@
 # public functions:	prepare_data
 # description:		Evaluates the MGR networks and parameters
 
-import sys, logging
+import sys, logging, os
 import numpy as np
 from mgr_utils import MGRException
 from mgr_utils import trackExceptions
@@ -31,7 +31,7 @@ batch_size = 40
 k = 5
 seed = 123
 ev_abs='ev1'
-model_save_dir = ".\\eval_models\\"
+model_save_dir = "." + os.path.sep + "eval_models" + os.path.sep
 n_tests = 5
 
 def main(argv):
