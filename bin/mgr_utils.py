@@ -19,6 +19,32 @@ log_mode = 'monitor'
 
 err_total=0
 
+formatter = logging.Formatter("%(asctime)s.%(msecs)03d: %(levelname)s: %(module)s."
+		+ "%(funcName)s: %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
+std_out = logging.StreamHandler(sys.stdout)
+std_out.setFormatter(formatter)
+std_out.setLevel(logging.DEBUG)
+err_out = logging.FileHandler('../logs/exceptions.log')
+err_out.setFormatter(formatter)
+err_out.setLevel(logging.ERROR)
+info_out = logging.FileHandler('../logs/monitor.log')
+info_out.setFormatter(formatter)
+info_out.setLevel(logging.DEBUG)
+log = logging.getLogger('log')
+
+if (log_mode == 'debug'):
+	log.addHandler(std_out)
+elif (log_mode == 'run'):
+	log.addHandler(info_out)
+	log.addHandler(err_out)
+elif (log_mode == 'monitor'):
+	log.addHandler(info_out)
+	log.addHandler(err_out)
+	log.addHandler(std_out)
+else:
+	print('\n\n\t\t- Invalid log mode: ' + str(log_mode) + '\n\n')
+	sys.exit(1)
+
 if (log_mode == 'debug'):
 	logging.basicConfig(stream=sys.stdout, level=logging.DEBUG,
 		format="%(asctime)s.%(msecs)03d: %(levelname)s: %(module)s."
