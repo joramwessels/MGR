@@ -37,8 +37,26 @@ model_save_dir = "." + os.path.sep + "eval_models" + os.path.sep
 n_tests = 5
 
 def main(argv):
-	(m, v) = test_model_on(cnn, 1, 0.001)
-	(m2, v2) = test_model_on(k2c2, 1, 0.001)
+	score = []
+	score.append(test_model_on(cnn, 1, 0.001))
+	score.append(test_model_on(k2c2, 1, 0.001))
+	score.append(test_model_on(cnn, 2, 0.001))
+	score.append(test_model_on(k2c2, 2, 0.001))
+	results.info(51*'=')
+	results.info(51*'=')
+	results.info(51*'=' + '\n\n\n')
+	results.info("CNN - dataset-1: " + str(score[0]))
+	results.info("k2c2 - dataset-1: " + str(score[0]))
+	results.info("CNN - dataset-2: " + str(score[0]))
+	results.info("k2c2 - dataset-2: " + str(score[0]))
+	results.info("Dataset-1: " + str(np.mean([score[0][0], score[1][0]])))
+	results.info("Dataset-2: " + str(np.mean([score[2][0], score[3][0]])))
+	results.info("CNN: " + str(np.mean([score[0][0], score[2][0]])))
+	results.info("k2c2: " + str(np.mean([score[1][0], score[3][0]])) + "\n\n\n")
+	results.info("")
+	results.info(51*'=')
+	results.info(51*'=')
+	results.info(51*'=' + '\n')
 
 def test_model_on(mod, n_dat, a):
 	id = str(n_dat)
@@ -73,6 +91,7 @@ def test_abstractions(id, mod, dat, a, values):
 			global err
 			err += 1
 			log_exception(e)
+			results.info("Error caught")
 	m = np.mean(acc)
 	v = np.var(acc)
 	results.info("m = %.4f -- v = %.4f" %(m, v))
@@ -86,7 +105,7 @@ def test_dropout(id, mod, dat, abs, alp, values, data):
 	acc = []
 	for v in values:
 		results.info("dropout: %.2f\n" %v)
-		idi = str(v)[:-2] + '_' + id
+		idi = str(v) + '_' + id
 		(m,v) = train_n_times(idi, mod, dat, abs, alp, v, n_tests, data)
 		acc.append(m)
 		results.info("m = %.4f -- v = %.4f" %(m, v))
