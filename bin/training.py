@@ -41,7 +41,7 @@ def train(network,
 		  savedir="./models/",
 		  tr_abs='all',
 		  ev_abs='all',
-		  lr=.001,
+		  lr=.001, #was .001
 		  do=0.75,
 		  seed=None,
 		  data=None):
