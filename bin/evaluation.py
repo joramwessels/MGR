@@ -172,6 +172,13 @@ def train_n_times(id, mod, dat, abs, alp, dro, n, data):
 	log.info("m = %.4f -- v = %.4f" %(m, v))
 	log.info('\n')
 	log.info(51*'=')
+	for (path, dirs, files) in os.walk(model_save_dir):
+		for f in files:
+			if (f.endswith(".data-00000-of-00001") or f.endswith(".index")):
+				try:
+					os.remove(f)
+				except:
+					pass
 	return (m, v)
 
 def store_all_results(filename):
