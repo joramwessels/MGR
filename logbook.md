@@ -375,4 +375,5 @@ __**Th 22-06-2017**__
 
 __**Fr 23-06-2017**__  
 **08:30-12:00** Got a GPU, the Tensorflow installation works, compatibility issues were surprisingly few (just `__next__()` and a path separator). The evaluation runs and MY GOD it's fast. I've added a results logger for convenience. The abstractions all work, the networks work, but `Dataset-2` ran into a `Resource exhausted: OOM when allocating tensor` error. I've applied batching for the test set to resolve it. The amount of results created by 2 models * 2 datasets * 5 abstractions * 3 learning rates * 3 dropouts is a little overwhelming (180). I wanted to write a function that stores them in a matrix so I can load it and evaluate per dimension, but that might be too much of a tangent (the json module already posed a problem, so I'd better not waste my time on that right now).  
-**12:30-** The evaluation is still running smoothly.
+**12:30-15:30** The evaluation still ran smoothly. I started writing the evaluation paragraphs in the report, and when I came back the same resource exhausted error blocked the training. The resource in question was storage. I cleared the models folder and added a part to the script that deletes models after testing.  
+**15:30-**
