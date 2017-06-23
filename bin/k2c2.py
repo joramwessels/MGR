@@ -125,7 +125,7 @@ def construct_model(x, y, n_classes, lr):
 	return pred, cost, optimizer, accuracy
 
 @trackExceptions
-def train(log, dataset, dir=None, id=None, md=None, lr=.001, ti=2*10^5, ds=25):
+def train(log, dataset, dir=None, id=None, md=None, a=.001, ti=2*10^5, ds=25, do=1.0):
 	"""Trains a k2c2 network as described in (Choi, 2016).
 	
 	Args:
