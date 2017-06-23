@@ -45,9 +45,9 @@ def main(argv):
 		score.append(test_model_on(k2c2, 1))
 		score.append(test_model_on(cnn, 2))
 		score.append(test_model_on(k2c2, 2))
-		results.info(51*'=')
-		results.info(51*'=')
-		results.info(51*'=' + '\n\n\n')
+		results.info(30*'=')
+		results.info(30*'=')
+		results.info(30*'=')
 		results.info("CNN - dataset-1: " + str(score[0]))
 		results.info("k2c2 - dataset-1: " + str(score[1]))
 		results.info("CNN - dataset-2: " + str(score[2]))
@@ -55,11 +55,10 @@ def main(argv):
 		results.info("Dataset-1: " + str(np.mean([score[0][0], score[1][0]])))
 		results.info("Dataset-2: " + str(np.mean([score[2][0], score[3][0]])))
 		results.info("CNN: " + str(np.mean([score[0][0], score[2][0]])))
-		results.info("k2c2: " + str(np.mean([score[1][0], score[3][0]])) + "\n\n\n")
-		results.info("")
-		results.info(51*'=')
-		results.info(51*'=')
-		results.info(51*'=' + '\n')
+		results.info("k2c2: " + str(np.mean([score[1][0], score[3][0]])))
+		results.info(30*'=')
+		results.info(30*'=')
+		results.info(30*'=' + '\n\n\n')
 	except Exception as e:
 		log_exception(e)
 	store_all_results(argv[1])
@@ -75,7 +74,6 @@ def test_model_on(mod, n_dat):
 	log.info(51*'=')
 	results.info("Evaluating " + info)
 	(m, v) = test_abstractions(id, mod, dat, abstractions)
-	results.info("\n\n Results: m = %.4f -- v = %.4f\n\n" %(m, v))
 	log.info(51*'=' + '\n\n\n\n')
 	log.info("Finished evaluating " + info)
 	log.info("mean: %.4f, variance: %.4f" %(m,v))
@@ -88,11 +86,10 @@ def test_abstractions(id, mod, dat, values):
 	for v in values:
 		data = Dataset(dat, batch_size, k, abs=v, seed=seed)
 		try:
-			results.info("abstraction: %s\n" %v)
+			results.info("abstraction: %s" %v)
 			idi = ('v1' if v == '<1' else v) + '_' + id
 			(m,v) = test_alpha(idi, mod, dat, v, alphas, data)
 			acc.append(m)
-			results.info("m = %.4f -- v = %.4f" %(m, v))
 		except Exception as e:
 			global err
 			err += 1
@@ -102,7 +99,10 @@ def test_abstractions(id, mod, dat, values):
 	v = np.var(acc)
 	max = np.max(acc)
 	min = np.min(acc)
+	result.info(30*'=')
+	results.info("Model: %s   Dataset: %s" %(mod.__name__, dat))
 	results.info("m = %.4f -- v = %.4f -- max = %.4f -- min = %.4f" %(m, v, max, min))
+	result.info(30*'=' + '\n')
 	log.info(51*'=' + '\n\n\n')
 	log.info("m = %.4f -- v = %.4f" %(m, v))
 	log.info('\n\n\n')
@@ -112,16 +112,15 @@ def test_abstractions(id, mod, dat, values):
 def test_alpha(id, mod, dat, abs, values, data):
 	acc = []
 	for v in values:
-		results.info("alpha: %.3f\n" %v)
+		results.info("alpha: %.3f" %v)
 		idi = str(v) + '_' + id
 		(m,v) = test_dropout(idi, mod, dat, abs, v, dropouts, data)
 		acc.append(m)
-		results.info("m = %.4f -- v = %.4f" %(m, v))
 	m = np.mean(acc)
 	v = np.var(acc)
 	max = np.max(acc)
 	min = np.min(acc)
-	results.info("m = %.4f -- v = %.4f -- max = %.4f -- min = %.4f" %(m, v, max, min))
+	results.info("for abs=%s: m = %.4f -- v = %.4f -- max = %.4f -- min = %.4f\n\n" %(abs, m, v, max, min))
 	log.info(51*'=' + '\n')
 	log.info("m = %.4f -- v = %.4f" %(m, v))
 	log.info(51*'=')
@@ -130,16 +129,16 @@ def test_alpha(id, mod, dat, abs, values, data):
 def test_dropout(id, mod, dat, abs, alp, values, data):
 	acc = []
 	for v in values:
-		results.info("dropout: %.2f\n" %v)
+		results.info("dropout: %.2f" %v)
 		idi = str(v) + '_' + id
-		(m,v) = train_n_times(idi, mod, dat, abs, alp, v, n_tests, data)
+		(m,var) = train_n_times(idi, mod, dat, abs, alp, v, n_tests, data)
 		acc.append(m)
-		results.info("m = %.4f -- v = %.4f" %(m, v))
+		results.info("for do=%v: m = %.4f -- v = %.4f\n" %(v, m, var))
 	m = np.mean(acc)
 	v = np.var(acc)
 	max = np.max(acc)
 	min = np.min(acc)
-	results.info("m = %.4f -- v = %.4f -- max = %.4f -- min = %.4f" %(m, v, max, min))
+	results.info("for a=%.3f: m = %.4f -- v = %.4f -- max = %.4f -- min = %.4f\n" %(alp, m, v, max, min))
 	log.info(51*'=' + '\n')
 	log.info("m = %.4f -- v = %.4f" %(m, v))
 	log.info(51*'=')
@@ -156,7 +155,7 @@ def train_n_times(id, mod, dat, abs, alp, dro, n, data):
 									savedir=model_save_dir, tr_abs=abs,
 									ev_abs=ev_abs, lr=alp, do=dro, seed=seed, data=data)
 			acc.append((m,v))
-			results.info("m = %.4f -- v = %.4f" %(m, v))
+			results.info(" v = %.4f" %v)
 		except Exception as e:
 			global err
 			err += 1
