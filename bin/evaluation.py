@@ -16,10 +16,12 @@ from mgr_utils import log_exception
 import cnn, k2c2, training
 from dataset import Dataset
 
-logging.basicConfig(filename='../logs/results.log', level=logging.DEBUG,
-	format="%(asctime)s.%(msecs)03d: %(levelname)s: %(module)s."
-	+ "%(funcName)s: %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
-results = logging.getLogger()
+formatter = logging.Formatter("%(asctime)s.%(msecs)03d: %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
+handler = logging.FileHandler('../logs/results.log')        
+handler.setFormatter(formatter)
+results = logging.getLogger('results')
+results.setLevel(logging.DEBUG)
+results.addHandler(handler)
 
 models = {'cnn':cnn,'k2c2':k2c2}
 datasets = ['dataset-1.txt','dataset-2.txt']
