@@ -380,4 +380,5 @@ __**Fr 23-06-2017**__
 **20:30-22:00** Completely finished the theoretical background by adding the paragraph on hard dance, finishing the one on house, and elaborating a little bit more about Tensorflow.  
 
 __**Sa 24-06-2017**__
-**09:30-** I found out Choi used a dropout of 0.5 after every maxpool layer, so I adjusted k2c2 to match that. However, there is still a bug in the code (even before this change) that might prevent proper results from showing. The accuracies produced are very disappointing indeed.
+**09:30-12:00** I found out Choi used a dropout of 0.5 after every maxpool layer, so I adjusted k2c2 to match that. However, there might still be a bug in the code (even before this change), since some training folds report 0.0 accuracy on both the training and test set. I've written a bunch on the results, some little things from the backlog, and I started optimizing the models on the second dataset.  
+**12:30-**
