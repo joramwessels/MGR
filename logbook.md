@@ -380,5 +380,7 @@ __**Fr 23-06-2017**__
 **20:30-22:00** Completely finished the theoretical background by adding the paragraph on hard dance, finishing the one on house, and elaborating a little bit more about Tensorflow.  
 
 __**Sa 24-06-2017**__
-**09:30-12:00** I found out Choi used a dropout of 0.5 after every maxpool layer, so I adjusted k2c2 to match that. However, there might still be a bug in the code (even before this change), since some training folds report 0.0 accuracy on both the training and test set. I've written a bunch on the results, some little things from the backlog, and I started optimizing the models on the second dataset.  
+**09:30-12:00** I found out Choi used a dropout of 0.5 after every maxpool layer, so I adjusted the k2c2 and cnn to match that. However, there might still be a bug in the code (even before this change), since some training folds report 0.0 accuracy on both the training and test set. I've written a bunch on the results, some little things from the backlog, and I started optimizing the models on the second dataset.  
 **12:30-14:30** I collected some results on the second dataset, and wrote about the evaluation. I figured I could run a simultaneous test on the DAS for just dataset 1, but that also returns a memory error on the first fold.  
+**14:30-15:30** Ran more local tests on dataset 2, while running a backup test on the DAS.  
+**18:30-** It seems that the results regarding subgenre targeting are different for each dataset. 
