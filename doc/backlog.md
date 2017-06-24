@@ -4,9 +4,7 @@
 	* influence of training on subgenres (train on abs=2 or abs=3, test on abs=1)
 
 ## writing
-	* elaborate RNN background
-		* tanh
-		* formulas
+	* add RNN functions
 	* go through Taco's notations
 	* -> write evaluation approach
 	* code walkthrough in algorithm (Tensorflow high level implementation)
