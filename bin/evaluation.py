@@ -25,9 +25,9 @@ results.addHandler(handler)
 
 models = {'cnn':cnn,'k2c2':k2c2}
 datasets = ['dataset-1.txt','dataset-2.txt']
-abstractions = ['all','<1','1','2','leafs']
-alphas = [0.2, 0.01, 0.05]
-dropouts = [0.4, 0.5, 0.6]
+abstractions = ['1']#['all','<1','1','2','leafs']
+alphas = [1.0]#[0.2, 0.01, 0.05]
+dropouts = [0.1]#[0.4, 0.5, 0.6]
 
 batch_size = 40
 k = 5
@@ -88,7 +88,7 @@ def test_abstractions(id, mod, dat, values):
 		try:
 			results.info("abstraction: %s" %v)
 			idi = ('v1' if v == '<1' else v) + '_' + id
-			(m,v) = test_alpha(idi, mod, dat, v, alphas, data)
+			(m,var) = test_alpha(idi, mod, dat, v, alphas, data)
 			acc.append(m)
 		except Exception as e:
 			global err
@@ -96,35 +96,35 @@ def test_abstractions(id, mod, dat, values):
 			log_exception(e)
 			results.info("Error caught")
 	m = np.mean(acc)
-	v = np.var(acc)
+	var = np.var(acc)
 	max = np.max(acc)
 	min = np.min(acc)
 	result.info(30*'=')
 	results.info("Model: %s   Dataset: %s" %(mod.__name__, dat))
-	results.info("m = %.4f -- v = %.4f -- max = %.4f -- min = %.4f" %(m, v, max, min))
+	results.info("m = %.4f -- v = %.4f -- max = %.4f -- min = %.4f" %(m, var, max, min))
 	result.info(30*'=' + '\n')
 	log.info(51*'=' + '\n\n\n')
-	log.info("m = %.4f -- v = %.4f" %(m, v))
+	log.info("m = %.4f -- v = %.4f" %(m, var))
 	log.info('\n\n\n')
 	log.info(51*'=')
-	return (max, v)
+	return (max, var)
 
 def test_alpha(id, mod, dat, abs, values, data):
 	acc = []
 	for v in values:
 		results.info("alpha: %.3f" %v)
 		idi = str(v) + '_' + id
-		(m,v) = test_dropout(idi, mod, dat, abs, v, dropouts, data)
+		(m,var) = test_dropout(idi, mod, dat, abs, v, dropouts, data)
 		acc.append(m)
 	m = np.mean(acc)
-	v = np.var(acc)
+	var = np.var(acc)
 	max = np.max(acc)
 	min = np.min(acc)
 	results.info("for abs=%s: m = %.4f -- v = %.4f -- max = %.4f -- min = %.4f\n\n" %(abs, m, v, max, min))
 	log.info(51*'=' + '\n')
-	log.info("m = %.4f -- v = %.4f" %(m, v))
+	log.info("m = %.4f -- v = %.4f" %(m, var))
 	log.info(51*'=')
-	return (max, v)
+	return (max, var)
 
 def test_dropout(id, mod, dat, abs, alp, values, data):
 	acc = []
@@ -135,14 +135,14 @@ def test_dropout(id, mod, dat, abs, alp, values, data):
 		acc.append(m)
 		results.info("for do=%.4f: m = %.4f -- v = %.4f\n" %(v, m, var))
 	m = np.mean(acc)
-	v = np.var(acc)
+	var = np.var(acc)
 	max = np.max(acc)
 	min = np.min(acc)
 	results.info("for a=%.3f: m = %.4f -- v = %.4f -- max = %.4f -- min = %.4f\n" %(alp, m, v, max, min))
 	log.info(51*'=' + '\n')
-	log.info("m = %.4f -- v = %.4f" %(m, v))
+	log.info("m = %.4f -- v = %.4f" %(m, var))
 	log.info(51*'=')
-	return (max, v)
+	return (max, var)
 
 @trackExceptions
 def train_n_times(id, mod, dat, abs, alp, dro, n, data):
@@ -151,24 +151,25 @@ def train_n_times(id, mod, dat, abs, alp, dro, n, data):
 		try:
 			data.cross_validate()
 			idi = str(i) + '_' + id
-			(m,v) = training.train(mod, dat, batch_size=batch_size, k=k, id=idi,
+			(m,var) = training.train(mod, dat, batch_size=batch_size, k=k, id=idi,
 									savedir=model_save_dir, tr_abs=abs,
 									ev_abs=ev_abs, lr=alp, do=dro, seed=seed, data=data)
-			acc.append((m,v))
-			results.info(" v = %.4f" %v)
+			acc.append((m,var))
+			results.info(" m = %.4f" %m)
+			results.info(" v = %.4f" %var)
 		except Exception as e:
 			global err
 			err += 1
 			log_exception(e)
 	m = np.mean(acc)
-	v = np.var(acc)
+	var = np.var(acc)
 	#all_results[list(models.keys()).index(mod.__name__),\
 	#			datasets.index(dat),\
 	#			abstractions.index(abs),\
 	#			alphas.index(alp),\
 	#			dropouts.index(dro)] = m
 	log.info(51*'=' + '\n')
-	log.info("m = %.4f -- v = %.4f" %(m, v))
+	log.info("m = %.4f -- v = %.4f" %(m, var))
 	log.info('\n')
 	log.info(51*'=')
 	for (path, dirs, files) in os.walk(model_save_dir):
@@ -178,7 +179,7 @@ def train_n_times(id, mod, dat, abs, alp, dro, n, data):
 					os.remove(f)
 				except:
 					pass
-	return (m, v)
+	return (m, var)
 
 def store_all_results(filename):
 	with open(filename, 'w') as out:
