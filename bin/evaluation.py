@@ -133,7 +133,7 @@ def test_dropout(id, mod, dat, abs, alp, values, data):
 		idi = str(v) + '_' + id
 		(m,var) = train_n_times(idi, mod, dat, abs, alp, v, n_tests, data)
 		acc.append(m)
-		results.info("for do=%v: m = %.4f -- v = %.4f\n" %(v, m, var))
+		results.info("for do=%.4f: m = %.4f -- v = %.4f\n" %(v, m, var))
 	m = np.mean(acc)
 	v = np.var(acc)
 	max = np.max(acc)
