@@ -34,34 +34,30 @@ k = 5
 seed = 123
 ev_abs='ev1'
 model_save_dir = "." + os.path.sep + "eval_models" + os.path.sep
-n_tests = 5
+n_tests = 1 #5
 
 #all_results = np.zeros((len(models), len(datasets), len(abstractions), len(dropouts)),dtype=np.float32)
 
 def main(argv):
-	try:
-		score = []
-		score.append(test_model_on(cnn, 1))
-		score.append(test_model_on(k2c2, 1))
-		#score.append(test_model_on(cnn, 2))
-		#score.append(test_model_on(k2c2, 2))
-		results.info(30*'=')
-		results.info(30*'=')
-		results.info(30*'=')
-		results.info("CNN - dataset-1: " + str(score[0]))
-		results.info("k2c2 - dataset-1: " + str(score[1]))
-		#results.info("CNN - dataset-2: " + str(score[2]))
-		#results.info("k2c2 - dataset-2: " + str(score[3]))
-		results.info("Dataset-1: " + str(np.mean([score[0][0], score[1][0]])))
-		#results.info("Dataset-2: " + str(np.mean([score[2][0], score[3][0]])))
-		#results.info("CNN: " + str(np.mean([score[0][0], score[2][0]])))
-		#results.info("k2c2: " + str(np.mean([score[1][0], score[3][0]])))
-		results.info(30*'=')
-		results.info(30*'=')
-		results.info(30*'=' + '\n\n\n')
-	except Exception as e:
-		log_exception(e)
-	#store_all_results(argv[1])
+	score = []
+	score.append(test_model_on(cnn, 1))
+	score.append(test_model_on(k2c2, 1))
+	#score.append(test_model_on(cnn, 2))
+	#score.append(test_model_on(k2c2, 2))
+	results.info(30*'=')
+	results.info(30*'=')
+	results.info(30*'=')
+	results.info("CNN - dataset-1: " + str(score[0]))
+	results.info("k2c2 - dataset-1: " + str(score[1]))
+	#results.info("CNN - dataset-2: " + str(score[2]))
+	#results.info("k2c2 - dataset-2: " + str(score[3]))
+	results.info("Dataset-1: " + str(np.mean([score[0][0], score[1][0]])))
+	#results.info("Dataset-2: " + str(np.mean([score[2][0], score[3][0]])))
+	#results.info("CNN: " + str(np.mean([score[0][0], score[2][0]])))
+	#results.info("k2c2: " + str(np.mean([score[1][0], score[3][0]])))
+	results.info(30*'=')
+	results.info(30*'=')
+	results.info(30*'=' + '\n\n\n')
 
 def test_model_on(mod, n_dat):
 	id = str(n_dat)
@@ -163,11 +159,6 @@ def train_n_times(id, mod, dat, abs, alp, dro, n, data):
 			log_exception(e)
 	m = np.mean(acc)
 	var = np.var(acc)
-	#all_results[list(models.keys()).index(mod.__name__),\
-	#			datasets.index(dat),\
-	#			abstractions.index(abs),\
-	#			alphas.index(alp),\
-	#			dropouts.index(dro)] = m
 	log.info(51*'=' + '\n')
 	log.info("m = %.4f -- v = %.4f" %(m, var))
 	log.info('\n')
@@ -180,14 +171,6 @@ def train_n_times(id, mod, dat, abs, alp, dro, n, data):
 				except:
 					pass
 	return (m, var)
-
-def store_all_results(filename):
-	with open(filename, 'w') as out:
-		json.dump(all_results, out)
-
-def read_previous_results(filename):
-	file = open(filename, 'r')
-	return json.loads(next(file))
 
 if __name__ == "__main__":
 	main(sys.argv)

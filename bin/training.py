@@ -41,8 +41,8 @@ def train(network,
 		  savedir="./models/",
 		  tr_abs='all',
 		  ev_abs='all',
-		  lr=.01, #was .001
-		  do=0.5,
+		  lr=.05, #was .001
+		  do=0.75,
 		  seed=None,
 		  data=None):
 	"""Trains a tensorflow network and tests it using k-fold cross validation
@@ -67,14 +67,15 @@ def train(network,
 	if (not os.path.exists(dir)): os.mkdir(dir)
 	id = (str(id) + '-' + network.__name__ if id else network.__name__) + '-%i'
 	if (not data): data = Dataset(dataset, batch_size, k, abs=tr_abs, seed=seed)
-	acc = k*[0.0]
+	acc = []
 	for fold in range(k):
 		try:
 			data.new_batch_generator('train')
 			log.info(51*'=')
 			savefile = network.train(log, data, dir=dir, id=(id %fold), a=lr, do=do)
 			log.info(51*'=')
-			acc[fold] = testing.test(log, savefile, data, abs=ev_abs)
+			if (savefile): a = testing.test(log, savefile, data, abs=ev_abs)
+			if (a): acc.append(a)
 			data.next_fold()
 		except Exception as e:
 			global err
@@ -83,6 +84,9 @@ def train(network,
 	log.info(51*'=')
 	log.info(17*'=' + "Training Complete" + 17*'=')
 	log.info("Network:     " + network.__name__)
+	log.info("learn_r:     " + str(lr))
+	log.info("dropout:     " + str(do))
+	log.info("train_abs:   " + tr_abs)
 	log.info("Dataset:     " + dataset)
 	log.info("Samples:     " + str(data.get_size()))
 	log.info("Validation:  " + str(k) + "-fold cross validation")
