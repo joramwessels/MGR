@@ -26,8 +26,8 @@ results.addHandler(handler)
 models = {'cnn':cnn,'k2c2':k2c2}
 datasets = ['dataset-1.txt','dataset-2.txt']
 abstractions = ['all','<1','1','2','leafs']
-alphas = [0.002, 0.0005]
-dropouts = [0.5,0.6]
+alphas = [0.2, 0.01, 0.05]
+dropouts = [0.4,0.5,0.6]
 
 batch_size = 40
 k = 5
