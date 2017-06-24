@@ -82,6 +82,7 @@ def test(log, model, data, abs=None):
 		tf.gfile.Remove(model + '.index')
 	except:
 		pass
+	print("TEST:%.4f" %np.mean(A))
 	return np.mean(A)
 
 parser = argparse.ArgumentParser(prog="testing.py",

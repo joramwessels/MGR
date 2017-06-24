@@ -32,19 +32,17 @@ def conv_net(x, weights, biases, dropout, name='pred'):
 	x = tf.reshape(x, shape=[-1, 96, 1280, 1])
 	# three 3x3 convnet layers, each followed by 2x4 maxpool layers
 	conv1 = conv2d(x, weights['wc1'], biases['bc1'])
-	conv1 = maxpool2d(conv1, k1=2, k2=4)
+	conv1 = tf.nn.dropout(maxpool2d(conv1, k1=2, k2=4), dropout)
 	conv2 = conv2d(conv1, weights['wc2'], biases['bc2'])
-	conv2 = maxpool2d(conv2, k1=2, k2=4)
+	conv2 = tf.nn.dropout(maxpool2d(conv2, k1=2, k2=4), dropout)
 	conv3 = conv2d(conv2, weights['wc3'], biases['bc3'])
-	conv3 = maxpool2d(conv3, k1=2, k2=4)
+	conv3 = tf.nn.dropout(maxpool2d(conv3, k1=2, k2=4), dropout)
 	conv4 = conv2d(conv3, weights['wc4'], biases['bc4'])
-	conv4 = maxpool2d(conv4, k1=3, k2=5)
+	conv4 = tf.nn.dropout(maxpool2d(conv4, k1=3, k2=5), dropout)
 	conv5 = conv2d(conv4, weights['wc5'], biases['bc5'])
-	conv5 = maxpool2d(conv5, k1=4, k2=4)
+	conv5 = tf.nn.dropout(maxpool2d(conv5, k1=4, k2=4), dropout)
 	# flattening layer
 	fc1 = tf.reshape(conv5, [-1, weights['wout'].get_shape().as_list()[0]])
-	# dropout temporarily disables nodes to prevent overfitting
-	fc1 = tf.nn.dropout(fc1, dropout)
 	# output layer
 	out = tf.add(tf.matmul(fc1, weights['wout']), biases['bout'], name=name)
 	return out

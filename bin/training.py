@@ -41,8 +41,8 @@ def train(network,
 		  savedir="./models/",
 		  tr_abs='all',
 		  ev_abs='all',
-		  lr=.001, #was .001
-		  do=0.75,
+		  lr=.01, #was .001
+		  do=0.5,
 		  seed=None,
 		  data=None):
 	"""Trains a tensorflow network and tests it using k-fold cross validation

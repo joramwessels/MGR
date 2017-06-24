@@ -31,6 +31,7 @@ info_out = logging.FileHandler('../logs/monitor.log')
 info_out.setFormatter(formatter)
 info_out.setLevel(logging.DEBUG)
 log = logging.getLogger('log')
+log.setLevel(logging.DEBUG)
 
 if (log_mode == 'debug'):
 	log.addHandler(std_out)
@@ -44,24 +45,6 @@ elif (log_mode == 'monitor'):
 else:
 	print('\n\n\t\t- Invalid log mode: ' + str(log_mode) + '\n\n')
 	sys.exit(1)
-
-if (log_mode == 'debug'):
-	logging.basicConfig(stream=sys.stdout, level=logging.DEBUG,
-		format="%(asctime)s.%(msecs)03d: %(levelname)s: %(module)s."
-		+ "%(funcName)s: %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
-elif (log_mode == 'run'):
-	logging.basicConfig(filename='../logs/run.log', level=logging.DEBUG,
-		format="%(asctime)s.%(msecs)03d: %(levelname)s: %(module)s."
-		+ "%(funcName)s: %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
-elif (log_mode == 'monitor'):
-	logging.basicConfig(filename='../logs/monitor.log', level=logging.DEBUG,
-		format="%(asctime)s.%(msecs)03d: %(levelname)s: %(module)s."
-		+ "%(funcName)s: %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
-else:
-	print('\n\n\t\t- Invalid log mode: ' + str(log_mode) + '\n\n')
-	sys.exit(1)
-log = logging.getLogger()
-if (log_mode == 'monitor'): log.addHandler(logging.StreamHandler(sys.stdout))
 
 class MGRException(Exception):
 	"""The universal exception for any problems with the MGR package
