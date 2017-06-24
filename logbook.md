@@ -365,7 +365,7 @@ __**We 21-06-2017**__
 **17:30-19:30** Added dataset-1 to the appendix, and started implementing the k2c2 network.  
 
 ## Week 11 - 📥 Handing In
-### *(total: 18.5 hrs)*
+### *(total: 27.5 hrs)*
 __**Th 22-06-2017**__  
 **10:30-12:00** k2c2 works (so far).  
 **13:00-14:00** Tenth meeting. There is a very acceptable and very feasible to this project. We will drop the CNN-RNN hybrids part and focus on training a CNN on electronic subgenres. That means that all programming is finished and that I will now start evaluating my two networks and two datasets for hierarchical targeting, learning rate, and dropout. The report draft is due on Monday. Today and tomorrow are reserved for evaluation, and the weekend for writing. On Monday we will go over the draft with the three of us. Until then I will report daily on my progress.  
@@ -383,4 +383,6 @@ __**Sa 24-06-2017**__
 **09:30-12:00** I found out Choi used a dropout of 0.5 after every maxpool layer, so I adjusted the k2c2 and cnn to match that. However, there might still be a bug in the code (even before this change), since some training folds report 0.0 accuracy on both the training and test set. I've written a bunch on the results, some little things from the backlog, and I started optimizing the models on the second dataset.  
 **12:30-14:30** I collected some results on the second dataset, and wrote about the evaluation. I figured I could run a simultaneous test on the DAS for just dataset 1, but that also returns a memory error on the first fold.  
 **14:30-15:30** Ran more local tests on dataset 2, while running a backup test on the DAS.  
-**18:30-** It seems that the results regarding subgenre targeting are different for each dataset. 
+**18:30-21:00** I am now confident enough of my code to let the evaluation module run overnight on the DAS.  
+
+__**Su 25-06-2017**__  
