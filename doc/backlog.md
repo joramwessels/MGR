@@ -7,7 +7,7 @@
 	* algorithm
 		* code walkthrough (Tensorflow high level implementation)
 	* Results
-		* write (raw) results of (small discussion about them)
+		* collect raw results
 		* subgenre targeting
 			* train on abs=1 vs train on abs=2 while eval on abs=1
 		* networks
