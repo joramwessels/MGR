@@ -1,14 +1,9 @@
-## evaluation
-	* optimize a
-	* optimize dropout
-	* influence of training on subgenres (train on abs=2 or abs=3, test on abs=1)
-
 ## writing
 	* abstract
 	* theoretical background
 		* add RNN functions
 	* approach
-		* -> evaluation
+		* Mel spectrogram computation
 	* algorithm
 		* code walkthrough (Tensorflow high level implementation)
 	* Results
