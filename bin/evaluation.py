@@ -25,36 +25,36 @@ results.addHandler(handler)
 
 models = {'cnn':cnn,'k2c2':k2c2}
 datasets = ['dataset-1.txt','dataset-2.txt']
-abstractions = ['1']#['all','<1','1','2','leafs']
-alphas = [1.0]#[0.2, 0.01, 0.05]
-dropouts = [0.1]#[0.4, 0.5, 0.6]
+abstractions = ['1','2']
+alphas = [0.25, 0.05, 0.075]
+dropouts = [0.4, 0.5, 0.6]
 
-batch_size = 40
+batch_size = 100
 k = 5
 seed = 123
 ev_abs='ev1'
 model_save_dir = "." + os.path.sep + "eval_models" + os.path.sep
-n_tests = 1 #5
+n_tests = 1
 
 #all_results = np.zeros((len(models), len(datasets), len(abstractions), len(dropouts)),dtype=np.float32)
 
 def main(argv):
 	score = []
-	#score.append(test_model_on(cnn, 1))
-	#score.append(test_model_on(k2c2, 1))
+	score.append(test_model_on(cnn, 1))
+	score.append(test_model_on(k2c2, 1))
 	score.append(test_model_on(cnn, 2))
 	score.append(test_model_on(k2c2, 2))
 	results.info(30*'=')
 	results.info(30*'=')
 	results.info(30*'=')
-	#results.info("CNN - dataset-1: " + str(score[0]))
-	#results.info("k2c2 - dataset-1: " + str(score[1]))
+	results.info("CNN - dataset-1: " + str(score[0]))
+	results.info("k2c2 - dataset-1: " + str(score[1]))
 	results.info("CNN - dataset-2: " + str(score[2]))
 	results.info("k2c2 - dataset-2: " + str(score[3]))
-	#results.info("Dataset-1: " + str(np.mean([score[0][0], score[1][0]])))
+	results.info("Dataset-1: " + str(np.mean([score[0][0], score[1][0]])))
 	results.info("Dataset-2: " + str(np.mean([score[2][0], score[3][0]])))
-	#results.info("CNN: " + str(np.mean([score[0][0], score[2][0]])))
-	#results.info("k2c2: " + str(np.mean([score[1][0], score[3][0]])))
+	results.info("CNN: " + str(np.mean([score[0][0], score[2][0]])))
+	results.info("k2c2: " + str(np.mean([score[1][0], score[3][0]])))
 	results.info(30*'=')
 	results.info(30*'=')
 	results.info(30*'=' + '\n\n\n')
