@@ -74,6 +74,7 @@ def train(network,
 			log.info(51*'=')
 			savefile = network.train(log, data, dir=dir, id=(id %fold), a=lr, do=do)
 			log.info(51*'=')
+			a = None
 			if (savefile): a = testing.test(log, savefile, data, abs=ev_abs)
 			if (a): acc.append(a)
 			data.next_fold()
