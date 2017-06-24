@@ -4,14 +4,10 @@
 	* influence of training on subgenres (train on abs=2 or abs=3, test on abs=1)
 
 ## writing
-	* finish paragraph on house
 	* elaborate RNN background
 		* tanh
 		* formulas
-	* more on tensorflow
 	* go through Taco's notations
-	* finish house (prog and electro (and complextro?))
-	* write hard dance (hardstyle and happy hardcore)
 	* -> write evaluation approach
 	* code walkthrough in algorithm (Tensorflow high level implementation)
 	* write (raw) results of (small discussion about them)
