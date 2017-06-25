@@ -386,3 +386,5 @@ __**Sa 24-06-2017**__
 **18:30-21:00** I am now confident enough of my code to let the evaluation module run overnight on the DAS.  
 
 __**Su 25-06-2017**__  
+**09:30-12:00** Initial results were so disappointing because the reported max accuracies were accidentally being averaged over both the mean as the variance, effectively dividing all results by 2. I could find the original results in the logs and fix the problem. I added the results of the overnight evaluation to the report, and they look stunning (a max accuracy of 92.3%). The way I've set up the experiments now is an initial round of rough testing to find the best abstractions, then a better optimized round of testing on dataset 1, and finally a sporadic optimization-guided round of testing on dataset 2. I am gatherling the last results for the last round, but I plan to really make the models face of in this one, incrementally optimizing each model-abstraction task to find their true potential.  
+**12:30-15:30** 
