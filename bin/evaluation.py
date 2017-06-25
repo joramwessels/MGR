@@ -26,8 +26,8 @@ results.addHandler(handler)
 models = {'cnn':cnn,'k2c2':k2c2}
 datasets = ['dataset-1.txt','dataset-2.txt']
 abstractions = ['1','2']
-alphas = [0.25, 0.05, 0.075]
-dropouts = [0.4, 0.5, 0.6]
+alphas = [0.01, 0.05]
+dropouts = [0.5, 0.75]
 
 batch_size = 100
 k = 5
@@ -40,21 +40,21 @@ n_tests = 1
 
 def main(argv):
 	score = []
-	score.append(test_model_on(cnn, 1))
-	score.append(test_model_on(k2c2, 1))
+	#score.append(test_model_on(cnn, 1))
+	#score.append(test_model_on(k2c2, 1))
 	score.append(test_model_on(cnn, 2))
 	score.append(test_model_on(k2c2, 2))
 	results.info(30*'=')
 	results.info(30*'=')
 	results.info(30*'=')
-	results.info("CNN - dataset-1: " + str(score[0]))
-	results.info("k2c2 - dataset-1: " + str(score[1]))
-	results.info("CNN - dataset-2: " + str(score[2]))
-	results.info("k2c2 - dataset-2: " + str(score[3]))
-	results.info("Dataset-1: " + str(np.mean([score[0][0], score[1][0]])))
-	results.info("Dataset-2: " + str(np.mean([score[2][0], score[3][0]])))
-	results.info("CNN: " + str(np.mean([score[0][0], score[2][0]])))
-	results.info("k2c2: " + str(np.mean([score[1][0], score[3][0]])))
+	results.info("CNN - dataset-2: " + str(score[0]))
+	results.info("k2c2 - dataset-2: " + str(score[1]))
+	#results.info("CNN - dataset-2: " + str(score[2]))
+	#results.info("k2c2 - dataset-2: " + str(score[3]))
+	results.info("Dataset-2: " + str(np.mean([score[0], score[1]])))
+	#results.info("Dataset-2: " + str(np.mean([score[2], score[3]])))
+	#results.info("CNN: " + str(np.mean([score[0], score[2]])))
+	#results.info("k2c2: " + str(np.mean([score[1], score[3]])))
 	results.info(30*'=')
 	results.info(30*'=')
 	results.info(30*'=' + '\n\n\n')
@@ -74,7 +74,7 @@ def test_model_on(mod, n_dat):
 	log.info("Finished evaluating " + info)
 	log.info("mean: %.4f, variance: %.4f" %(m,v))
 	log.info(51*'=' + '\n\n')
-	return (m,v)
+	return m
 
 @trackExceptions
 def test_abstractions(id, mod, dat, values):
@@ -149,7 +149,7 @@ def train_n_times(id, mod, dat, abs, alp, dro, n, data):
 			(m,var) = training.train(mod, dat, batch_size=batch_size, k=k, id=idi,
 									savedir=model_save_dir, tr_abs=abs,
 									ev_abs=ev_abs, lr=alp, do=dro, seed=seed, data=data)
-			acc.append((m,var))
+			acc.append(m)
 			results.info(" m = %.4f" %m)
 			results.info(" v = %.4f" %var)
 		except Exception as e:
