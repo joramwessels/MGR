@@ -1,8 +1,9 @@
-## writing
-	* theoretical background
-		* add RNN functions
-	* approach
+## Backlog
+	* Introduction
+		* A little more focus on (Choi, 2016)
+	* Theoretical Background
 		* Mel spectrogram computation
-	* algorithm (?)
-		* code walkthrough (Tensorflow high level implementation)
+		* CNN formulas
+	* Results
+		* Add Excel charts
 	* go through Taco's notations
