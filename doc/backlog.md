@@ -1,4 +1,5 @@
 ## Backlog
+	* Replace cover image with something relevant
 	* Introduction
 		* A little more focus on (Choi, 2016)
 	* Theoretical Background
