@@ -7,4 +7,3 @@
 		* CNN formulas
 	* Results
 		* Add Excel charts
-	* go through Taco's notations
