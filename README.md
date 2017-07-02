@@ -6,7 +6,9 @@ The presented work proposes a new method of classifying music genres. The field 
 ![The genre taxonomy](https://github.com/joramwessels/MGR/blob/master/taxonomy.png)
 
 ### Models
+#### Small CNN
 ![The small CNN](https://github.com/joramwessels/MGR/blob/master/CNN.png)
+#### k2c2
 ![The k2c2 proposed by (Choi, 2016)](https://github.com/joramwessels/MGR/blob/master/k2c2.png)
 
 ### Conclusion
